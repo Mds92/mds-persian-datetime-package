@@ -1,0 +1,18 @@
+{
+  "name": "mds.persian.calendar",
+  "version": "0.9.21",
+  "description": "Persian Calendar in TypeScript",
+  "license": "MIT",
+  "main": "./mds.persian.calendar.js",
+  "types": "./mds.persian.calendar.d.ts",
+  "author": {
+    "email": "mds_soft@yahoo.com",
+    "name": "Mohammad Dayyan",
+    "url": "https://github.com/Mds92/MdsPersianCalendarTypeScript"
+  },
+  "repository": {
+    "type": "public",
+    "url": "https://github.com/Mds92/MdsPersianCalendarTypeScript"
+  },
+  "homepage": "https://github.com/Mds92/MdsPersianCalendarTypeScript"
+}
