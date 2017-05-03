@@ -148,7 +148,7 @@
         }
 
         private getPersianDateTime(): { year: number, month: number, day: number, hour: number, minute: number, second: number, millisecond: number } {
-            const persianDate = PersianDateConverter.toPersian(this.dateTime.getFullYear(), this.dateTime.getMonth(), this.dateTime.getDate());
+            const persianDate = PersianDateConverter.toPersian(this.dateTime.getFullYear(), this.dateTime.getMonth() + 1, this.dateTime.getDate());
             return {
                 year: persianDate.year,
                 month: persianDate.month,
@@ -160,18 +160,8 @@
             };
         }
 
-        static now = (): { year: number, month: number, day: number, hour: number, minute: number, second: number, millisecond: number } => {
-            const dateTime = new Date();
-            const persianDate = PersianDateConverter.toPersian(dateTime.getFullYear(), dateTime.getMonth(), dateTime.getDay());
-            return {
-                year: persianDate.year,
-                month: persianDate.month,
-                day: persianDate.day,
-                hour: dateTime.getHours(),
-                minute: dateTime.getMinutes(),
-                second: dateTime.getSeconds(),
-                millisecond: dateTime.getMilliseconds()
-            };
+        static now(): PersianDateTime {
+            return new PersianDateTime(new Date());
         };
 
         static today = (): PersianDateTime => {
