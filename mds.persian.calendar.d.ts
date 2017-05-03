@@ -27,15 +27,7 @@ export declare namespace Mds {
          */
         static parse(persianDateTimeInString: string, dateSeperatorPattern?: string): PersianDateTime;
         private getPersianDateTime();
-        static now: () => {
-            year: number;
-            month: number;
-            day: number;
-            hour: number;
-            minute: number;
-            second: number;
-            millisecond: number;
-        };
+        static now(): PersianDateTime;
         static today: () => PersianDateTime;
         /**
          * آیا اعداد در خروجی به صورت انگلیسی نمایش داده شوند؟

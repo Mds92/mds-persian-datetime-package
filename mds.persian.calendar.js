@@ -356,7 +356,7 @@ var Mds;
             return PersianDateTime.fromPersianDateTime(numericYear, numericMonth, numericDay, numericHour, numericMinute, numericSecond, numericMiliSecond);
         };
         PersianDateTime.prototype.getPersianDateTime = function () {
-            var persianDate = PersianDateConverter.toPersian(this.dateTime.getFullYear(), this.dateTime.getMonth(), this.dateTime.getDate());
+            var persianDate = PersianDateConverter.toPersian(this.dateTime.getFullYear(), this.dateTime.getMonth() + 1, this.dateTime.getDate());
             return {
                 year: persianDate.year,
                 month: persianDate.month,
@@ -367,6 +367,10 @@ var Mds;
                 millisecond: this.dateTime.getMilliseconds()
             };
         };
+        PersianDateTime.now = function () {
+            return new PersianDateTime(new Date());
+        };
+        ;
         /**
         * @description تاریخ بدون احتساب زمان
         **/
@@ -497,19 +501,6 @@ var Mds;
         };
         return PersianDateTime;
     }());
-    PersianDateTime.now = function () {
-        var dateTime = new Date();
-        var persianDate = PersianDateConverter.toPersian(dateTime.getFullYear(), dateTime.getMonth(), dateTime.getDay());
-        return {
-            year: persianDate.year,
-            month: persianDate.month,
-            day: persianDate.day,
-            hour: dateTime.getHours(),
-            minute: dateTime.getMinutes(),
-            second: dateTime.getSeconds(),
-            millisecond: dateTime.getMilliseconds()
-        };
-    };
     PersianDateTime.today = function () {
         var dateTime = new Date();
         var persianDate = PersianDateConverter.toPersian(dateTime.getFullYear(), dateTime.getMonth(), dateTime.getDay());
