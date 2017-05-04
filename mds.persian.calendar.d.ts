@@ -102,7 +102,21 @@ export declare namespace Mds {
          * شکل کوتاه شده قبل از ظهر یا بعد از ظهر
          */
         getShortPersianAmPmEnum: () => string;
+        /**
+         * لیست نام ماه های تقویم فارسی
+         */
         getPersianMonthNames(): string[];
+        /**
+         * لیست روزهای هفته در تقویم فارسی
+         */
+        getPersianWeekdayNames(): string[];
+        /**
+         * لیست روزهای هفته در تقویم میلادی
+         */
+        getGregorianWeekdayNames(): string[];
+        /**
+         * لیست نام ماه های تقویم میلادی
+         */
         getGregorianMonthNames(): string[];
         /**
         * @description زمان به فرمتی مشابه

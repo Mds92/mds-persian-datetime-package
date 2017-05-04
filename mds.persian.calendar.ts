@@ -369,6 +369,20 @@
         }
 
         /**
+         * لیست روزهای هفته در تقویم فارسی
+         */
+        getPersianWeekdayNames(): string[] {
+          return ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"];
+        }
+
+        /**
+         * لیست روزهای هفته در تقویم میلادی
+         */
+        getGregorianWeekdayNames(): string[] {
+          return ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+        }
+
+        /**
          * لیست نام ماه های تقویم میلادی
          */
         getGregorianMonthNames(): string[] {

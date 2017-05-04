@@ -377,12 +377,30 @@ var Mds;
             return PersianDateTime.fromPersianDate(persianDate.year, persianDate.month, persianDate.day);
         };
         ;
+        /**
+         * لیست نام ماه های تقویم فارسی
+         */
         PersianDateTime.prototype.getPersianMonthNames = function () {
             return ["فروردین", "اردیبهشت", "خرداد",
                 "تیر", "مرداد", "شهریور",
                 "مهر", "آبان", "آذر",
                 "دی", "بهمن", "اسفند"];
         };
+        /**
+         * لیست روزهای هفته در تقویم فارسی
+         */
+        PersianDateTime.prototype.getPersianWeekdayNames = function () {
+            return ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"];
+        };
+        /**
+         * لیست روزهای هفته در تقویم میلادی
+         */
+        PersianDateTime.prototype.getGregorianWeekdayNames = function () {
+            return ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+        };
+        /**
+         * لیست نام ماه های تقویم میلادی
+         */
         PersianDateTime.prototype.getGregorianMonthNames = function () {
             return ["January", "February", "March",
                 "April", "May", "June",
