@@ -358,6 +358,9 @@
             return 'ب.ظ';
         }
 
+        /**
+         * لیست نام ماه های تقویم فارسی
+         */
         getPersianMonthNames():string[] {
             return ["فروردین", "اردیبهشت", "خرداد",
                 "تیر", "مرداد", "شهریور",
@@ -365,6 +368,9 @@
                 "دی", "بهمن", "اسفند"];
         }
 
+        /**
+         * لیست نام ماه های تقویم میلادی
+         */
         getGregorianMonthNames(): string[] {
             return ["January", "February", "March",
                 "April", "May", "June",
