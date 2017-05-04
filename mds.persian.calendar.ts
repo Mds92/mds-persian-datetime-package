@@ -170,6 +170,12 @@
             return PersianDateTime.fromPersianDate(persianDate.year, persianDate.month, persianDate.day);
         };
 
+        static elapsedFromNow() {
+            const dateTime = new Date();
+            const persianDate = PersianDateConverter.toPersian(dateTime.getFullYear(), dateTime.getMonth(), dateTime.getDay());
+            return PersianDateTime.fromPersianDate(persianDate.year, persianDate.month, persianDate.day);
+        };
+
         /**
          * آیا اعداد در خروجی به صورت انگلیسی نمایش داده شوند؟
          */
@@ -352,6 +358,20 @@
             return 'ب.ظ';
         }
 
+        getPersianMonthNames():string[] {
+            return ["فروردین", "اردیبهشت", "خرداد",
+                "تیر", "مرداد", "شهریور",
+                "مهر", "آبان", "آذر",
+                "دی", "بهمن", "اسفند"];
+        }
+
+        getGregorianMonthNames(): string[] {
+            return ["January", "February", "March",
+                "April", "May", "June",
+                "July", "August", "September",
+                "October", "November", "December"];
+        }
+
         /**
         * @description زمان به فرمتی مشابه 
         * 13:47:40:530
@@ -441,59 +461,67 @@
         /**
         * اضافه کردن سال به تاریخ
         */
-        addYears(years: number) {
+        addYears(years: number): PersianDateTime {
             this.dateTime.setFullYear(this.dateTime.getFullYear() + years);
+            return new PersianDateTime(this.dateTime);
         }
 
         /**
          * اضافه کردن ماه به تاریخ
          */
-        addMonths(months: number) {
+        addMonths(months: number): PersianDateTime {
             this.dateTime.setMonth(this.dateTime.getMonth() + months);
+            return new PersianDateTime(this.dateTime);
         }
 
         /**
          * اضافه کردن روز به تاریخ
          */
-        addDays(days: number) {
+        addDays(days: number): PersianDateTime {
             this.dateTime.setDate(this.dateTime.getDate() + days);
+            return new PersianDateTime(this.dateTime);
         }
 
         /**
          * اضافه کردن ساعت به تاریخ
          */
-        addHours(hours: number) {
+        addHours(hours: number): PersianDateTime {
             this.dateTime.setHours(this.dateTime.getHours() + hours);
+            return new PersianDateTime(this.dateTime);
         }
 
         /**
          * اضافه کردن دقیقه به تاریخ
          */
-        addMinutes(minutes: number) {
+        addMinutes(minutes: number): PersianDateTime {
             this.dateTime.setHours(this.dateTime.getMinutes() + minutes);
+            return new PersianDateTime(this.dateTime);
         }
 
         /**
          * اضافه کردن به ثانیه به تاریخ
          */
-        addSeconds(seconds: number) {
+        addSeconds(seconds: number): PersianDateTime {
             this.dateTime.setSeconds(this.dateTime.getSeconds() + seconds);
+            return new PersianDateTime(this.dateTime);
         }
 
         /**
          * اضافه کردن به میلی ثانیه به تاریخ
          */
-        addMilliSeconds(milliseconds: number) {
+        addMilliSeconds(milliseconds: number): PersianDateTime {
             this.dateTime.setMilliseconds(this.dateTime.getMilliseconds() + milliseconds);
+            return new PersianDateTime(this.dateTime);
         }
 
         /**
          * اضافه کردن سال و ماه و روز به تاریخ
          */
-        addDate(year: number, month: number, day: number) {
+        addDate(year: number, month: number, day: number): PersianDateTime {
             this.addYears(year);
             this.addMonths(month);
             this.addDays(day);
+            return new PersianDateTime(this.dateTime);
         }
 
         /**
@@ -506,7 +534,7 @@
         /**
          * اضافه کردن دو تاریخ به همدیگر
          */
-        add(persianDateTime: PersianDateTime) {
+        add(persianDateTime: PersianDateTime): PersianDateTime {
             const datetime = persianDateTime.toDate();
             this.dateTime.setFullYear(this.dateTime.getFullYear() + datetime.getFullYear());
             this.dateTime.setMonth(this.dateTime.getMonth() + datetime.getMonth());
@@ -515,12 +543,13 @@
             this.dateTime.setMinutes(this.dateTime.getMinutes() + datetime.getMinutes());
             this.dateTime.setSeconds(this.dateTime.getSeconds() + datetime.getSeconds());
             this.dateTime.setMilliseconds(this.dateTime.getMilliseconds() + datetime.getMilliseconds());
+            return new PersianDateTime(this.dateTime);
         }
 
         /**
          * کم کردن دو تاریخ از همدیگر
          */
-        subtract(persianDateTime: PersianDateTime) {
+        subtract(persianDateTime: PersianDateTime): PersianDateTime {
             const datetime = persianDateTime.toDate();
             this.dateTime.setFullYear(this.dateTime.getFullYear() - datetime.getFullYear());
             this.dateTime.setMonth(this.dateTime.getMonth() - datetime.getMonth());
@@ -529,6 +558,7 @@
             this.dateTime.setMinutes(this.dateTime.getMinutes() - datetime.getMinutes());
             this.dateTime.setSeconds(this.dateTime.getSeconds() - datetime.getSeconds());
             this.dateTime.setMilliseconds(this.dateTime.getMilliseconds() - datetime.getMilliseconds());
+            return new PersianDateTime(this.dateTime);
         }
 
         private zeroPad(nr: any, base: string): string {
@@ -858,7 +888,7 @@
         Friday = 5
     }
 
-    export enum AmPmEnum {
+    enum AmPmEnum {
         None = 0,
         AM = 1,
         PM = 2,

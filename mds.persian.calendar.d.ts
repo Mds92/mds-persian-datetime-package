@@ -29,6 +29,7 @@ export declare namespace Mds {
         private getPersianDateTime();
         static now(): PersianDateTime;
         static today: () => PersianDateTime;
+        static elapsedFromNow(): PersianDateTime;
         /**
          * آیا اعداد در خروجی به صورت انگلیسی نمایش داده شوند؟
          */
@@ -101,6 +102,8 @@ export declare namespace Mds {
          * شکل کوتاه شده قبل از ظهر یا بعد از ظهر
          */
         getShortPersianAmPmEnum: () => string;
+        getPersianMonthNames(): string[];
+        getGregorianMonthNames(): string[];
         /**
         * @description زمان به فرمتی مشابه
         * 13:47:40:530
@@ -149,35 +152,35 @@ export declare namespace Mds {
         /**
         * اضافه کردن سال به تاریخ
         */
-        addYears(years: number): void;
+        addYears(years: number): PersianDateTime;
         /**
          * اضافه کردن ماه به تاریخ
          */
-        addMonths(months: number): void;
+        addMonths(months: number): PersianDateTime;
         /**
          * اضافه کردن روز به تاریخ
          */
-        addDays(days: number): void;
+        addDays(days: number): PersianDateTime;
         /**
          * اضافه کردن ساعت به تاریخ
          */
-        addHours(hours: number): void;
+        addHours(hours: number): PersianDateTime;
         /**
          * اضافه کردن دقیقه به تاریخ
          */
-        addMinutes(minutes: number): void;
+        addMinutes(minutes: number): PersianDateTime;
         /**
          * اضافه کردن به ثانیه به تاریخ
          */
-        addSeconds(seconds: number): void;
+        addSeconds(seconds: number): PersianDateTime;
         /**
          * اضافه کردن به میلی ثانیه به تاریخ
          */
-        addMilliSeconds(milliseconds: number): void;
+        addMilliSeconds(milliseconds: number): PersianDateTime;
         /**
          * اضافه کردن سال و ماه و روز به تاریخ
          */
-        addDate(year: number, month: number, day: number): void;
+        addDate(year: number, month: number, day: number): PersianDateTime;
         /**
          * بدست آوردن آبجکت استاندارد تاریخ و زمان
          */
@@ -185,11 +188,11 @@ export declare namespace Mds {
         /**
          * اضافه کردن دو تاریخ به همدیگر
          */
-        add(persianDateTime: PersianDateTime): void;
+        add(persianDateTime: PersianDateTime): PersianDateTime;
         /**
          * کم کردن دو تاریخ از همدیگر
          */
-        subtract(persianDateTime: PersianDateTime): void;
+        subtract(persianDateTime: PersianDateTime): PersianDateTime;
         private zeroPad(nr, base);
         private toPersianNumber(input);
         private static toEnglishNumber(input);
@@ -224,10 +227,5 @@ export declare namespace Mds {
         Wednesday = 3,
         Thursday = 4,
         Friday = 5,
-    }
-    enum AmPmEnum {
-        None = 0,
-        AM = 1,
-        PM = 2,
     }
 }

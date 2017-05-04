@@ -1,6 +1,6 @@
 {
   "name": "mds.persian.calendar",
-  "version": "0.9.29",
+  "version": "0.9.31",
   "description": "Persian Calendar in TypeScript",
   "license": "MIT",
   "main": "./mds.persian.calendar.js",

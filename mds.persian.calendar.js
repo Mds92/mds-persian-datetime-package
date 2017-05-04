@@ -371,6 +371,24 @@ var Mds;
             return new PersianDateTime(new Date());
         };
         ;
+        PersianDateTime.elapsedFromNow = function () {
+            var dateTime = new Date();
+            var persianDate = PersianDateConverter.toPersian(dateTime.getFullYear(), dateTime.getMonth(), dateTime.getDay());
+            return PersianDateTime.fromPersianDate(persianDate.year, persianDate.month, persianDate.day);
+        };
+        ;
+        PersianDateTime.prototype.getPersianMonthNames = function () {
+            return ["فروردین", "اردیبهشت", "خرداد",
+                "تیر", "مرداد", "شهریور",
+                "مهر", "آبان", "آذر",
+                "دی", "بهمن", "اسفند"];
+        };
+        PersianDateTime.prototype.getGregorianMonthNames = function () {
+            return ["January", "February", "March",
+                "April", "May", "June",
+                "July", "August", "September",
+                "October", "November", "December"];
+        };
         /**
         * @description تاریخ بدون احتساب زمان
         **/
@@ -383,42 +401,49 @@ var Mds;
         */
         PersianDateTime.prototype.addYears = function (years) {
             this.dateTime.setFullYear(this.dateTime.getFullYear() + years);
+            return new PersianDateTime(this.dateTime);
         };
         /**
          * اضافه کردن ماه به تاریخ
          */
         PersianDateTime.prototype.addMonths = function (months) {
             this.dateTime.setMonth(this.dateTime.getMonth() + months);
+            return new PersianDateTime(this.dateTime);
         };
         /**
          * اضافه کردن روز به تاریخ
          */
         PersianDateTime.prototype.addDays = function (days) {
             this.dateTime.setDate(this.dateTime.getDate() + days);
+            return new PersianDateTime(this.dateTime);
         };
         /**
          * اضافه کردن ساعت به تاریخ
          */
         PersianDateTime.prototype.addHours = function (hours) {
             this.dateTime.setHours(this.dateTime.getHours() + hours);
+            return new PersianDateTime(this.dateTime);
         };
         /**
          * اضافه کردن دقیقه به تاریخ
          */
         PersianDateTime.prototype.addMinutes = function (minutes) {
             this.dateTime.setHours(this.dateTime.getMinutes() + minutes);
+            return new PersianDateTime(this.dateTime);
         };
         /**
          * اضافه کردن به ثانیه به تاریخ
          */
         PersianDateTime.prototype.addSeconds = function (seconds) {
             this.dateTime.setSeconds(this.dateTime.getSeconds() + seconds);
+            return new PersianDateTime(this.dateTime);
         };
         /**
          * اضافه کردن به میلی ثانیه به تاریخ
          */
         PersianDateTime.prototype.addMilliSeconds = function (milliseconds) {
             this.dateTime.setMilliseconds(this.dateTime.getMilliseconds() + milliseconds);
+            return new PersianDateTime(this.dateTime);
         };
         /**
          * اضافه کردن سال و ماه و روز به تاریخ
@@ -427,6 +452,7 @@ var Mds;
             this.addYears(year);
             this.addMonths(month);
             this.addDays(day);
+            return new PersianDateTime(this.dateTime);
         };
         /**
          * بدست آوردن آبجکت استاندارد تاریخ و زمان
@@ -446,6 +472,7 @@ var Mds;
             this.dateTime.setMinutes(this.dateTime.getMinutes() + datetime.getMinutes());
             this.dateTime.setSeconds(this.dateTime.getSeconds() + datetime.getSeconds());
             this.dateTime.setMilliseconds(this.dateTime.getMilliseconds() + datetime.getMilliseconds());
+            return new PersianDateTime(this.dateTime);
         };
         /**
          * کم کردن دو تاریخ از همدیگر
@@ -459,6 +486,7 @@ var Mds;
             this.dateTime.setMinutes(this.dateTime.getMinutes() - datetime.getMinutes());
             this.dateTime.setSeconds(this.dateTime.getSeconds() - datetime.getSeconds());
             this.dateTime.setMilliseconds(this.dateTime.getMilliseconds() - datetime.getMilliseconds());
+            return new PersianDateTime(this.dateTime);
         };
         PersianDateTime.prototype.zeroPad = function (nr, base) {
             if (nr == undefined || nr == '')
@@ -766,7 +794,7 @@ var Mds;
         AmPmEnum[AmPmEnum["None"] = 0] = "None";
         AmPmEnum[AmPmEnum["AM"] = 1] = "AM";
         AmPmEnum[AmPmEnum["PM"] = 2] = "PM";
-    })(AmPmEnum = Mds.AmPmEnum || (Mds.AmPmEnum = {}));
+    })(AmPmEnum || (AmPmEnum = {}));
     // در پارس کردن مورد استفاده قرا میگیرد
     var PersianDateTimeMonthEnum;
     (function (PersianDateTimeMonthEnum) {
