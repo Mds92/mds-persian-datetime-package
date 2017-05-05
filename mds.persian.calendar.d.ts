@@ -216,9 +216,9 @@ export declare namespace Mds {
         setSecond(second: number): PersianDateTime;
         setMillisecond(millisecond: number): PersianDateTime;
         /**
-         * بدست آوردن عدد ماه ایرانی از روی نام ماه
+         * بدست آوردن ایندکس ماه ایرانی از روی نام ماه
          */
-        getPersianMonthNumber(persianMonthName: string): number;
+        static getPersianMonthIndex(persianMonthName: string): number;
         private zeroPad(nr, base);
         private toPersianNumber(input);
         private static toEnglishNumber(input);

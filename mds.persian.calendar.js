@@ -658,9 +658,9 @@ var Mds;
             return PersianDateTime.fromPersianDateTime(this.year, this.month, this.day, this.hour, this.minute, this.second, millisecond);
         };
         /**
-         * بدست آوردن عدد ماه ایرانی از روی نام ماه
+         * بدست آوردن ایندکس ماه ایرانی از روی نام ماه
          */
-        PersianDateTime.prototype.getPersianMonthNumber = function (persianMonthName) {
+        PersianDateTime.getPersianMonthIndex = function (persianMonthName) {
             return PersianDateTime.getPersianMonthNames.indexOf(persianMonthName);
         };
         PersianDateTime.prototype.zeroPad = function (nr, base) {

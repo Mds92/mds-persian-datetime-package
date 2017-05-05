@@ -617,7 +617,7 @@
     /**
      * بدست آوردن ایندکس ماه ایرانی از روی نام ماه
      */
-    getPersianMonthIndex(persianMonthName: string) {
+    static getPersianMonthIndex(persianMonthName: string): number {
       return PersianDateTime.getPersianMonthNames.indexOf(persianMonthName);
     }
 
