@@ -108,17 +108,33 @@ export declare namespace Mds {
          */
         static readonly getPersianMonthNames: string[];
         /**
+         * بدست آوردن ایندکس ماه ایرانی از روی نام ماه
+         */
+        static getPersianMonthIndex(persianMonthName: string): number;
+        /**
          * لیست روزهای هفته در تقویم فارسی
          */
         static readonly getPersianWeekdayNames: string[];
+        /**
+         * بدست آوردن ایندکس نام روز ایرانی از روی نام روزها
+         */
+        static getPersianWeekdayIndex(persianWeekdayName: string): number;
         /**
          * لیست روزهای هفته در تقویم میلادی
          */
         static readonly getGregorianWeekdayNames: string[];
         /**
+         * بدست آوردن ایندکس نام روز میلادی از روی نام روزها
+         */
+        static getGregorianWeekdayIndex(gregorianWeekdayName: string): number;
+        /**
          * لیست نام ماه های تقویم میلادی
          */
         static readonly getGregorianMonthNames: string[];
+        /**
+        * بدست آوردن ایندکس نام ماه میلادی از روی نام ماه ها
+        */
+        static getGregorianMonthNameIndex(gregorianMonthName: string): number;
         /**
         * @description زمان به فرمتی مشابه
         * 13:47:40:530
@@ -215,10 +231,6 @@ export declare namespace Mds {
         setMinute(minute: number): PersianDateTime;
         setSecond(second: number): PersianDateTime;
         setMillisecond(millisecond: number): PersianDateTime;
-        /**
-         * بدست آوردن ایندکس ماه ایرانی از روی نام ماه
-         */
-        static getPersianMonthIndex(persianMonthName: string): number;
         private zeroPad(nr, base);
         private toPersianNumber(input);
         private static toEnglishNumber(input);

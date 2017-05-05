@@ -373,10 +373,24 @@
     }
 
     /**
+     * بدست آوردن ایندکس ماه ایرانی از روی نام ماه
+     */
+    static getPersianMonthIndex(persianMonthName: string): number {
+      return this.getPersianMonthNames.indexOf(persianMonthName);
+    }
+
+    /**
      * لیست روزهای هفته در تقویم فارسی
      */
     static get getPersianWeekdayNames(): string[] {
       return ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"];
+    }
+
+    /**
+     * بدست آوردن ایندکس نام روز ایرانی از روی نام روزها
+     */
+    static getPersianWeekdayIndex(persianWeekdayName: string): number {
+      return this.getPersianWeekdayNames.indexOf(persianWeekdayName);
     }
 
     /**
@@ -387,6 +401,13 @@
     }
 
     /**
+     * بدست آوردن ایندکس نام روز میلادی از روی نام روزها
+     */
+    static getGregorianWeekdayIndex(gregorianWeekdayName: string): number {
+      return this.getGregorianWeekdayNames.indexOf(gregorianWeekdayName);
+    }
+
+    /**
      * لیست نام ماه های تقویم میلادی
      */
     static get getGregorianMonthNames(): string[] {
@@ -394,6 +415,13 @@
         "April", "May", "June",
         "July", "August", "September",
         "October", "November", "December"];
+    }
+
+    /**
+    * بدست آوردن ایندکس نام ماه میلادی از روی نام ماه ها
+    */
+    static getGregorianMonthNameIndex(gregorianMonthName: string): number {
+      return this.getGregorianMonthNames.indexOf(gregorianMonthName);
     }
 
     /**
@@ -612,13 +640,6 @@
     setMillisecond(millisecond: number) {
       return PersianDateTime.fromPersianDateTime(this.year, this.month, this.day,
         this.hour, this.minute, this.second, millisecond);
-    }
-
-    /**
-     * بدست آوردن ایندکس ماه ایرانی از روی نام ماه
-     */
-    static getPersianMonthIndex(persianMonthName: string): number {
-      return PersianDateTime.getPersianMonthNames.indexOf(persianMonthName);
     }
 
     private zeroPad(nr: any, base: string): string {

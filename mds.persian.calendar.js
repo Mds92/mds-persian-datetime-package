@@ -408,6 +408,12 @@ var Mds;
             enumerable: true,
             configurable: true
         });
+        /**
+         * بدست آوردن ایندکس ماه ایرانی از روی نام ماه
+         */
+        PersianDateTime.getPersianMonthIndex = function (persianMonthName) {
+            return this.getPersianMonthNames.indexOf(persianMonthName);
+        };
         Object.defineProperty(PersianDateTime, "getPersianWeekdayNames", {
             /**
              * لیست روزهای هفته در تقویم فارسی
@@ -418,6 +424,12 @@ var Mds;
             enumerable: true,
             configurable: true
         });
+        /**
+         * بدست آوردن ایندکس نام روز ایرانی از روی نام روزها
+         */
+        PersianDateTime.getPersianWeekdayIndex = function (persianWeekdayName) {
+            return this.getPersianWeekdayNames.indexOf(persianWeekdayName);
+        };
         Object.defineProperty(PersianDateTime, "getGregorianWeekdayNames", {
             /**
              * لیست روزهای هفته در تقویم میلادی
@@ -428,6 +440,12 @@ var Mds;
             enumerable: true,
             configurable: true
         });
+        /**
+         * بدست آوردن ایندکس نام روز میلادی از روی نام روزها
+         */
+        PersianDateTime.getGregorianWeekdayIndex = function (gregorianWeekdayName) {
+            return this.getGregorianWeekdayNames.indexOf(gregorianWeekdayName);
+        };
         Object.defineProperty(PersianDateTime, "getGregorianMonthNames", {
             /**
              * لیست نام ماه های تقویم میلادی
@@ -441,6 +459,12 @@ var Mds;
             enumerable: true,
             configurable: true
         });
+        /**
+        * بدست آوردن ایندکس نام ماه میلادی از روی نام ماه ها
+        */
+        PersianDateTime.getGregorianMonthNameIndex = function (gregorianMonthName) {
+            return this.getGregorianMonthNames.indexOf(gregorianMonthName);
+        };
         Object.defineProperty(PersianDateTime.prototype, "timeOfDay", {
             /**
             * @description زمان به فرمتی مشابه
@@ -656,12 +680,6 @@ var Mds;
         };
         PersianDateTime.prototype.setMillisecond = function (millisecond) {
             return PersianDateTime.fromPersianDateTime(this.year, this.month, this.day, this.hour, this.minute, this.second, millisecond);
-        };
-        /**
-         * بدست آوردن ایندکس ماه ایرانی از روی نام ماه
-         */
-        PersianDateTime.getPersianMonthIndex = function (persianMonthName) {
-            return PersianDateTime.getPersianMonthNames.indexOf(persianMonthName);
         };
         PersianDateTime.prototype.zeroPad = function (nr, base) {
             if (nr == undefined || nr == '')
