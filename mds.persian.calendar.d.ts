@@ -208,6 +208,17 @@ export declare namespace Mds {
          * کم کردن دو تاریخ از همدیگر
          */
         subtract(persianDateTime: PersianDateTime): PersianDateTime;
+        setPersianYear(persianYear: number): PersianDateTime;
+        setPersianMonth(persianMonth: number): PersianDateTime;
+        setPersianDay(persianDay: number): PersianDateTime;
+        setHour(hour: number): PersianDateTime;
+        setMinute(minute: number): PersianDateTime;
+        setSecond(second: number): PersianDateTime;
+        setMillisecond(millisecond: number): PersianDateTime;
+        /**
+         * بدست آوردن عدد ماه ایرانی از روی نام ماه
+         */
+        getPersianMonthNumber(persianMonthName: string): number;
         private zeroPad(nr, base);
         private toPersianNumber(input);
         private static toEnglishNumber(input);

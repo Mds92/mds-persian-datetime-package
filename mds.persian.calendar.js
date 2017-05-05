@@ -636,6 +636,33 @@ var Mds;
             this.dateTime.setMilliseconds(this.dateTime.getMilliseconds() - datetime.getMilliseconds());
             return new PersianDateTime(this.dateTime);
         };
+        PersianDateTime.prototype.setPersianYear = function (persianYear) {
+            return PersianDateTime.fromPersianDateTime(persianYear, this.month, this.day, this.hour, this.minute, this.second, this.millisecond);
+        };
+        PersianDateTime.prototype.setPersianMonth = function (persianMonth) {
+            return PersianDateTime.fromPersianDateTime(this.year, persianMonth, this.day, this.hour, this.minute, this.second, this.millisecond);
+        };
+        PersianDateTime.prototype.setPersianDay = function (persianDay) {
+            return PersianDateTime.fromPersianDateTime(this.year, this.month, persianDay, this.hour, this.minute, this.second, this.millisecond);
+        };
+        PersianDateTime.prototype.setHour = function (hour) {
+            return PersianDateTime.fromPersianDateTime(this.year, this.month, this.day, hour, this.minute, this.second, this.millisecond);
+        };
+        PersianDateTime.prototype.setMinute = function (minute) {
+            return PersianDateTime.fromPersianDateTime(this.year, this.month, this.day, this.hour, minute, this.second, this.millisecond);
+        };
+        PersianDateTime.prototype.setSecond = function (second) {
+            return PersianDateTime.fromPersianDateTime(this.year, this.month, this.day, this.hour, this.minute, second, this.millisecond);
+        };
+        PersianDateTime.prototype.setMillisecond = function (millisecond) {
+            return PersianDateTime.fromPersianDateTime(this.year, this.month, this.day, this.hour, this.minute, this.second, millisecond);
+        };
+        /**
+         * بدست آوردن عدد ماه ایرانی از روی نام ماه
+         */
+        PersianDateTime.prototype.getPersianMonthNumber = function (persianMonthName) {
+            return PersianDateTime.getPersianMonthNames.indexOf(persianMonthName);
+        };
         PersianDateTime.prototype.zeroPad = function (nr, base) {
             if (nr == undefined || nr == '')
                 return base;
