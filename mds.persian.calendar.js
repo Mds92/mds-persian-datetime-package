@@ -4,237 +4,7 @@ var Mds;
 (function (Mds) {
     var PersianDateTime = (function () {
         function PersianDateTime(gregorianDateTime) {
-            var _this = this;
             this.dateTime = null;
-            /**
-             * سال
-             */
-            this.year = function () {
-                return _this.getPersianDateTime().year;
-            };
-            /**
-             * سال دو رقمی
-             */
-            this.shortYear = function () {
-                return _this.getPersianDateTime().year % 100;
-            };
-            /**
-             * ماه
-             */
-            this.month = function () {
-                return _this.getPersianDateTime().month;
-            };
-            /**
-             * روز ماه
-             */
-            this.day = function () {
-                return _this.getPersianDateTime().day;
-            };
-            /**
-             * نام شمسی ماه
-             */
-            this.monthName = function () {
-                switch (_this.month()) {
-                    case 1:
-                        return 'فروردین';
-                    case 2:
-                        return 'اردیبهشت';
-                    case 3:
-                        return 'خرداد';
-                    case 4:
-                        return 'تیر';
-                    case 5:
-                        return 'مرداد';
-                    case 6:
-                        return 'شهریور';
-                    case 7:
-                        return 'مهر';
-                    case 8:
-                        return 'آبان';
-                    case 9:
-                        return 'آذر';
-                    case 10:
-                        return 'دی';
-                    case 11:
-                        return 'بهمن';
-                    case 12:
-                        return 'اسفند';
-                    default:
-                        return '';
-                }
-            };
-            /**
-             * روز هفته
-             */
-            this.dayOfWeek = function () {
-                return _this.dateTime.getDay();
-            };
-            /**
-             * نام روز هفته
-             */
-            this.dayOfWeekName = function () {
-                switch (_this.dayOfWeek()) {
-                    case PersianDayOfWeek.Saturday:
-                        return 'شنبه';
-                    case PersianDayOfWeek.Sunday:
-                        return 'یکشنبه';
-                    case PersianDayOfWeek.Monday:
-                        return 'دوشنبه';
-                    case PersianDayOfWeek.Tuesday:
-                        return 'سه شنبه';
-                    case PersianDayOfWeek.Wednesday:
-                        return 'چهار شنبه';
-                    case PersianDayOfWeek.Thursday:
-                        return 'پنج شنبه';
-                    case PersianDayOfWeek.Friday:
-                        return 'جمعه';
-                    default:
-                        return '';
-                }
-            };
-            /**
-             * شکل کوتاه شده نام روز هفته
-             */
-            this.getShortDayOfWeekName = function () {
-                return _this.dayOfWeekName()[0];
-            };
-            /**
-             * تعدا روز در ماه
-             */
-            this.getMonthDays = function () {
-                return PersianDateConverter.getDaysInPersianMonth(_this.dateTime.getFullYear(), _this.dateTime.getMonth());
-            };
-            /**
-             * ساعت 1 تا 24
-             */
-            this.hour = function () {
-                return _this.getPersianDateTime().hour;
-            };
-            /**
-             * ساعت 1 تا 12
-             */
-            this.shortHour = function () {
-                var shortHour = _this.hour();
-                if (shortHour > 12)
-                    shortHour = shortHour - 12;
-                return shortHour;
-            };
-            /**
-             * دقیقه
-             */
-            this.minute = function () {
-                return _this.getPersianDateTime().minute;
-            };
-            /**
-             * ثانیه
-             */
-            this.second = function () {
-                return _this.getPersianDateTime().second;
-            };
-            /**
-             * میلی ثانیه
-             */
-            this.millisecond = function () {
-                return _this.getPersianDateTime().millisecond;
-            };
-            /**
-             * آیا سال کبیسه است
-             */
-            this.isLeapYear = function () {
-                return PersianDateConverter.isLeapPersianYear(_this.dateTime.getFullYear());
-            };
-            /**
-             * بعد از ظهر یا قبل از ظهر
-             */
-            this.getPersianAmPmEnum = function () {
-                if (_this.hour() < 12)
-                    return 'قبل از ظهر';
-                return 'بعد از ظهر';
-            };
-            /**
-             * شکل کوتاه شده قبل از ظهر یا بعد از ظهر
-             */
-            this.getShortPersianAmPmEnum = function () {
-                if (_this.hour() < 12)
-                    return 'ق.ظ';
-                return 'ب.ظ';
-            };
-            /**
-            * @description زمان به فرمتی مشابه
-            * 13:47:40:530
-            **/
-            this.timeOfDay = function () {
-                return _this.zeroPad(_this.hour(), '00') + " : " + _this.zeroPad(_this.minute(), '00') + " : " + _this.zeroPad(_this.second(), '00') + " : " + _this.zeroPad(_this.millisecond(), '000');
-            };
-            /**
-             * @description  زمان به فرمتی مشابه زیر
-             * ساعت 01:47:40:530 ب.ظ
-            **/
-            this.longTimeOfDay = function () {
-                return "\u0633\u0627\u0639\u062A " + _this.zeroPad(_this.hour(), '00') + " : " + _this.zeroPad(_this.minute(), '00') + " : " + _this.zeroPad(_this.second(), '00') + " : " + _this.zeroPad(_this.millisecond(), '000') + " " + _this.getShortPersianAmPmEnum();
-            };
-            /**
-            * @description زمان به فرمتی مشابه زیر
-            * 01:47:40 ب.ظ
-            **/
-            this.shortTimeOfDay = function () {
-                return _this.zeroPad(_this.hour(), '00') + " : " + _this.zeroPad(_this.minute(), '00') + " : " + _this.zeroPad(_this.second(), '00') + " " + _this.getShortPersianAmPmEnum();
-            };
-            /**
-            * @description تبدیل تاریخ به رشته <br>
-            * فرمت پیش فرض 1393/09/14   13:49:40 <br>
-            * yyyy: سال چهار رقمی <br>
-            * yy: سال دو رقمی <br>
-            * MMMM: نام فارسی ماه <br>
-            * MM: عدد دو رقمی ماه <br>
-            * M: عدد یک رقمی ماه <br>
-            * dddd: نام فارسی روز هفته <br>
-            * dd: عدد دو رقمی روز ماه <br>
-            * d: عدد یک رقمی روز ماه <br>
-            * HH: ساعت دو رقمی با فرمت 00 تا 24 <br>
-            * H: ساعت یک رقمی با فرمت 0 تا 24 <br>
-            * hh: ساعت دو رقمی با فرمت 00 تا 12 <br>
-            * h: ساعت یک رقمی با فرمت 0 تا 12 <br>
-            * mm: عدد دو رقمی دقیقه <br>
-            * m: عدد یک رقمی دقیقه <br>
-            * ss: ثانیه دو رقمی <br>
-            * s: ثانیه یک رقمی <br>
-            * fff: میلی ثانیه 3 رقمی <br>
-            * ff: میلی ثانیه 2 رقمی <br>
-            * f: میلی ثانیه یک رقمی <br>
-            * tt: ب.ظ یا ق.ظ <br>
-            * t: حرف اول از ب.ظ یا ق.ظ
-            **/
-            this.toString = function (format) {
-                if (format === void 0) { format = ''; }
-                if (format == '' || format == null)
-                    return _this.zeroPad(_this.year(), '0000') + "/" + _this.zeroPad(_this.month(), '00') + "/" + _this.zeroPad(_this.day(), '00') + "   " + _this.zeroPad(_this.hour(), '00') + ":" + _this.zeroPad(_this.minute(), '00') + ":" + _this.zeroPad(_this.second(), '00');
-                var dateTimeString = format;
-                dateTimeString = dateTimeString.replace(/yyyy/img, _this.zeroPad(_this.year(), '0000'));
-                dateTimeString = dateTimeString.replace(/yy/img, _this.zeroPad(_this.year(), '00'));
-                dateTimeString = dateTimeString.replace(/MMMM/img, _this.monthName());
-                dateTimeString = dateTimeString.replace(/MM/img, _this.zeroPad(_this.month(), '00'));
-                dateTimeString = dateTimeString.replace(/M/img, _this.month().toString());
-                dateTimeString = dateTimeString.replace(/dddd/img, _this.dayOfWeekName());
-                dateTimeString = dateTimeString.replace(/dd/img, _this.zeroPad(_this.day(), '00'));
-                dateTimeString = dateTimeString.replace(/d/img, _this.day().toString());
-                dateTimeString = dateTimeString.replace(/HH/img, _this.zeroPad(_this.hour(), '00'));
-                dateTimeString = dateTimeString.replace(/H/img, _this.hour().toString());
-                dateTimeString = dateTimeString.replace(/hh/img, _this.zeroPad(_this.shortHour(), '00'));
-                dateTimeString = dateTimeString.replace(/h/img, _this.shortHour().toString());
-                dateTimeString = dateTimeString.replace(/mm/img, _this.zeroPad(_this.minute(), '00'));
-                dateTimeString = dateTimeString.replace(/m/img, _this.minute().toString());
-                dateTimeString = dateTimeString.replace(/ss/img, _this.zeroPad(_this.second(), '00'));
-                dateTimeString = dateTimeString.replace(/s/img, _this.second().toString());
-                dateTimeString = dateTimeString.replace(/fff/img, _this.zeroPad(_this.millisecond(), '000'));
-                dateTimeString = dateTimeString.replace(/ff/img, _this.zeroPad(_this.millisecond() / 10, '00'));
-                dateTimeString = dateTimeString.replace(/f/img, (_this.millisecond() / 10).toString());
-                dateTimeString = dateTimeString.replace(/tt/img, _this.getPersianAmPmEnum());
-                dateTimeString = dateTimeString.replace(/t/img, _this.getPersianAmPmEnum()[0]);
-                if (!_this.englishNumber)
-                    dateTimeString = _this.toPersianNumber(dateTimeString);
-                return dateTimeString;
-            };
             this.dateTime = gregorianDateTime;
         }
         /**
@@ -367,51 +137,411 @@ var Mds;
                 millisecond: this.dateTime.getMilliseconds()
             };
         };
-        PersianDateTime.now = function () {
-            return new PersianDateTime(new Date());
+        Object.defineProperty(PersianDateTime, "now", {
+            get: function () {
+                return new PersianDateTime(new Date());
+            },
+            enumerable: true,
+            configurable: true
+        });
+        ;
+        Object.defineProperty(PersianDateTime, "today", {
+            get: function () {
+                var dateTime = new Date();
+                var persianDate = PersianDateConverter.toPersian(dateTime.getFullYear(), dateTime.getMonth(), dateTime.getDay());
+                return PersianDateTime.fromPersianDate(persianDate.year, persianDate.month, persianDate.day);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        ;
+        PersianDateTime.elapsedFromNow = function (persianDateTime) {
+            return PersianDateTime.now.subtract(persianDateTime);
         };
         ;
-        PersianDateTime.elapsedFromNow = function () {
-            var dateTime = new Date();
-            var persianDate = PersianDateConverter.toPersian(dateTime.getFullYear(), dateTime.getMonth(), dateTime.getDay());
-            return PersianDateTime.fromPersianDate(persianDate.year, persianDate.month, persianDate.day);
-        };
+        Object.defineProperty(PersianDateTime.prototype, "englishNumber", {
+            /**
+             * آیا اعداد در خروجی به صورت انگلیسی نمایش داده شوند؟
+             */
+            get: function () {
+                return this.englishNumberPrivate;
+            },
+            set: function (value) {
+                this.englishNumberPrivate = value;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        ;
+        ;
+        Object.defineProperty(PersianDateTime.prototype, "year", {
+            /**
+             * سال
+             */
+            get: function () {
+                return this.getPersianDateTime().year;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "shortYear", {
+            /**
+             * سال دو رقمی
+             */
+            get: function () {
+                return this.getPersianDateTime().year % 100;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "month", {
+            /**
+             * ماه
+             */
+            get: function () {
+                return this.getPersianDateTime().month;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "day", {
+            /**
+             * روز ماه
+             */
+            get: function () {
+                return this.getPersianDateTime().day;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "monthName", {
+            /**
+             * نام شمسی ماه
+             */
+            get: function () {
+                switch (this.month) {
+                    case 1:
+                        return 'فروردین';
+                    case 2:
+                        return 'اردیبهشت';
+                    case 3:
+                        return 'خرداد';
+                    case 4:
+                        return 'تیر';
+                    case 5:
+                        return 'مرداد';
+                    case 6:
+                        return 'شهریور';
+                    case 7:
+                        return 'مهر';
+                    case 8:
+                        return 'آبان';
+                    case 9:
+                        return 'آذر';
+                    case 10:
+                        return 'دی';
+                    case 11:
+                        return 'بهمن';
+                    case 12:
+                        return 'اسفند';
+                    default:
+                        return '';
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "dayOfWeek", {
+            /**
+             * روز هفته
+             */
+            get: function () {
+                return this.dateTime.getDay();
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "dayOfWeekName", {
+            /**
+             * نام روز هفته
+             */
+            get: function () {
+                switch (this.dayOfWeek) {
+                    case PersianDayOfWeek.Saturday:
+                        return 'شنبه';
+                    case PersianDayOfWeek.Sunday:
+                        return 'یکشنبه';
+                    case PersianDayOfWeek.Monday:
+                        return 'دوشنبه';
+                    case PersianDayOfWeek.Tuesday:
+                        return 'سه شنبه';
+                    case PersianDayOfWeek.Wednesday:
+                        return 'چهار شنبه';
+                    case PersianDayOfWeek.Thursday:
+                        return 'پنج شنبه';
+                    case PersianDayOfWeek.Friday:
+                        return 'جمعه';
+                    default:
+                        return '';
+                }
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "getShortDayOfWeekName", {
+            /**
+             * شکل کوتاه شده نام روز هفته
+             */
+            get: function () {
+                return this.dayOfWeekName[0];
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "getMonthDays", {
+            /**
+             * تعدا روز در ماه
+             */
+            get: function () {
+                return PersianDateConverter.getDaysInPersianMonth(this.dateTime.getFullYear(), this.dateTime.getMonth());
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "hour", {
+            /**
+             * ساعت 1 تا 24
+             */
+            get: function () {
+                return this.getPersianDateTime().hour;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "shortHour", {
+            /**
+             * ساعت 1 تا 12
+             */
+            get: function () {
+                var shortHour = this.hour;
+                if (shortHour > 12)
+                    shortHour = shortHour - 12;
+                return shortHour;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "minute", {
+            /**
+             * دقیقه
+             */
+            get: function () {
+                return this.getPersianDateTime().minute;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "second", {
+            /**
+             * ثانیه
+             */
+            get: function () {
+                return this.getPersianDateTime().second;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "millisecond", {
+            /**
+             * میلی ثانیه
+             */
+            get: function () {
+                return this.getPersianDateTime().millisecond;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "isLeapYear", {
+            /**
+             * آیا سال کبیسه است
+             */
+            get: function () {
+                return PersianDateConverter.isLeapPersianYear(this.dateTime.getFullYear());
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "getPersianAmPmEnum", {
+            /**
+             * بعد از ظهر یا قبل از ظهر
+             */
+            get: function () {
+                if (this.hour < 12)
+                    return 'قبل از ظهر';
+                return 'بعد از ظهر';
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "getShortPersianAmPmEnum", {
+            /**
+             * شکل کوتاه شده قبل از ظهر یا بعد از ظهر
+             */
+            get: function () {
+                if (this.hour < 12)
+                    return 'ق.ظ';
+                return 'ب.ظ';
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "getPersianMonthNames", {
+            /**
+             * لیست نام ماه های تقویم فارسی
+             */
+            get: function () {
+                return ["فروردین", "اردیبهشت", "خرداد",
+                    "تیر", "مرداد", "شهریور",
+                    "مهر", "آبان", "آذر",
+                    "دی", "بهمن", "اسفند"];
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "getPersianWeekdayNames", {
+            /**
+             * لیست روزهای هفته در تقویم فارسی
+             */
+            get: function () {
+                return ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"];
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "getGregorianWeekdayNames", {
+            /**
+             * لیست روزهای هفته در تقویم میلادی
+             */
+            get: function () {
+                return ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "getGregorianMonthNames", {
+            /**
+             * لیست نام ماه های تقویم میلادی
+             */
+            get: function () {
+                return ["January", "February", "March",
+                    "April", "May", "June",
+                    "July", "August", "September",
+                    "October", "November", "December"];
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "timeOfDay", {
+            /**
+            * @description زمان به فرمتی مشابه
+            * 13:47:40:530
+            **/
+            get: function () {
+                return this.zeroPad(this.hour, '00') + " : " + this.zeroPad(this.minute, '00') + " : " + this.zeroPad(this.second, '00') + " : " + this.zeroPad(this.millisecond, '000');
+            },
+            enumerable: true,
+            configurable: true
+        });
+        ;
+        Object.defineProperty(PersianDateTime.prototype, "longTimeOfDay", {
+            /**
+             * @description  زمان به فرمتی مشابه زیر
+             * ساعت 01:47:40:530 ب.ظ
+            **/
+            get: function () {
+                return "\u0633\u0627\u0639\u062A " + this.zeroPad(this.hour, '00') + " : " + this.zeroPad(this.minute, '00') + " : " + this.zeroPad(this.second, '00') + " : " + this.zeroPad(this.millisecond, '000') + " " + this.getShortPersianAmPmEnum;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        ;
+        Object.defineProperty(PersianDateTime.prototype, "shortTimeOfDay", {
+            /**
+            * @description زمان به فرمتی مشابه زیر
+            * 01:47:40 ب.ظ
+            **/
+            get: function () {
+                return this.zeroPad(this.hour, '00') + " : " + this.zeroPad(this.minute, '00') + " : " + this.zeroPad(this.second, '00') + " " + this.getShortPersianAmPmEnum;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        ;
+        Object.defineProperty(PersianDateTime.prototype, "date", {
+            /**
+            * @description تاریخ بدون احتساب زمان
+            **/
+            get: function () {
+                return PersianDateTime.fromPersianDate(this.year, this.month, this.day);
+            },
+            enumerable: true,
+            configurable: true
+        });
         ;
         /**
-         * لیست نام ماه های تقویم فارسی
-         */
-        PersianDateTime.prototype.getPersianMonthNames = function () {
-            return ["فروردین", "اردیبهشت", "خرداد",
-                "تیر", "مرداد", "شهریور",
-                "مهر", "آبان", "آذر",
-                "دی", "بهمن", "اسفند"];
-        };
-        /**
-         * لیست روزهای هفته در تقویم فارسی
-         */
-        PersianDateTime.prototype.getPersianWeekdayNames = function () {
-            return ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"];
-        };
-        /**
-         * لیست روزهای هفته در تقویم میلادی
-         */
-        PersianDateTime.prototype.getGregorianWeekdayNames = function () {
-            return ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
-        };
-        /**
-         * لیست نام ماه های تقویم میلادی
-         */
-        PersianDateTime.prototype.getGregorianMonthNames = function () {
-            return ["January", "February", "March",
-                "April", "May", "June",
-                "July", "August", "September",
-                "October", "November", "December"];
-        };
-        /**
-        * @description تاریخ بدون احتساب زمان
+        * @description تبدیل تاریخ به رشته <br>
+        * فرمت پیش فرض 1393/09/14   13:49:40 <br>
+        * yyyy: سال چهار رقمی <br>
+        * yy: سال دو رقمی <br>
+        * MMMM: نام فارسی ماه <br>
+        * MM: عدد دو رقمی ماه <br>
+        * M: عدد یک رقمی ماه <br>
+        * dddd: نام فارسی روز هفته <br>
+        * dd: عدد دو رقمی روز ماه <br>
+        * d: عدد یک رقمی روز ماه <br>
+        * HH: ساعت دو رقمی با فرمت 00 تا 24 <br>
+        * H: ساعت یک رقمی با فرمت 0 تا 24 <br>
+        * hh: ساعت دو رقمی با فرمت 00 تا 12 <br>
+        * h: ساعت یک رقمی با فرمت 0 تا 12 <br>
+        * mm: عدد دو رقمی دقیقه <br>
+        * m: عدد یک رقمی دقیقه <br>
+        * ss: ثانیه دو رقمی <br>
+        * s: ثانیه یک رقمی <br>
+        * fff: میلی ثانیه 3 رقمی <br>
+        * ff: میلی ثانیه 2 رقمی <br>
+        * f: میلی ثانیه یک رقمی <br>
+        * tt: ب.ظ یا ق.ظ <br>
+        * t: حرف اول از ب.ظ یا ق.ظ
         **/
-        PersianDateTime.prototype.date = function () {
-            return PersianDateTime.fromPersianDate(this.year(), this.month(), this.day());
+        PersianDateTime.prototype.toString = function (format) {
+            if (format === void 0) { format = ''; }
+            if (format == '' || format == null)
+                return this.zeroPad(this.year, '0000') + "/" + this.zeroPad(this.month, '00') + "/" + this.zeroPad(this.day, '00') + "   " + this.zeroPad(this.hour, '00') + ":" + this.zeroPad(this.minute, '00') + ":" + this.zeroPad(this.second, '00');
+            var dateTimeString = format;
+            dateTimeString = dateTimeString.replace(/yyyy/img, this.zeroPad(this.year, '0000'));
+            dateTimeString = dateTimeString.replace(/yy/img, this.zeroPad(this.year, '00'));
+            dateTimeString = dateTimeString.replace(/MMMM/img, this.monthName);
+            dateTimeString = dateTimeString.replace(/MM/img, this.zeroPad(this.month, '00'));
+            dateTimeString = dateTimeString.replace(/M/img, this.month.toString());
+            dateTimeString = dateTimeString.replace(/dddd/img, this.dayOfWeekName);
+            dateTimeString = dateTimeString.replace(/dd/img, this.zeroPad(this.day, '00'));
+            dateTimeString = dateTimeString.replace(/d/img, this.day.toString());
+            dateTimeString = dateTimeString.replace(/HH/img, this.zeroPad(this.hour, '00'));
+            dateTimeString = dateTimeString.replace(/H/img, this.hour.toString());
+            dateTimeString = dateTimeString.replace(/hh/img, this.zeroPad(this.shortHour, '00'));
+            dateTimeString = dateTimeString.replace(/h/img, this.shortHour.toString());
+            dateTimeString = dateTimeString.replace(/mm/img, this.zeroPad(this.minute, '00'));
+            dateTimeString = dateTimeString.replace(/m/img, this.minute.toString());
+            dateTimeString = dateTimeString.replace(/ss/img, this.zeroPad(this.second, '00'));
+            dateTimeString = dateTimeString.replace(/s/img, this.second.toString());
+            dateTimeString = dateTimeString.replace(/fff/img, this.zeroPad(this.millisecond, '000'));
+            dateTimeString = dateTimeString.replace(/ff/img, this.zeroPad(this.millisecond / 10, '00'));
+            dateTimeString = dateTimeString.replace(/f/img, (this.millisecond / 10).toString());
+            dateTimeString = dateTimeString.replace(/tt/img, this.getPersianAmPmEnum);
+            dateTimeString = dateTimeString.replace(/t/img, this.getPersianAmPmEnum[0]);
+            if (!this.englishNumber)
+                dateTimeString = this.toPersianNumber(dateTimeString);
+            return dateTimeString;
         };
         ;
         /**
@@ -547,11 +677,6 @@ var Mds;
         };
         return PersianDateTime;
     }());
-    PersianDateTime.today = function () {
-        var dateTime = new Date();
-        var persianDate = PersianDateConverter.toPersian(dateTime.getFullYear(), dateTime.getMonth(), dateTime.getDay());
-        return PersianDateTime.fromPersianDate(persianDate.year, persianDate.month, persianDate.day);
-    };
     Mds.PersianDateTime = PersianDateTime;
     var PersianDateConverter = (function () {
         function PersianDateConverter() {

@@ -27,116 +27,117 @@ export declare namespace Mds {
          */
         static parse(persianDateTimeInString: string, dateSeperatorPattern?: string): PersianDateTime;
         private getPersianDateTime();
-        static now(): PersianDateTime;
-        static today: () => PersianDateTime;
-        static elapsedFromNow(): PersianDateTime;
+        static readonly now: PersianDateTime;
+        static readonly today: PersianDateTime;
+        static elapsedFromNow(persianDateTime: PersianDateTime): PersianDateTime;
         /**
          * آیا اعداد در خروجی به صورت انگلیسی نمایش داده شوند؟
          */
         englishNumber: boolean;
+        private englishNumberPrivate;
         /**
          * سال
          */
-        year: () => number;
+        readonly year: number;
         /**
          * سال دو رقمی
          */
-        shortYear: () => number;
+        readonly shortYear: number;
         /**
          * ماه
          */
-        month: () => number;
+        readonly month: number;
         /**
          * روز ماه
          */
-        day: () => number;
+        readonly day: number;
         /**
          * نام شمسی ماه
          */
-        monthName: () => string;
+        readonly monthName: string;
         /**
          * روز هفته
          */
-        dayOfWeek: () => PersianDayOfWeek;
+        readonly dayOfWeek: PersianDayOfWeek;
         /**
          * نام روز هفته
          */
-        dayOfWeekName: () => string;
+        readonly dayOfWeekName: string;
         /**
          * شکل کوتاه شده نام روز هفته
          */
-        getShortDayOfWeekName: () => string;
+        readonly getShortDayOfWeekName: string;
         /**
          * تعدا روز در ماه
          */
-        getMonthDays: () => number;
+        readonly getMonthDays: number;
         /**
          * ساعت 1 تا 24
          */
-        hour: () => number;
+        readonly hour: number;
         /**
          * ساعت 1 تا 12
          */
-        shortHour: () => number;
+        readonly shortHour: number;
         /**
          * دقیقه
          */
-        minute: () => number;
+        readonly minute: number;
         /**
          * ثانیه
          */
-        second: () => number;
+        readonly second: number;
         /**
          * میلی ثانیه
          */
-        millisecond: () => number;
+        readonly millisecond: number;
         /**
          * آیا سال کبیسه است
          */
-        isLeapYear: () => boolean;
+        readonly isLeapYear: boolean;
         /**
          * بعد از ظهر یا قبل از ظهر
          */
-        getPersianAmPmEnum: () => string;
+        readonly getPersianAmPmEnum: string;
         /**
          * شکل کوتاه شده قبل از ظهر یا بعد از ظهر
          */
-        getShortPersianAmPmEnum: () => string;
+        readonly getShortPersianAmPmEnum: string;
         /**
          * لیست نام ماه های تقویم فارسی
          */
-        getPersianMonthNames(): string[];
+        readonly getPersianMonthNames: string[];
         /**
          * لیست روزهای هفته در تقویم فارسی
          */
-        getPersianWeekdayNames(): string[];
+        readonly getPersianWeekdayNames: string[];
         /**
          * لیست روزهای هفته در تقویم میلادی
          */
-        getGregorianWeekdayNames(): string[];
+        readonly getGregorianWeekdayNames: string[];
         /**
          * لیست نام ماه های تقویم میلادی
          */
-        getGregorianMonthNames(): string[];
+        readonly getGregorianMonthNames: string[];
         /**
         * @description زمان به فرمتی مشابه
         * 13:47:40:530
         **/
-        timeOfDay: () => string;
+        readonly timeOfDay: string;
         /**
          * @description  زمان به فرمتی مشابه زیر
          * ساعت 01:47:40:530 ب.ظ
         **/
-        longTimeOfDay: () => string;
+        readonly longTimeOfDay: string;
         /**
         * @description زمان به فرمتی مشابه زیر
         * 01:47:40 ب.ظ
         **/
-        shortTimeOfDay: () => string;
+        readonly shortTimeOfDay: string;
         /**
         * @description تاریخ بدون احتساب زمان
         **/
-        date(): PersianDateTime;
+        readonly date: PersianDateTime;
         /**
         * @description تبدیل تاریخ به رشته <br>
         * فرمت پیش فرض 1393/09/14   13:49:40 <br>
@@ -162,7 +163,7 @@ export declare namespace Mds {
         * tt: ب.ظ یا ق.ظ <br>
         * t: حرف اول از ب.ظ یا ق.ظ
         **/
-        toString: (format?: string) => string;
+        toString(format?: string): string;
         /**
         * اضافه کردن سال به تاریخ
         */
