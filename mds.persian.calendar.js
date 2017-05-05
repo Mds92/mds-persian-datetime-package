@@ -14,8 +14,7 @@ var Mds;
          * @param persianDay روز شمسی
          */
         PersianDateTime.fromPersianDate = function (persianYear, persianMonth, persianDay) {
-            var persianDate = PersianDateConverter.toGregorian(persianYear, persianMonth, persianDay);
-            return new PersianDateTime(new Date(persianDate.year, persianDate.month, persianDate.day, 0, 0, 0, 0));
+            return PersianDateTime.fromPersianDateTime(persianYear, persianMonth, persianDay, 0, 0, 0, 0);
         };
         /**
          * بدست آوردن آبجکت از یه تاریخ مشخص شمسی
@@ -28,8 +27,8 @@ var Mds;
          * @param millisecond میلی ثانیه
          */
         PersianDateTime.fromPersianDateTime = function (persianYear, persianMonth, persianDay, hour, minute, second, millisecond) {
-            var persianDate = PersianDateConverter.toGregorian(persianYear, persianMonth, persianDay);
-            return new PersianDateTime(new Date(persianDate.year, persianDate.month, persianDate.day, hour, minute, second, millisecond));
+            var dateTime = PersianDateConverter.toGregorian(persianYear, persianMonth - 1, persianDay);
+            return new PersianDateTime(new Date(dateTime.year, dateTime.month, dateTime.day, hour, minute, second, millisecond));
         };
         /**
          * پارس کردن رشته و تبدیل آن به آبجکت

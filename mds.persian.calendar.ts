@@ -15,8 +15,7 @@
      * @param persianDay روز شمسی
      */
     static fromPersianDate(persianYear: number, persianMonth: number, persianDay: number) {
-      const persianDate = PersianDateConverter.toGregorian(persianYear, persianMonth, persianDay);
-      return new PersianDateTime(new Date(persianDate.year, persianDate.month, persianDate.day, 0, 0, 0, 0));
+      return PersianDateTime.fromPersianDateTime(persianYear, persianMonth, persianDay, 0, 0, 0, 0);
     }
 
     /**
@@ -30,8 +29,8 @@
      * @param millisecond میلی ثانیه
      */
     static fromPersianDateTime(persianYear: number, persianMonth: number, persianDay: number, hour: number, minute: number, second: number, millisecond: number) {
-      const persianDate = PersianDateConverter.toGregorian(persianYear, persianMonth, persianDay);
-      return new PersianDateTime(new Date(persianDate.year, persianDate.month, persianDate.day, hour, minute, second, millisecond));
+      const dateTime = PersianDateConverter.toGregorian(persianYear, persianMonth - 1, persianDay);
+      return new PersianDateTime(new Date(dateTime.year, dateTime.month, dateTime.day, hour, minute, second, millisecond));
     }
 
     /**
