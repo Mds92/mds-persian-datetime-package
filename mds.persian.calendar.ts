@@ -365,7 +365,7 @@
         /**
          * لیست نام ماه های تقویم فارسی
          */
-        get getPersianMonthNames(): string[] {
+        static get getPersianMonthNames(): string[] {
             return ["فروردین", "اردیبهشت", "خرداد",
                 "تیر", "مرداد", "شهریور",
                 "مهر", "آبان", "آذر",
@@ -375,21 +375,21 @@
         /**
          * لیست روزهای هفته در تقویم فارسی
          */
-        get getPersianWeekdayNames(): string[] {
+        static get getPersianWeekdayNames(): string[] {
             return ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"];
         }
 
         /**
          * لیست روزهای هفته در تقویم میلادی
          */
-        get getGregorianWeekdayNames(): string[] {
+        static get getGregorianWeekdayNames(): string[] {
             return ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
         }
 
         /**
          * لیست نام ماه های تقویم میلادی
          */
-        get getGregorianMonthNames(): string[] {
+        static get getGregorianMonthNames(): string[] {
             return ["January", "February", "March",
                 "April", "May", "June",
                 "July", "August", "September",

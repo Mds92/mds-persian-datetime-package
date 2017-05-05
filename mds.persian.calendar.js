@@ -395,7 +395,7 @@ var Mds;
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(PersianDateTime.prototype, "getPersianMonthNames", {
+        Object.defineProperty(PersianDateTime, "getPersianMonthNames", {
             /**
              * لیست نام ماه های تقویم فارسی
              */
@@ -408,7 +408,7 @@ var Mds;
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(PersianDateTime.prototype, "getPersianWeekdayNames", {
+        Object.defineProperty(PersianDateTime, "getPersianWeekdayNames", {
             /**
              * لیست روزهای هفته در تقویم فارسی
              */
@@ -418,7 +418,7 @@ var Mds;
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(PersianDateTime.prototype, "getGregorianWeekdayNames", {
+        Object.defineProperty(PersianDateTime, "getGregorianWeekdayNames", {
             /**
              * لیست روزهای هفته در تقویم میلادی
              */
@@ -428,7 +428,7 @@ var Mds;
             enumerable: true,
             configurable: true
         });
-        Object.defineProperty(PersianDateTime.prototype, "getGregorianMonthNames", {
+        Object.defineProperty(PersianDateTime, "getGregorianMonthNames", {
             /**
              * لیست نام ماه های تقویم میلادی
              */

@@ -106,19 +106,19 @@ export declare namespace Mds {
         /**
          * لیست نام ماه های تقویم فارسی
          */
-        readonly getPersianMonthNames: string[];
+        static readonly getPersianMonthNames: string[];
         /**
          * لیست روزهای هفته در تقویم فارسی
          */
-        readonly getPersianWeekdayNames: string[];
+        static readonly getPersianWeekdayNames: string[];
         /**
          * لیست روزهای هفته در تقویم میلادی
          */
-        readonly getGregorianWeekdayNames: string[];
+        static readonly getGregorianWeekdayNames: string[];
         /**
          * لیست نام ماه های تقویم میلادی
          */
-        readonly getGregorianMonthNames: string[];
+        static readonly getGregorianMonthNames: string[];
         /**
         * @description زمان به فرمتی مشابه
         * 13:47:40:530
