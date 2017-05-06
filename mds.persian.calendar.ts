@@ -254,6 +254,20 @@
     }
 
     /**
+     * روز شروع ماه
+     */
+    get startDayOfMonthDayOfWeek(): PersianDayOfWeek {
+      return PersianDateTime.fromPersianDate(this.year, this.month, 1).dayOfWeek;
+    }
+
+    /**
+     * روز پایان ماه
+     */
+    get endDayOfMonthDayOfWeek(): PersianDayOfWeek {
+      return PersianDateTime.fromPersianDate(this.year, this.month, this.getMonthDays).dayOfWeek;
+    }
+
+    /**
      * نام روز هفته
      */
     get dayOfWeekName(): string {

@@ -60,6 +60,14 @@ export declare namespace Mds {
          */
         readonly dayOfWeek: PersianDayOfWeek;
         /**
+         * روز شروع ماه
+         */
+        readonly startDayOfMonthDayOfWeek: PersianDayOfWeek;
+        /**
+         * روز پایان ماه
+         */
+        readonly endDayOfMonthDayOfWeek: PersianDayOfWeek;
+        /**
          * نام روز هفته
          */
         readonly dayOfWeekName: string;

@@ -260,6 +260,26 @@ var Mds;
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(PersianDateTime.prototype, "startDayOfMonthDayOfWeek", {
+            /**
+             * روز شروع ماه
+             */
+            get: function () {
+                return PersianDateTime.fromPersianDate(this.year, this.month, 1).dayOfWeek;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "endDayOfMonthDayOfWeek", {
+            /**
+             * روز پایان ماه
+             */
+            get: function () {
+                return PersianDateTime.fromPersianDate(this.year, this.month, this.getMonthDays).dayOfWeek;
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(PersianDateTime.prototype, "dayOfWeekName", {
             /**
              * نام روز هفته
