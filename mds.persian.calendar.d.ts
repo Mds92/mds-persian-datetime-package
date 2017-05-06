@@ -266,6 +266,15 @@ export declare namespace Mds {
         private static mod(a, b);
     }
     enum PersianDayOfWeek {
+        Saturday = 0,
+        Sunday = 1,
+        Monday = 2,
+        Tuesday = 3,
+        Wednesday = 4,
+        Thursday = 5,
+        Friday = 6,
+    }
+    enum GregorianDayOfWeek {
         Saturday = 6,
         Sunday = 0,
         Monday = 1,

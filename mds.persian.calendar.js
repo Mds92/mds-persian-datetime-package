@@ -255,7 +255,32 @@ var Mds;
              * روز هفته
              */
             get: function () {
-                return this.dateTime.getDay();
+                var gregorianDayOfWeek = this.dateTime.getDay();
+                var persianDayOfWeek = PersianDayOfWeek.Saturday;
+                switch (gregorianDayOfWeek) {
+                    case GregorianDayOfWeek.Saturday:
+                        persianDayOfWeek = PersianDayOfWeek.Saturday;
+                        break;
+                    case GregorianDayOfWeek.Sunday:
+                        persianDayOfWeek = PersianDayOfWeek.Sunday;
+                        break;
+                    case GregorianDayOfWeek.Monday:
+                        persianDayOfWeek = PersianDayOfWeek.Monday;
+                        break;
+                    case GregorianDayOfWeek.Tuesday:
+                        persianDayOfWeek = PersianDayOfWeek.Tuesday;
+                        break;
+                    case GregorianDayOfWeek.Thursday:
+                        persianDayOfWeek = PersianDayOfWeek.Thursday;
+                        break;
+                    case GregorianDayOfWeek.Wednesday:
+                        persianDayOfWeek = PersianDayOfWeek.Wednesday;
+                        break;
+                    case GregorianDayOfWeek.Friday:
+                        persianDayOfWeek = PersianDayOfWeek.Friday;
+                        break;
+                }
+                return persianDayOfWeek;
             },
             enumerable: true,
             configurable: true
@@ -970,32 +995,63 @@ var Mds;
         /// <summary>
         /// شنبه
         /// </summary>
-        PersianDayOfWeek[PersianDayOfWeek["Saturday"] = 6] = "Saturday";
+        PersianDayOfWeek[PersianDayOfWeek["Saturday"] = 0] = "Saturday";
         /// <summary>
         /// یکشنبه
         /// </summary>
-        PersianDayOfWeek[PersianDayOfWeek["Sunday"] = 0] = "Sunday";
+        PersianDayOfWeek[PersianDayOfWeek["Sunday"] = 1] = "Sunday";
         /// <summary>
         /// دو شنبه
         /// </summary>
-        PersianDayOfWeek[PersianDayOfWeek["Monday"] = 1] = "Monday";
+        PersianDayOfWeek[PersianDayOfWeek["Monday"] = 2] = "Monday";
         /// <summary>
         /// سه شنبه
         /// </summary>
-        PersianDayOfWeek[PersianDayOfWeek["Tuesday"] = 2] = "Tuesday";
+        PersianDayOfWeek[PersianDayOfWeek["Tuesday"] = 3] = "Tuesday";
         /// <summary>
         /// چهار شنبه
         /// </summary>
-        PersianDayOfWeek[PersianDayOfWeek["Wednesday"] = 3] = "Wednesday";
+        PersianDayOfWeek[PersianDayOfWeek["Wednesday"] = 4] = "Wednesday";
         /// <summary>
         /// پنج شنبه
         /// </summary>
-        PersianDayOfWeek[PersianDayOfWeek["Thursday"] = 4] = "Thursday";
+        PersianDayOfWeek[PersianDayOfWeek["Thursday"] = 5] = "Thursday";
         /// <summary>
         /// جمعه
         /// </summary>
-        PersianDayOfWeek[PersianDayOfWeek["Friday"] = 5] = "Friday";
+        PersianDayOfWeek[PersianDayOfWeek["Friday"] = 6] = "Friday";
     })(PersianDayOfWeek = Mds.PersianDayOfWeek || (Mds.PersianDayOfWeek = {}));
+    var GregorianDayOfWeek;
+    (function (GregorianDayOfWeek) {
+        /// <summary>
+        /// شنبه
+        /// </summary>
+        GregorianDayOfWeek[GregorianDayOfWeek["Saturday"] = 6] = "Saturday";
+        /// <summary>
+        /// یکشنبه
+        /// </summary>
+        GregorianDayOfWeek[GregorianDayOfWeek["Sunday"] = 0] = "Sunday";
+        /// <summary>
+        /// دو شنبه
+        /// </summary>
+        GregorianDayOfWeek[GregorianDayOfWeek["Monday"] = 1] = "Monday";
+        /// <summary>
+        /// سه شنبه
+        /// </summary>
+        GregorianDayOfWeek[GregorianDayOfWeek["Tuesday"] = 2] = "Tuesday";
+        /// <summary>
+        /// چهار شنبه
+        /// </summary>
+        GregorianDayOfWeek[GregorianDayOfWeek["Wednesday"] = 3] = "Wednesday";
+        /// <summary>
+        /// پنج شنبه
+        /// </summary>
+        GregorianDayOfWeek[GregorianDayOfWeek["Thursday"] = 4] = "Thursday";
+        /// <summary>
+        /// جمعه
+        /// </summary>
+        GregorianDayOfWeek[GregorianDayOfWeek["Friday"] = 5] = "Friday";
+    })(GregorianDayOfWeek = Mds.GregorianDayOfWeek || (Mds.GregorianDayOfWeek = {}));
     var AmPmEnum;
     (function (AmPmEnum) {
         AmPmEnum[AmPmEnum["None"] = 0] = "None";

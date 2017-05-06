@@ -250,7 +250,32 @@
      * روز هفته
      */
     get dayOfWeek(): PersianDayOfWeek {
-      return this.dateTime.getDay();
+      const gregorianDayOfWeek = this.dateTime.getDay() as GregorianDayOfWeek;
+      let persianDayOfWeek = PersianDayOfWeek.Saturday;
+      switch (gregorianDayOfWeek) {
+        case GregorianDayOfWeek.Saturday:
+          persianDayOfWeek = PersianDayOfWeek.Saturday;
+          break;
+        case GregorianDayOfWeek.Sunday:
+          persianDayOfWeek = PersianDayOfWeek.Sunday;
+          break;
+        case GregorianDayOfWeek.Monday:
+          persianDayOfWeek = PersianDayOfWeek.Monday;
+          break;
+        case GregorianDayOfWeek.Tuesday:
+          persianDayOfWeek = PersianDayOfWeek.Tuesday;
+          break;
+        case GregorianDayOfWeek.Thursday:
+          persianDayOfWeek = PersianDayOfWeek.Thursday;
+          break;
+        case GregorianDayOfWeek.Wednesday:
+          persianDayOfWeek = PersianDayOfWeek.Wednesday;
+          break;
+        case GregorianDayOfWeek.Friday:
+          persianDayOfWeek = PersianDayOfWeek.Friday;
+          break;
+      }
+      return persianDayOfWeek;
     }
 
     /**
@@ -946,6 +971,43 @@
   }
 
   export enum PersianDayOfWeek {
+    /// <summary>
+    /// شنبه
+    /// </summary>
+    Saturday = 0,
+
+    /// <summary>
+    /// یکشنبه
+    /// </summary>
+    Sunday = 1,
+
+    /// <summary>
+    /// دو شنبه
+    /// </summary>
+    Monday = 2,
+
+    /// <summary>
+    /// سه شنبه
+    /// </summary>
+    Tuesday = 3,
+
+    /// <summary>
+    /// چهار شنبه
+    /// </summary>
+    Wednesday = 4,
+
+    /// <summary>
+    /// پنج شنبه
+    /// </summary>
+    Thursday = 5,
+
+    /// <summary>
+    /// جمعه
+    /// </summary>
+    Friday = 6
+  }
+
+  export enum GregorianDayOfWeek {
     /// <summary>
     /// شنبه
     /// </summary>
