@@ -217,21 +217,15 @@ export declare namespace Mds {
          */
         addMilliSeconds(milliseconds: number): PersianDateTime;
         /**
-         * اضافه کردن سال و ماه و روز به تاریخ
+         * کم کردن دو تاریخ از همدیگر
          */
-        addDate(year: number, month: number, day: number): PersianDateTime;
+        subtract(persianDateTime: PersianDateTime): PersianDateTime;
+        clone(): PersianDateTime;
+        private cloneDateTime();
         /**
          * بدست آوردن آبجکت استاندارد تاریخ و زمان
          */
         toDate(): Date;
-        /**
-         * اضافه کردن دو تاریخ به همدیگر
-         */
-        add(persianDateTime: PersianDateTime): PersianDateTime;
-        /**
-         * کم کردن دو تاریخ از همدیگر
-         */
-        subtract(persianDateTime: PersianDateTime): PersianDateTime;
         setPersianYear(persianYear: number): PersianDateTime;
         setPersianMonth(persianMonth: number): PersianDateTime;
         setPersianDay(persianDay: number): PersianDateTime;

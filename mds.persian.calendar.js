@@ -616,93 +616,85 @@ var Mds;
         * اضافه کردن سال به تاریخ
         */
         PersianDateTime.prototype.addYears = function (years) {
-            this.dateTime.setFullYear(this.dateTime.getFullYear() + years);
-            return new PersianDateTime(this.dateTime);
+            var dateTime = this.cloneDateTime();
+            dateTime.setFullYear(dateTime.getFullYear() + years);
+            return new PersianDateTime(dateTime);
         };
         /**
          * اضافه کردن ماه به تاریخ
          */
         PersianDateTime.prototype.addMonths = function (months) {
-            this.dateTime.setMonth(this.dateTime.getMonth() + months);
-            return new PersianDateTime(this.dateTime);
+            var dateTime = this.cloneDateTime();
+            dateTime.setMonth(dateTime.getMonth() + months);
+            return new PersianDateTime(dateTime);
         };
         /**
          * اضافه کردن روز به تاریخ
          */
         PersianDateTime.prototype.addDays = function (days) {
-            this.dateTime.setDate(this.dateTime.getDate() + days);
-            return new PersianDateTime(this.dateTime);
+            var dateTime = this.cloneDateTime();
+            dateTime.setDate(dateTime.getDate() + days);
+            return new PersianDateTime(dateTime);
         };
         /**
          * اضافه کردن ساعت به تاریخ
          */
         PersianDateTime.prototype.addHours = function (hours) {
-            this.dateTime.setHours(this.dateTime.getHours() + hours);
-            return new PersianDateTime(this.dateTime);
+            var dateTime = this.cloneDateTime();
+            dateTime.setHours(dateTime.getHours() + hours);
+            return new PersianDateTime(dateTime);
         };
         /**
          * اضافه کردن دقیقه به تاریخ
          */
         PersianDateTime.prototype.addMinutes = function (minutes) {
-            this.dateTime.setHours(this.dateTime.getMinutes() + minutes);
-            return new PersianDateTime(this.dateTime);
+            var dateTime = this.cloneDateTime();
+            dateTime.setHours(dateTime.getMinutes() + minutes);
+            return new PersianDateTime(dateTime);
         };
         /**
          * اضافه کردن به ثانیه به تاریخ
          */
         PersianDateTime.prototype.addSeconds = function (seconds) {
-            this.dateTime.setSeconds(this.dateTime.getSeconds() + seconds);
-            return new PersianDateTime(this.dateTime);
+            var dateTime = this.cloneDateTime();
+            dateTime.setSeconds(dateTime.getSeconds() + seconds);
+            return new PersianDateTime(dateTime);
         };
         /**
          * اضافه کردن به میلی ثانیه به تاریخ
          */
         PersianDateTime.prototype.addMilliSeconds = function (milliseconds) {
-            this.dateTime.setMilliseconds(this.dateTime.getMilliseconds() + milliseconds);
-            return new PersianDateTime(this.dateTime);
+            var dateTime = this.cloneDateTime();
+            dateTime.setMilliseconds(dateTime.getMilliseconds() + milliseconds);
+            return new PersianDateTime(dateTime);
         };
         /**
-         * اضافه کردن سال و ماه و روز به تاریخ
+         * کم کردن دو تاریخ از همدیگر
          */
-        PersianDateTime.prototype.addDate = function (year, month, day) {
-            this.addYears(year);
-            this.addMonths(month);
-            this.addDays(day);
-            return new PersianDateTime(this.dateTime);
+        PersianDateTime.prototype.subtract = function (persianDateTime) {
+            var datetime1 = this.cloneDateTime();
+            var datetime2 = persianDateTime.toDate();
+            datetime1.setFullYear(datetime1.getFullYear() - datetime2.getFullYear());
+            datetime1.setMonth(datetime1.getMonth() - datetime2.getMonth());
+            datetime1.setDate(datetime1.getDate() - datetime2.getDate());
+            datetime1.setHours(datetime1.getHours() - datetime2.getHours());
+            datetime1.setMinutes(datetime1.getMinutes() - datetime2.getMinutes());
+            datetime1.setSeconds(datetime1.getSeconds() - datetime2.getSeconds());
+            datetime1.setMilliseconds(datetime1.getMilliseconds() - datetime2.getMilliseconds());
+            return new PersianDateTime(datetime1);
+        };
+        PersianDateTime.prototype.clone = function () {
+            var dateTime = new Date(this.dateTime.getTime());
+            return new PersianDateTime(dateTime);
+        };
+        PersianDateTime.prototype.cloneDateTime = function () {
+            return new Date(this.dateTime.getTime());
         };
         /**
          * بدست آوردن آبجکت استاندارد تاریخ و زمان
          */
         PersianDateTime.prototype.toDate = function () {
             return this.dateTime;
-        };
-        /**
-         * اضافه کردن دو تاریخ به همدیگر
-         */
-        PersianDateTime.prototype.add = function (persianDateTime) {
-            var datetime = persianDateTime.toDate();
-            this.dateTime.setFullYear(this.dateTime.getFullYear() + datetime.getFullYear());
-            this.dateTime.setMonth(this.dateTime.getMonth() + datetime.getMonth());
-            this.dateTime.setDate(this.dateTime.getDate() + datetime.getDate());
-            this.dateTime.setHours(this.dateTime.getHours() + datetime.getHours());
-            this.dateTime.setMinutes(this.dateTime.getMinutes() + datetime.getMinutes());
-            this.dateTime.setSeconds(this.dateTime.getSeconds() + datetime.getSeconds());
-            this.dateTime.setMilliseconds(this.dateTime.getMilliseconds() + datetime.getMilliseconds());
-            return new PersianDateTime(this.dateTime);
-        };
-        /**
-         * کم کردن دو تاریخ از همدیگر
-         */
-        PersianDateTime.prototype.subtract = function (persianDateTime) {
-            var datetime = persianDateTime.toDate();
-            this.dateTime.setFullYear(this.dateTime.getFullYear() - datetime.getFullYear());
-            this.dateTime.setMonth(this.dateTime.getMonth() - datetime.getMonth());
-            this.dateTime.setDate(this.dateTime.getDate() - datetime.getDate());
-            this.dateTime.setHours(this.dateTime.getHours() - datetime.getHours());
-            this.dateTime.setMinutes(this.dateTime.getMinutes() - datetime.getMinutes());
-            this.dateTime.setSeconds(this.dateTime.getSeconds() - datetime.getSeconds());
-            this.dateTime.setMilliseconds(this.dateTime.getMilliseconds() - datetime.getMilliseconds());
-            return new PersianDateTime(this.dateTime);
         };
         PersianDateTime.prototype.setPersianYear = function (persianYear) {
             return PersianDateTime.fromPersianDateTime(persianYear, this.month, this.day, this.hour, this.minute, this.second, this.millisecond);
