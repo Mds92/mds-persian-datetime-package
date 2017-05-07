@@ -27,8 +27,8 @@ var Mds;
          * @param millisecond میلی ثانیه
          */
         PersianDateTime.fromPersianDateTime = function (persianYear, persianMonth, persianDay, hour, minute, second, millisecond) {
-            var dateTime = PersianDateConverter.toGregorian(persianYear, persianMonth - 1, persianDay);
-            return new PersianDateTime(new Date(dateTime.year, dateTime.month, dateTime.day, hour, minute, second, millisecond));
+            var dateTime = PersianDateConverter.toGregorian(persianYear, persianMonth, persianDay);
+            return new PersianDateTime(new Date(dateTime.year, dateTime.month - 1, dateTime.day, hour, minute, second, millisecond));
         };
         /**
          * پارس کردن رشته و تبدیل آن به آبجکت
@@ -147,7 +147,7 @@ var Mds;
         Object.defineProperty(PersianDateTime, "today", {
             get: function () {
                 var dateTime = new Date();
-                var persianDate = PersianDateConverter.toPersian(dateTime.getFullYear(), dateTime.getMonth(), dateTime.getDay());
+                var persianDate = PersianDateConverter.toPersian(dateTime.getFullYear(), dateTime.getMonth() + 1, dateTime.getDay());
                 return PersianDateTime.fromPersianDate(persianDate.year, persianDate.month, persianDate.day);
             },
             enumerable: true,
@@ -290,7 +290,8 @@ var Mds;
              * روز شروع ماه
              */
             get: function () {
-                return PersianDateTime.fromPersianDate(this.year, this.month, 1).dayOfWeek;
+                var persianDateTime = this.getPersianDateTime();
+                return PersianDateTime.fromPersianDate(persianDateTime.year, persianDateTime.month, 1).dayOfWeek;
             },
             enumerable: true,
             configurable: true
@@ -300,7 +301,8 @@ var Mds;
              * روز پایان ماه
              */
             get: function () {
-                return PersianDateTime.fromPersianDate(this.year, this.month, this.getMonthDays).dayOfWeek;
+                var persianDateTime = this.getPersianDateTime();
+                return PersianDateTime.fromPersianDate(persianDateTime.year, persianDateTime.month, this.getMonthDays).dayOfWeek;
             },
             enumerable: true,
             configurable: true
@@ -347,7 +349,8 @@ var Mds;
              * تعدا روز در ماه
              */
             get: function () {
-                return PersianDateConverter.getDaysInPersianMonth(this.dateTime.getFullYear(), this.dateTime.getMonth());
+                var persianDateTime = this.getPersianDateTime();
+                return PersianDateConverter.getDaysInPersianMonth(persianDateTime.year, persianDateTime.month);
             },
             enumerable: true,
             configurable: true
@@ -550,60 +553,62 @@ var Mds;
             * @description تاریخ بدون احتساب زمان
             **/
             get: function () {
-                return PersianDateTime.fromPersianDate(this.year, this.month, this.day);
+                var persianDateTime = this.getPersianDateTime();
+                return PersianDateTime.fromPersianDate(persianDateTime.year, persianDateTime.month, persianDateTime.day);
             },
             enumerable: true,
             configurable: true
         });
         ;
         /**
-        * @description تبدیل تاریخ به رشته <br>
-        * فرمت پیش فرض 1393/09/14   13:49:40 <br>
-        * yyyy: سال چهار رقمی <br>
-        * yy: سال دو رقمی <br>
-        * MMMM: نام فارسی ماه <br>
-        * MM: عدد دو رقمی ماه <br>
-        * M: عدد یک رقمی ماه <br>
-        * dddd: نام فارسی روز هفته <br>
-        * dd: عدد دو رقمی روز ماه <br>
-        * d: عدد یک رقمی روز ماه <br>
-        * HH: ساعت دو رقمی با فرمت 00 تا 24 <br>
-        * H: ساعت یک رقمی با فرمت 0 تا 24 <br>
-        * hh: ساعت دو رقمی با فرمت 00 تا 12 <br>
-        * h: ساعت یک رقمی با فرمت 0 تا 12 <br>
-        * mm: عدد دو رقمی دقیقه <br>
-        * m: عدد یک رقمی دقیقه <br>
-        * ss: ثانیه دو رقمی <br>
-        * s: ثانیه یک رقمی <br>
-        * fff: میلی ثانیه 3 رقمی <br>
-        * ff: میلی ثانیه 2 رقمی <br>
-        * f: میلی ثانیه یک رقمی <br>
-        * tt: ب.ظ یا ق.ظ <br>
+        * @description تبدیل تاریخ به رشته
+        * فرمت پیش فرض 1393/09/14   13:49:40
+        * yyyy: سال چهار رقمی
+        * yy: سال دو رقمی
+        * MMMM: نام فارسی ماه
+        * MM: عدد دو رقمی ماه
+        * M: عدد یک رقمی ماه
+        * dddd: نام فارسی روز هفته
+        * dd: عدد دو رقمی روز ماه
+        * d: عدد یک رقمی روز ماه
+        * HH: ساعت دو رقمی با فرمت 00 تا 24
+        * H: ساعت یک رقمی با فرمت 0 تا 24
+        * hh: ساعت دو رقمی با فرمت 00 تا 12
+        * h: ساعت یک رقمی با فرمت 0 تا 12
+        * mm: عدد دو رقمی دقیقه
+        * m: عدد یک رقمی دقیقه
+        * ss: ثانیه دو رقمی
+        * s: ثانیه یک رقمی
+        * fff: میلی ثانیه 3 رقمی
+        * ff: میلی ثانیه 2 رقمی
+        * f: میلی ثانیه یک رقمی
+        * tt: ب.ظ یا ق.ظ
         * t: حرف اول از ب.ظ یا ق.ظ
         **/
         PersianDateTime.prototype.toString = function (format) {
             if (format === void 0) { format = ''; }
+            var persianDateTime = this.getPersianDateTime();
             if (format == '' || format == null)
-                return this.zeroPad(this.year, '0000') + "/" + this.zeroPad(this.month, '00') + "/" + this.zeroPad(this.day, '00') + "   " + this.zeroPad(this.hour, '00') + ":" + this.zeroPad(this.minute, '00') + ":" + this.zeroPad(this.second, '00');
+                return this.zeroPad(persianDateTime.year, '0000') + "/" + this.zeroPad(persianDateTime.month, '00') + "/" + this.zeroPad(persianDateTime.day, '00') + "   " + this.zeroPad(persianDateTime.hour, '00') + ":" + this.zeroPad(persianDateTime.minute, '00') + ":" + this.zeroPad(persianDateTime.second, '00');
             var dateTimeString = format;
-            dateTimeString = dateTimeString.replace(/yyyy/img, this.zeroPad(this.year, '0000'));
-            dateTimeString = dateTimeString.replace(/yy/img, this.zeroPad(this.year, '00'));
+            dateTimeString = dateTimeString.replace(/yyyy/img, this.zeroPad(persianDateTime.year, '0000'));
+            dateTimeString = dateTimeString.replace(/yy/img, this.zeroPad(persianDateTime.year, '00'));
             dateTimeString = dateTimeString.replace(/MMMM/img, this.monthName);
-            dateTimeString = dateTimeString.replace(/MM/img, this.zeroPad(this.month, '00'));
-            dateTimeString = dateTimeString.replace(/M/img, this.month.toString());
+            dateTimeString = dateTimeString.replace(/MM/img, this.zeroPad(persianDateTime.month, '00'));
+            dateTimeString = dateTimeString.replace(/M/img, persianDateTime.month.toString());
             dateTimeString = dateTimeString.replace(/dddd/img, this.dayOfWeekName);
-            dateTimeString = dateTimeString.replace(/dd/img, this.zeroPad(this.day, '00'));
-            dateTimeString = dateTimeString.replace(/d/img, this.day.toString());
-            dateTimeString = dateTimeString.replace(/HH/img, this.zeroPad(this.hour, '00'));
-            dateTimeString = dateTimeString.replace(/H/img, this.hour.toString());
+            dateTimeString = dateTimeString.replace(/dd/img, this.zeroPad(persianDateTime.day, '00'));
+            dateTimeString = dateTimeString.replace(/d/img, persianDateTime.day.toString());
+            dateTimeString = dateTimeString.replace(/HH/img, this.zeroPad(persianDateTime.hour, '00'));
+            dateTimeString = dateTimeString.replace(/H/img, persianDateTime.hour.toString());
             dateTimeString = dateTimeString.replace(/hh/img, this.zeroPad(this.shortHour, '00'));
             dateTimeString = dateTimeString.replace(/h/img, this.shortHour.toString());
-            dateTimeString = dateTimeString.replace(/mm/img, this.zeroPad(this.minute, '00'));
-            dateTimeString = dateTimeString.replace(/m/img, this.minute.toString());
-            dateTimeString = dateTimeString.replace(/ss/img, this.zeroPad(this.second, '00'));
-            dateTimeString = dateTimeString.replace(/s/img, this.second.toString());
-            dateTimeString = dateTimeString.replace(/fff/img, this.zeroPad(this.millisecond, '000'));
-            dateTimeString = dateTimeString.replace(/ff/img, this.zeroPad(this.millisecond / 10, '00'));
+            dateTimeString = dateTimeString.replace(/mm/img, this.zeroPad(persianDateTime.minute, '00'));
+            dateTimeString = dateTimeString.replace(/m/img, persianDateTime.minute.toString());
+            dateTimeString = dateTimeString.replace(/ss/img, this.zeroPad(persianDateTime.second, '00'));
+            dateTimeString = dateTimeString.replace(/s/img, persianDateTime.second.toString());
+            dateTimeString = dateTimeString.replace(/fff/img, this.zeroPad(persianDateTime.millisecond, '000'));
+            dateTimeString = dateTimeString.replace(/ff/img, this.zeroPad(persianDateTime.millisecond / 10, '00'));
             dateTimeString = dateTimeString.replace(/f/img, (this.millisecond / 10).toString());
             dateTimeString = dateTimeString.replace(/tt/img, this.getPersianAmPmEnum);
             dateTimeString = dateTimeString.replace(/t/img, this.getPersianAmPmEnum[0]);
@@ -700,22 +705,28 @@ var Mds;
             return PersianDateTime.fromPersianDateTime(persianYear, this.month, this.day, this.hour, this.minute, this.second, this.millisecond);
         };
         PersianDateTime.prototype.setPersianMonth = function (persianMonth) {
-            return PersianDateTime.fromPersianDateTime(this.year, persianMonth, this.day, this.hour, this.minute, this.second, this.millisecond);
+            var persianDateTime = this.getPersianDateTime();
+            return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianMonth, persianDateTime.day, persianDateTime.hour, persianDateTime.minute, persianDateTime.second, persianDateTime.millisecond);
         };
         PersianDateTime.prototype.setPersianDay = function (persianDay) {
-            return PersianDateTime.fromPersianDateTime(this.year, this.month, persianDay, this.hour, this.minute, this.second, this.millisecond);
+            var persianDateTime = this.getPersianDateTime();
+            return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDay, persianDateTime.hour, persianDateTime.minute, persianDateTime.second, persianDateTime.millisecond);
         };
         PersianDateTime.prototype.setHour = function (hour) {
-            return PersianDateTime.fromPersianDateTime(this.year, this.month, this.day, hour, this.minute, this.second, this.millisecond);
+            var persianDateTime = this.getPersianDateTime();
+            return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day, hour, persianDateTime.minute, persianDateTime.second, persianDateTime.millisecond);
         };
         PersianDateTime.prototype.setMinute = function (minute) {
-            return PersianDateTime.fromPersianDateTime(this.year, this.month, this.day, this.hour, minute, this.second, this.millisecond);
+            var persianDateTime = this.getPersianDateTime();
+            return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day, persianDateTime.hour, minute, persianDateTime.second, persianDateTime.millisecond);
         };
         PersianDateTime.prototype.setSecond = function (second) {
-            return PersianDateTime.fromPersianDateTime(this.year, this.month, this.day, this.hour, this.minute, second, this.millisecond);
+            var persianDateTime = this.getPersianDateTime();
+            return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day, persianDateTime.hour, persianDateTime.minute, second, persianDateTime.millisecond);
         };
         PersianDateTime.prototype.setMillisecond = function (millisecond) {
-            return PersianDateTime.fromPersianDateTime(this.year, this.month, this.day, this.hour, this.minute, this.second, millisecond);
+            var persianDateTime = this.getPersianDateTime();
+            return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day, persianDateTime.hour, persianDateTime.minute, persianDateTime.second, millisecond);
         };
         PersianDateTime.prototype.zeroPad = function (nr, base) {
             if (nr == undefined || nr == '')
