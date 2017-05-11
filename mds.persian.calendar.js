@@ -654,7 +654,7 @@ var Mds;
          */
         PersianDateTime.prototype.addMinutes = function (minutes) {
             var dateTime = this.cloneDateTime();
-            dateTime.setHours(dateTime.getMinutes() + minutes);
+            dateTime.setMinutes(dateTime.getMinutes() + minutes);
             return new PersianDateTime(dateTime);
         };
         /**

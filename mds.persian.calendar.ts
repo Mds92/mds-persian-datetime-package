@@ -594,7 +594,7 @@
      */
     addMinutes(minutes: number): PersianDateTime {
       const dateTime = this.cloneDateTime();
-      dateTime.setHours(dateTime.getMinutes() + minutes);
+      dateTime.setMinutes(dateTime.getMinutes() + minutes);
       return new PersianDateTime(dateTime);
     }
 
