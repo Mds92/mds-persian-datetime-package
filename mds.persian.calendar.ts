@@ -546,7 +546,7 @@
       dateTimeString = dateTimeString.replace(/fff/img, this.zeroPad(persianDateTime.millisecond, '000'));
       dateTimeString = dateTimeString.replace(/ff/img, this.zeroPad(persianDateTime.millisecond / 10, '00'));
       dateTimeString = dateTimeString.replace(/f/img, (this.millisecond / 10).toString());
-      dateTimeString = dateTimeString.replace(/tt/img, this.getPersianAmPmEnum);
+      dateTimeString = dateTimeString.replace(/tt/img, this.getShortPersianAmPmEnum);
       dateTimeString = dateTimeString.replace(/t/img, this.getPersianAmPmEnum[0]);
       if (!this.englishNumber)
         dateTimeString = this.toPersianNumber(dateTimeString);
