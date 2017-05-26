@@ -647,39 +647,32 @@
       return this.dateTime;
     }
 
-    setPersianYear(persianYear: number) {
-      return PersianDateTime.fromPersianDateTime(persianYear, this.month, this.day,
-        this.hour, this.minute, this.second, this.millisecond);
+    setPersianYear(persianYear: number): PersianDateTime {
+      return PersianDateTime.fromPersianDateTime(persianYear, this.month, this.day, this.hour, this.minute, this.second, this.millisecond);
     }
-    setPersianMonth(persianMonth: number) {
+    setPersianMonth(persianMonth: number): PersianDateTime {
       const persianDateTime = this.getPersianDateTime();
-      return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianMonth, persianDateTime.day,
-        persianDateTime.hour, persianDateTime.minute, persianDateTime.second, persianDateTime.millisecond);
+      return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianMonth, persianDateTime.day, persianDateTime.hour, persianDateTime.minute, persianDateTime.second, persianDateTime.millisecond);
     }
-    setPersianDay(persianDay: number) {
+    setPersianDay(persianDay: number): PersianDateTime {
       const persianDateTime = this.getPersianDateTime();
-      return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDay,
-        persianDateTime.hour, persianDateTime.minute, persianDateTime.second, persianDateTime.millisecond);
+      return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDay, persianDateTime.hour, persianDateTime.minute, persianDateTime.second, persianDateTime.millisecond);
     }
-    setHour(hour: number) {
+    setHour(hour: number): PersianDateTime {
       const persianDateTime = this.getPersianDateTime();
-      return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day,
-        hour, persianDateTime.minute, persianDateTime.second, persianDateTime.millisecond);
+      return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day, hour, persianDateTime.minute, persianDateTime.second, persianDateTime.millisecond);
     }
-    setMinute(minute: number) {
+    setMinute(minute: number): PersianDateTime {
       const persianDateTime = this.getPersianDateTime();
-      return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day,
-        persianDateTime.hour, minute, persianDateTime.second, persianDateTime.millisecond);
+      return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day, persianDateTime.hour, minute, persianDateTime.second, persianDateTime.millisecond);
     }
-    setSecond(second: number) {
+    setSecond(second: number): PersianDateTime {
       const persianDateTime = this.getPersianDateTime();
-      return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day,
-        persianDateTime.hour, persianDateTime.minute, second, persianDateTime.millisecond);
+      return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day, persianDateTime.hour, persianDateTime.minute, second, persianDateTime.millisecond);
     }
-    setMillisecond(millisecond: number) {
+    setMillisecond(millisecond: number): PersianDateTime {
       const persianDateTime = this.getPersianDateTime();
-      return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day,
-        persianDateTime.hour, persianDateTime.minute, persianDateTime.second, millisecond);
+      return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day, persianDateTime.hour, persianDateTime.minute, persianDateTime.second, millisecond);
     }
 
     private zeroPad(nr: any, base: string): string {
@@ -687,7 +680,6 @@
       const len = (String(base).length - String(nr).length) + 1;
       return len > 0 ? new Array(len).join('0') + nr : nr;
     }
-
     private toPersianNumber(input: string): string {
       if (input == '' || input == null) return '';
       input = input.replace(/ي/img, 'ی').replace(/ك/img, 'ک');
@@ -703,7 +695,6 @@
         .replace(/8/img, '۸')
         .replace(/9/img, '۹');
     }
-
     private static toEnglishNumber(input: string): string {
       if (input == '' || input == null) return '';
       input = input.replace(/ي/img, 'ی').replace(/ك/img, 'ک');
