@@ -490,7 +490,9 @@
     };
 
     /**
-    * @description تاریخ بدون احتساب زمان
+     * 
+     * تاریخ بدون احتساب زمان
+     * 
     **/
     get date(): PersianDateTime {
       const persianDateTime = this.getPersianDateTime();
