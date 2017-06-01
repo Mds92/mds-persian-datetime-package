@@ -621,17 +621,23 @@ var Mds;
         * اضافه کردن سال به تاریخ
         */
         PersianDateTime.prototype.addYears = function (years) {
-            var dateTime = this.cloneDateTime();
-            dateTime.setFullYear(dateTime.getFullYear() + years);
-            return new PersianDateTime(dateTime);
+            return this.setPersianYear(this.year + years);
         };
         /**
          * اضافه کردن ماه به تاریخ
          */
         PersianDateTime.prototype.addMonths = function (months) {
-            var dateTime = this.cloneDateTime();
-            dateTime.setMonth(dateTime.getMonth() + months);
-            return new PersianDateTime(dateTime);
+            var currentMonth = this.month;
+            var currentYear = this.year;
+            var newMonth = currentMonth + months;
+            if (newMonth < 1) {
+                newMonth += 12;
+                currentYear--;
+                return this.setPersianYear(currentYear).setPersianMonth(newMonth);
+            }
+            else {
+                return this.setPersianMonth(newMonth);
+            }
         };
         /**
          * اضافه کردن روز به تاریخ
@@ -706,7 +712,17 @@ var Mds;
         };
         PersianDateTime.prototype.setPersianMonth = function (persianMonth) {
             var persianDateTime = this.getPersianDateTime();
-            return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianMonth, persianDateTime.day, persianDateTime.hour, persianDateTime.minute, persianDateTime.second, persianDateTime.millisecond);
+            var day = persianDateTime.day;
+            if (persianMonth > 6 && persianMonth < 12 && day > 30)
+                day = 30;
+            else if (persianMonth >= 12 && day > 29) {
+                var isYearLeap = PersianDateConverter.isLeapPersianYear(persianDateTime.year);
+                if (isYearLeap)
+                    day = 30;
+                else
+                    day = 29;
+            }
+            return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianMonth, day, persianDateTime.hour, persianDateTime.minute, persianDateTime.second, persianDateTime.millisecond);
         };
         PersianDateTime.prototype.setPersianDay = function (persianDay) {
             var persianDateTime = this.getPersianDateTime();
@@ -821,6 +837,11 @@ var Mds;
             if (this.isLeapPersianYear(persianYear))
                 return 30;
             return 29;
+        };
+        PersianDateConverter.getDaysInPersianYear = function (persianYear) {
+            if (this.isLeapPersianYear(persianYear))
+                return 366;
+            return 365;
         };
         /*
          This function determines if the Persian (Persian) year is

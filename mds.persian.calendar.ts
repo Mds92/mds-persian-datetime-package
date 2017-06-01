@@ -557,18 +557,23 @@
     * اضافه کردن سال به تاریخ
     */
     addYears(years: number): PersianDateTime {
-      const dateTime = this.cloneDateTime();
-      dateTime.setFullYear(dateTime.getFullYear() + years);
-      return new PersianDateTime(dateTime);
+      return this.setPersianYear(this.year + years);
     }
 
     /**
      * اضافه کردن ماه به تاریخ
      */
     addMonths(months: number): PersianDateTime {
-      const dateTime = this.cloneDateTime();
-      dateTime.setMonth(dateTime.getMonth() + months);
-      return new PersianDateTime(dateTime);
+      const currentMonth = this.month;
+      let currentYear = this.year;
+      let newMonth = currentMonth + months;
+      if (newMonth < 1) {
+        newMonth += 12;
+        currentYear--;
+        return this.setPersianYear(currentYear).setPersianMonth(newMonth);
+      } else {
+        return this.setPersianMonth(newMonth);
+      }
     }
 
     /**
@@ -652,7 +657,17 @@
     }
     setPersianMonth(persianMonth: number): PersianDateTime {
       const persianDateTime = this.getPersianDateTime();
-      return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianMonth, persianDateTime.day, persianDateTime.hour, persianDateTime.minute, persianDateTime.second, persianDateTime.millisecond);
+      let day = persianDateTime.day;
+      if (persianMonth > 6 && persianMonth < 12 && day > 30) 
+        day = 30;
+      else if (persianMonth >= 12 && day > 29) {
+        const isYearLeap = PersianDateConverter.isLeapPersianYear(persianDateTime.year);
+        if (isYearLeap)
+          day = 30;
+        else
+          day = 29;
+      }
+      return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianMonth, day, persianDateTime.hour, persianDateTime.minute, persianDateTime.second, persianDateTime.millisecond);
     }
     setPersianDay(persianDay: number): PersianDateTime {
       const persianDateTime = this.getPersianDateTime();
@@ -773,6 +788,11 @@
       if (persianMonth <= 11) return 30;
       if (this.isLeapPersianYear(persianYear)) return 30;
       return 29;
+    }
+
+    static getDaysInPersianYear(persianYear): number {
+      if (this.isLeapPersianYear(persianYear)) return 366;
+      return 365;
     }
 
     /*

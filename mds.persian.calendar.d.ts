@@ -253,6 +253,7 @@ export declare namespace Mds {
         static isValidPersianDate(persianYear: number, persianMonth: number, persianDay: number): boolean;
         static isLeapPersianYear(persianYear: number): boolean;
         static getDaysInPersianMonth(persianYear: any, persianMonth: any): number;
+        static getDaysInPersianYear(persianYear: any): number;
         private static persianCalendar(persianYear);
         private static j2D(persianYear, persianMonth, persianDay);
         private static d2J(jdn);
