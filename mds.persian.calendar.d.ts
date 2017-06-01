@@ -233,6 +233,8 @@ export declare namespace Mds {
         setMinute(minute: number): PersianDateTime;
         setSecond(second: number): PersianDateTime;
         setMillisecond(millisecond: number): PersianDateTime;
+        setPersianDate(year: number, month: number, day: number): PersianDateTime;
+        setTime(hour: number, minute: number, second: number, millisecond: number): PersianDateTime;
         private zeroPad(nr, base);
         private toPersianNumber(input);
         private static toEnglishNumber(input);

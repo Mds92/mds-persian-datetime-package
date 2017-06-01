@@ -728,6 +728,14 @@ var Mds;
             var persianDateTime = this.getPersianDateTime();
             return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day, persianDateTime.hour, persianDateTime.minute, persianDateTime.second, millisecond);
         };
+        PersianDateTime.prototype.setPersianDate = function (year, month, day) {
+            var persianDateTime = this.getPersianDateTime();
+            return PersianDateTime.fromPersianDateTime(year, month, day, persianDateTime.hour, persianDateTime.minute, persianDateTime.second, persianDateTime.millisecond);
+        };
+        PersianDateTime.prototype.setTime = function (hour, minute, second, millisecond) {
+            var persianDateTime = this.getPersianDateTime();
+            return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day, hour, minute, second, millisecond);
+        };
         PersianDateTime.prototype.zeroPad = function (nr, base) {
             if (nr == undefined || nr == '')
                 return base;

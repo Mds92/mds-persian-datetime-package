@@ -674,6 +674,15 @@
       const persianDateTime = this.getPersianDateTime();
       return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day, persianDateTime.hour, persianDateTime.minute, persianDateTime.second, millisecond);
     }
+    setPersianDate(year: number, month: number, day: number): PersianDateTime{
+      const persianDateTime = this.getPersianDateTime();
+      return PersianDateTime.fromPersianDateTime(year, month, day, persianDateTime.hour, persianDateTime.minute, persianDateTime.second, persianDateTime.millisecond);
+    }
+    setTime(hour: number, minute: number, second: number, millisecond: number): PersianDateTime {
+      const persianDateTime = this.getPersianDateTime();
+      return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day,
+        hour, minute, second, millisecond);
+    }
 
     private zeroPad(nr: any, base: string): string {
       if (nr == undefined || nr == '') return base;
