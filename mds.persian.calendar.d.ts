@@ -159,7 +159,9 @@ export declare namespace Mds {
         **/
         readonly shortTimeOfDay: string;
         /**
-        * @description تاریخ بدون احتساب زمان
+         *
+         * تاریخ بدون احتساب زمان
+         *
         **/
         readonly date: PersianDateTime;
         /**

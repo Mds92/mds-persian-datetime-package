@@ -550,7 +550,9 @@ var Mds;
         ;
         Object.defineProperty(PersianDateTime.prototype, "date", {
             /**
-            * @description تاریخ بدون احتساب زمان
+             *
+             * تاریخ بدون احتساب زمان
+             *
             **/
             get: function () {
                 var persianDateTime = this.getPersianDateTime();
