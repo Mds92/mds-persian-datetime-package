@@ -92,29 +92,29 @@ static getGregorianMonthNameIndex(gregorianMonthName: string): number // Get gre
 ```
 ```typescript
 /**
- * @description convert datetime to string
+ * convert datetime to string
  * فرمت پیش فرض 1393/09/14   13:49:40 
- * yyyy: سال چهار رقمی 
- * yy: سال دو رقمی 
- * MMMM: نام فارسی ماه 
- * MM: عدد دو رقمی ماه 
- * M: عدد یک رقمی ماه 
- * dddd: نام فارسی روز هفته 
- * dd: عدد دو رقمی روز ماه 
- * d: عدد یک رقمی روز ماه 
- * HH: ساعت دو رقمی با فرمت 00 تا 24 
- * H: ساعت یک رقمی با فرمت 0 تا 24 
- * hh: ساعت دو رقمی با فرمت 00 تا 12 
- * h: ساعت یک رقمی با فرمت 0 تا 12 
- * mm: عدد دو رقمی دقیقه 
- * m: عدد یک رقمی دقیقه 
- * ss: ثانیه دو رقمی 
- * s: ثانیه یک رقمی 
- * fff: میلی ثانیه 3 رقمی 
- * ff: میلی ثانیه 2 رقمی 
- * f: میلی ثانیه یک رقمی 
- * tt: ب.ظ یا ق.ظ 
- * t: حرف اول از ب.ظ یا ق.ظ 
+ * yyyy: year with four digit
+ * yy: year with two digit
+ * MMMM: persian month name
+ * MM: month number with two digit
+ * M: month number
+ * dddd: persian week day name
+ * dd: month day number with two digit
+ * d: month day number
+ * HH: hour with two digit from 0 to 24
+ * H: hour from 0 to 24
+ * hh: hour with two digit from 0 to 12
+ * h: hour from 0 to 12
+ * mm: minute with two digit
+ * m: minute
+ * ss: second with two digit
+ * s: second 
+ * fff: millisecond with three digit
+ * ff: millisecond with two digit
+ * f: millisecond
+ * tt: ب.ظ or ق.ظ 
+ * t: first character of ب.ظ or ق.ظ
  **/
 toString(format: string = ''): string
 ```
