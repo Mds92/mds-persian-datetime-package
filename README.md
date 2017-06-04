@@ -78,5 +78,5 @@ static getPersianMonthIndex: number // get index of persian month with persian m
 static getPersianWeekdayNames: string[]  // list of all persian week day names
 static getGregorianWeekdayNames: string[] // get list of all gregorian week day names
 timeOfDay: string // get time like 13:47:40:530
-longTimeOfDay: string get time like ساعت 01:47:40:530 ب.ظ
+longTimeOfDay: string // get time like ساعت 01:47:40:530 ب.ظ
 ```
