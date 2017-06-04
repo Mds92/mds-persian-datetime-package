@@ -3,8 +3,8 @@
 
 ### Install
 Use npm to install:
-```cmd
-npm install mds.persian.calendar
+```
+npm install mds.persian.calendar --save
 ```
 Then import `Mds` namespace it in your project
 ```typescript
