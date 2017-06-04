@@ -79,4 +79,68 @@ static getPersianWeekdayNames: string[]  // list of all persian week day names
 static getGregorianWeekdayNames: string[] // get list of all gregorian week day names
 timeOfDay: string // get time like 13:47:40:530
 longTimeOfDay: string // get time like ساعت 01:47:40:530 ب.ظ
+shortTimeOfDay: string // get time like 01:47:40 ب.ظ
+date: PersianDateTime // get new object of date without time
 ```
+-----------------------------------
+### Methods
+```typescript
+static getPersianMonthIndex(persianMonthName: string): number // Get persian index of input month name
+static getPersianWeekdayIndex(persianWeekdayName: string): number // Get persian index of input week day name
+static getGregorianWeekdayIndex(gregorianWeekdayName: string): number // Get gregorian index of input week day name
+static getGregorianMonthNameIndex(gregorianMonthName: string): number // Get gregorian index of input month name
+```
+```typescript
+/**
+ * @description convert datetime to string
+ * فرمت پیش فرض 1393/09/14   13:49:40 
+ * yyyy: سال چهار رقمی 
+ * yy: سال دو رقمی 
+ * MMMM: نام فارسی ماه 
+ * MM: عدد دو رقمی ماه 
+ * M: عدد یک رقمی ماه 
+ * dddd: نام فارسی روز هفته 
+ * dd: عدد دو رقمی روز ماه 
+ * d: عدد یک رقمی روز ماه 
+ * HH: ساعت دو رقمی با فرمت 00 تا 24 
+ * H: ساعت یک رقمی با فرمت 0 تا 24 
+ * hh: ساعت دو رقمی با فرمت 00 تا 12 
+ * h: ساعت یک رقمی با فرمت 0 تا 12 
+ * mm: عدد دو رقمی دقیقه 
+ * m: عدد یک رقمی دقیقه 
+ * ss: ثانیه دو رقمی 
+ * s: ثانیه یک رقمی 
+ * fff: میلی ثانیه 3 رقمی 
+ * ff: میلی ثانیه 2 رقمی 
+ * f: میلی ثانیه یک رقمی 
+ * tt: ب.ظ یا ق.ظ 
+ * t: حرف اول از ب.ظ یا ق.ظ 
+ **/
+toString(format: string = ''): string
+```
+```typescript
+addYears(years: number): PersianDateTime // add years to datetime object
+addMonths(years: number): PersianDateTime // add months to datetime object
+addDays(days: number): PersianDateTime // add days to datetime object
+addHours(hours: number): PersianDateTime // add hours to datetime object
+addMinutes(minutes: number): PersianDateTime // add minutes to datetime object
+addSeconds(seconds: number): PersianDateTime // add seconds to datetime object
+addMilliSeconds(milliseconds: number): PersianDateTime // add milliseconds to datetime object
+```
+```typescript
+// get date object
+toDate(): Date
+```
+```typescript
+setPersianYear(persianYear: number): PersianDateTime // set persian year
+setPersianMonth(persianMonth: number): PersianDateTime // set persian month
+setPersianDay(persianDay: number): PersianDateTime // set persian day
+setHour(hour: number): PersianDateTime // set hour
+setMinute(minute: number): PersianDateTime // set minute
+setSecond(second: number): PersianDateTime // set second
+setMillisecond(millisecond: number): PersianDateTime // set millisecond
+setPersianDate(year: number, month: number, day: number): PersianDateTime // set persian date
+setTime(hour: number, minute: number, second: number, millisecond: number): PersianDateTime // set time
+```
+
+
