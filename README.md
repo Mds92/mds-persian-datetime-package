@@ -11,7 +11,7 @@ Then import `Mds` namespace it in your project
 import { Mds } from 'mds-persian-calendar'
 import PersianDateTime = Mds.PersianDateTime;
 ```
-## Using
+
 -----------------------------
 ### Define new object
 You can define new `PersianDateTime` object with following ways:
