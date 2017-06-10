@@ -1,14 +1,14 @@
-# MdsPersianCalendarTypeScript
-### Persian calendar library in TypeScript for using in TypeScript projects like angular
+# Persian DateTime In TypeScript
+### Persian datetime library in TypeScript for using in TypeScript projects like angular
 
 ### Install
 Use npm to install:
 ```
-npm install mds.persian.calendar --save
+npm install mds.persian.datetime --save
 ```
 Then import `Mds` namespace it in your project
 ```typescript
-import { Mds } from 'mds-persian-calendar'
+import { Mds } from 'mds-persian-datetime'
 import PersianDateTime = Mds.PersianDateTime;
 ```
 

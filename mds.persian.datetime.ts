@@ -7,7 +7,7 @@
     public constructor(gregorianDateTime: Date) {
       this.dateTime = gregorianDateTime;
     }
-
+    
     /**
      * بدست آوردن آبجکت از یه تاریخ مشخص شمسی
      * @param persianYear سال شمسی

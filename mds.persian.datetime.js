@@ -1109,4 +1109,4 @@ var Mds;
         PersianDateTimeMonthEnum[PersianDateTimeMonthEnum["\u0627\u0633\u0641\u0646\u062F"] = 12] = "\u0627\u0633\u0641\u0646\u062F";
     })(PersianDateTimeMonthEnum || (PersianDateTimeMonthEnum = {}));
 })(Mds = exports.Mds || (exports.Mds = {}));
-//# sourceMappingURL=mds.persian.calendar.js.map
+//# sourceMappingURL=mds.persian.datetime.js.map
