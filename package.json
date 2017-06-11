@@ -3,8 +3,8 @@
   "version": "0.9.69",
   "description": "Persian DateTime in TypeScript",
   "license": "MIT",
-  "main": "./mds.persian.calendar.js",
-  "types": "./mds.persian.calendar.d.ts",
+  "main": "./mds.persian.datetime.js",
+  "types": "./mds.persian.datetime.d.ts",
   "author": {
     "email": "mds_soft@yahoo.com",
     "name": "Mohammad Dayyan",
