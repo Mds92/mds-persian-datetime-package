@@ -8,7 +8,7 @@ npm install mds.persian.datetime --save
 ```
 Then import `Mds` namespace it in your project
 ```typescript
-import { Mds } from 'mds-persian-datetime'
+import { Mds } from 'mds.persian.datetime'
 import PersianDateTime = Mds.PersianDateTime;
 ```
 
