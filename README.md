@@ -142,5 +142,9 @@ setMillisecond(millisecond: number): PersianDateTime // set millisecond
 setPersianDate(year: number, month: number, day: number): PersianDateTime // set persian date
 setTime(hour: number, minute: number, second: number, millisecond: number): PersianDateTime // set time
 ```
+-----------------------------------
+### DateTimePicker
 
+If you need a DateTimePicker for your apps, I recommned the following:
 
+https://github.com/Mds92/mds-angular-datetime-picker-package
