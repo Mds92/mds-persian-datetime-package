@@ -4,7 +4,7 @@
 ### Install
 Use npm to install:
 ```
-npm install mds.persian.datetime --save
+npm install mds.persian.datetime@latest --save
 ```
 Then import `Mds` namespace it in your project
 ```typescript
