@@ -7,7 +7,7 @@
     public constructor(gregorianDateTime: Date) {
       this.dateTime = gregorianDateTime;
     }
-    
+
     /**
      * بدست آوردن آبجکت از یه تاریخ مشخص شمسی
      * @param persianYear سال شمسی
@@ -80,19 +80,41 @@
         }
       }
 
+      const objValues = Object.keys(PersianDateTimeMonthEnum).map(k => PersianDateTimeMonthEnum[k]);
+      const persianMonthNames = objValues.filter(v => typeof v === "string") as string[];
+
       if (containMonthSeperator) {
+
         // بدست آوردن ماه
-        month = persianDateTimeInString.match(/\d{2,4}-\d{1,2}(?=-\d{1,2}[^:])/img)[0].match(/-\d{1,2}/img)[0].replace(/\D+/img, '');
+        let monthMatch = persianDateTimeInString.match(/\d{2,4}-\d{1,2}(?=-\d{1,2}[^:])/img)
+        if (monthMatch != null && monthMatch.length > 0)
+          monthMatch = monthMatch[0].match(/-\d{1,2}/img);
+        if (monthMatch != null && monthMatch.length > 0)
+          month = monthMatch[0].replace(/\D+/img, '');
+
+        if (month == '' || month == null)
+          for (let i = 0; i < persianMonthNames.length; i++) {
+            let monthName = persianMonthNames[i];
+            if (persianDateTimeInString.indexOf(monthName) <= -1) continue;
+            month = PersianDateTimeMonthEnum[monthName];
+            break;
+          }
 
         // بدست آوردن روز
-        day = persianDateTimeInString.match(/\d{2,4}-\d{1,2}-\d{1,2}(?=-)/img)[0].match(/\d+$/img)[0];
+        let dayMatch = persianDateTimeInString.match(/\d{2,4}-\d{1,2}-\d{1,2}(?=-)/img);
+        if (dayMatch != null && dayMatch.length > 0)
+          dayMatch = dayMatch[0].match(/\d+$/img);
+        if (dayMatch != null && dayMatch.length > 0)
+          day = dayMatch[0];
 
         // بدست آوردن سال
-        year = persianDateTimeInString.match(/\d{2,4}(?=-\d{1,2}-\d{1,2})/img)[0].replace(/\D+/img, '');
+        let yearMatch = persianDateTimeInString.match(/\d{2,4}(?=-\d{1,2}-\d{1,2})/img);
+        if (yearMatch != null && yearMatch.length > 0)
+          yearMatch = yearMatch[0].match(/\D+/img);
+        if (yearMatch != null && yearMatch.length > 0)
+          year = yearMatch[0];
       }
       else {
-        const objValues = Object.keys(PersianDateTimeMonthEnum).map(k => PersianDateTimeMonthEnum[k]);
-        const persianMonthNames = objValues.filter(v => typeof v === "string") as string[];
         for (let i = 0; i < persianMonthNames.length; i++) {
           let monthName = persianMonthNames[i];
           if (persianDateTimeInString.indexOf(monthName) <= -1) continue;
@@ -111,11 +133,11 @@
           throw new Error("عدد روز در رشته ورودی وجود ندارد");
         // بدست آوردن سال
         let yearMatch = persianDateTimeInString.match(/-\d{4}(?=-)/img);
-        if (yearMatch != null)
+        if (yearMatch != null && yearMatch.length > 0)
           year = yearMatch[0].replace(/\D+/img, '');
         else {
           yearMatch = persianDateTimeInString.match(/-\d{2,4}(?=-)/img);
-          if (yearMatch != null)
+          if (yearMatch != null && yearMatch.length > 0)
             year = yearMatch[0].replace(/\D+/img, '');
           else
             throw new Error("عدد سال در رشته ورودی وجود ندارد");
@@ -660,7 +682,7 @@
     setPersianMonth(persianMonth: number): PersianDateTime {
       const persianDateTime = this.getPersianDateTime();
       let day = persianDateTime.day;
-      if (persianMonth > 6 && persianMonth < 12 && day > 30) 
+      if (persianMonth > 6 && persianMonth < 12 && day > 30)
         day = 30;
       else if (persianMonth >= 12 && day > 29) {
         const isYearLeap = PersianDateConverter.isLeapPersianYear(persianDateTime.year);
@@ -691,7 +713,7 @@
       const persianDateTime = this.getPersianDateTime();
       return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day, persianDateTime.hour, persianDateTime.minute, persianDateTime.second, millisecond);
     }
-    setPersianDate(year: number, month: number, day: number): PersianDateTime{
+    setPersianDate(year: number, month: number, day: number): PersianDateTime {
       const persianDateTime = this.getPersianDateTime();
       return PersianDateTime.fromPersianDateTime(year, month, day, persianDateTime.hour, persianDateTime.minute, persianDateTime.second, persianDateTime.millisecond);
     }

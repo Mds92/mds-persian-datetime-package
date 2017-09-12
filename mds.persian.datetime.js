@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 var Mds;
 (function (Mds) {
-    var PersianDateTime = (function () {
+    var PersianDateTime = /** @class */ (function () {
         function PersianDateTime(gregorianDateTime) {
             this.dateTime = null;
             this.dateTime = gregorianDateTime;
@@ -64,17 +64,37 @@ var Mds;
                 catch (e) {
                 }
             }
+            var objValues = Object.keys(PersianDateTimeMonthEnum).map(function (k) { return PersianDateTimeMonthEnum[k]; });
+            var persianMonthNames = objValues.filter(function (v) { return typeof v === "string"; });
             if (containMonthSeperator) {
                 // بدست آوردن ماه
-                month = persianDateTimeInString.match(/\d{2,4}-\d{1,2}(?=-\d{1,2}[^:])/img)[0].match(/-\d{1,2}/img)[0].replace(/\D+/img, '');
+                var monthMatch = persianDateTimeInString.match(/\d{2,4}-\d{1,2}(?=-\d{1,2}[^:])/img);
+                if (monthMatch != null && monthMatch.length > 0)
+                    monthMatch = monthMatch[0].match(/-\d{1,2}/img);
+                if (monthMatch != null && monthMatch.length > 0)
+                    month = monthMatch[0].replace(/\D+/img, '');
+                if (month == '' || month == null)
+                    for (var i = 0; i < persianMonthNames.length; i++) {
+                        var monthName = persianMonthNames[i];
+                        if (persianDateTimeInString.indexOf(monthName) <= -1)
+                            continue;
+                        month = PersianDateTimeMonthEnum[monthName];
+                        break;
+                    }
                 // بدست آوردن روز
-                day = persianDateTimeInString.match(/\d{2,4}-\d{1,2}-\d{1,2}(?=-)/img)[0].match(/\d+$/img)[0];
+                var dayMatch = persianDateTimeInString.match(/\d{2,4}-\d{1,2}-\d{1,2}(?=-)/img);
+                if (dayMatch != null && dayMatch.length > 0)
+                    dayMatch = dayMatch[0].match(/\d+$/img);
+                if (dayMatch != null && dayMatch.length > 0)
+                    day = dayMatch[0];
                 // بدست آوردن سال
-                year = persianDateTimeInString.match(/\d{2,4}(?=-\d{1,2}-\d{1,2})/img)[0].replace(/\D+/img, '');
+                var yearMatch = persianDateTimeInString.match(/\d{2,4}(?=-\d{1,2}-\d{1,2})/img);
+                if (yearMatch != null && yearMatch.length > 0)
+                    yearMatch = yearMatch[0].match(/\D+/img);
+                if (yearMatch != null && yearMatch.length > 0)
+                    year = yearMatch[0];
             }
             else {
-                var objValues = Object.keys(PersianDateTimeMonthEnum).map(function (k) { return PersianDateTimeMonthEnum[k]; });
-                var persianMonthNames = objValues.filter(function (v) { return typeof v === "string"; });
                 for (var i = 0; i < persianMonthNames.length; i++) {
                     var monthName = persianMonthNames[i];
                     if (persianDateTimeInString.indexOf(monthName) <= -1)
@@ -94,11 +114,11 @@ var Mds;
                     throw new Error("عدد روز در رشته ورودی وجود ندارد");
                 // بدست آوردن سال
                 var yearMatch = persianDateTimeInString.match(/-\d{4}(?=-)/img);
-                if (yearMatch != null)
+                if (yearMatch != null && yearMatch.length > 0)
                     year = yearMatch[0].replace(/\D+/img, '');
                 else {
                     yearMatch = persianDateTimeInString.match(/-\d{2,4}(?=-)/img);
-                    if (yearMatch != null)
+                    if (yearMatch != null && yearMatch.length > 0)
                         year = yearMatch[0].replace(/\D+/img, '');
                     else
                         throw new Error("عدد سال در رشته ورودی وجود ندارد");
@@ -796,7 +816,7 @@ var Mds;
         return PersianDateTime;
     }());
     Mds.PersianDateTime = PersianDateTime;
-    var PersianDateConverter = (function () {
+    var PersianDateConverter = /** @class */ (function () {
         function PersianDateConverter() {
         }
         /*
