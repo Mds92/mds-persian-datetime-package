@@ -110,7 +110,7 @@
         // بدست آوردن سال
         let yearMatch = persianDateTimeInString.match(/\d{2,4}(?=-\d{1,2}-\d{1,2})/img);
         if (yearMatch != null && yearMatch.length > 0)
-          yearMatch = yearMatch[0].match(/\D+/img);
+          yearMatch = yearMatch[0].match(/\d+/img);
         if (yearMatch != null && yearMatch.length > 0)
           year = yearMatch[0];
       }
