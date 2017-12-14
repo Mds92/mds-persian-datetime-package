@@ -65,18 +65,14 @@
 
       if (persianDateTimeInString.indexOf(':') > -1) // رشته ورودی شامل ساعت نیز هست
       {
-        try {
-          persianDateTimeInString = persianDateTimeInString.replace(/-*:-*/img, ':');
-          hour = persianDateTimeInString.match(/-\d{1,2}(?=:)/img)[0].replace(/\D+/img, '');
-          minute = persianDateTimeInString.match(/\d{1,2}:\d{1,2}(?=:?)/img)[0].match(/\d{1,2}$/img)[0];
-          if (persianDateTimeInString.indexOf(':') != persianDateTimeInString.lastIndexOf(':')) {
-            second = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}(?=(\d{1,2})?)/img)[0].match(/:\d{1,2}$/img)[0].replace(/\D+/img, '');
-            const miliSecondMatch = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}:\d{1,4}(?=(\d{1,2})?)/img);
-            if (miliSecondMatch == null) miliSecond = '0';
-            miliSecond = miliSecondMatch[0].match(/:\d{1,4}-/img)[0].replace(/\D+/img, '');
-          }
-        } catch (e) {
-
+        persianDateTimeInString = persianDateTimeInString.replace(/-*:-*/img, ':');
+        hour = persianDateTimeInString.match(/-\d{1,2}(?=:)/img)[0].replace(/\D+/img, '');
+        minute = persianDateTimeInString.match(/\d{1,2}:\d{1,2}(?=:?)/img)[0].match(/\d{1,2}$/img)[0];
+        if (persianDateTimeInString.indexOf(':') != persianDateTimeInString.lastIndexOf(':')) {
+          second = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}(?=(\d{1,2})?)/img)[0].match(/:\d{1,2}$/img)[0].replace(/\D+/img, '');
+          const miliSecondMatch = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}:\d{1,4}(?=(\d{1,2})?)/img);
+          if (miliSecondMatch == null) miliSecond = '0';
+          miliSecond = miliSecondMatch[0].match(/:\d{1,4}-/img)[0].replace(/\D+/img, '');
         }
       }
 
@@ -84,7 +80,6 @@
       const persianMonthNames = objValues.filter(v => typeof v === "string") as string[];
 
       if (containMonthSeperator) {
-
         // بدست آوردن ماه
         let monthMatch = persianDateTimeInString.match(/\d{2,4}-\d{1,2}(?=-\d{1,2}[^:])/img)
         if (monthMatch != null && monthMatch.length > 0)
@@ -485,6 +480,19 @@
     */
     static getGregorianMonthNameIndex(gregorianMonthName: string): number {
       return this.getGregorianMonthNames.indexOf(gregorianMonthName);
+    }
+
+    /**
+     * آیا تاریخ وارد شده معتبر می باشد یا نه
+     */
+    static isValid(persianDateTime: string, dateSeperatorPattern: string = '\/|-'): boolean {
+      try{
+        this.parse(persianDateTime, dateSeperatorPattern);
+        return true;
+      }
+      catch(e){
+        return false;
+      }
     }
 
     /**

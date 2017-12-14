@@ -144,6 +144,10 @@ export declare namespace Mds {
         */
         static getGregorianMonthNameIndex(gregorianMonthName: string): number;
         /**
+         * آیا تاریخ وارد شده معتبر می باشد یا نه
+         */
+        static isValid(persianDateTime: string, dateSeperatorPattern?: string): boolean;
+        /**
         * @description زمان به فرمتی مشابه
         * 13:47:40:530
         **/

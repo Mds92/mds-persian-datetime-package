@@ -49,19 +49,15 @@ var Mds;
             else if (persianDateTimeInString.indexOf('ب.ظ') > -1)
                 amPm = AmPmEnum.PM;
             if (persianDateTimeInString.indexOf(':') > -1) {
-                try {
-                    persianDateTimeInString = persianDateTimeInString.replace(/-*:-*/img, ':');
-                    hour = persianDateTimeInString.match(/-\d{1,2}(?=:)/img)[0].replace(/\D+/img, '');
-                    minute = persianDateTimeInString.match(/\d{1,2}:\d{1,2}(?=:?)/img)[0].match(/\d{1,2}$/img)[0];
-                    if (persianDateTimeInString.indexOf(':') != persianDateTimeInString.lastIndexOf(':')) {
-                        second = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}(?=(\d{1,2})?)/img)[0].match(/:\d{1,2}$/img)[0].replace(/\D+/img, '');
-                        var miliSecondMatch = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}:\d{1,4}(?=(\d{1,2})?)/img);
-                        if (miliSecondMatch == null)
-                            miliSecond = '0';
-                        miliSecond = miliSecondMatch[0].match(/:\d{1,4}-/img)[0].replace(/\D+/img, '');
-                    }
-                }
-                catch (e) {
+                persianDateTimeInString = persianDateTimeInString.replace(/-*:-*/img, ':');
+                hour = persianDateTimeInString.match(/-\d{1,2}(?=:)/img)[0].replace(/\D+/img, '');
+                minute = persianDateTimeInString.match(/\d{1,2}:\d{1,2}(?=:?)/img)[0].match(/\d{1,2}$/img)[0];
+                if (persianDateTimeInString.indexOf(':') != persianDateTimeInString.lastIndexOf(':')) {
+                    second = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}(?=(\d{1,2})?)/img)[0].match(/:\d{1,2}$/img)[0].replace(/\D+/img, '');
+                    var miliSecondMatch = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}:\d{1,4}(?=(\d{1,2})?)/img);
+                    if (miliSecondMatch == null)
+                        miliSecond = '0';
+                    miliSecond = miliSecondMatch[0].match(/:\d{1,4}-/img)[0].replace(/\D+/img, '');
                 }
             }
             var objValues = Object.keys(PersianDateTimeMonthEnum).map(function (k) { return PersianDateTimeMonthEnum[k]; });
@@ -531,6 +527,19 @@ var Mds;
         */
         PersianDateTime.getGregorianMonthNameIndex = function (gregorianMonthName) {
             return this.getGregorianMonthNames.indexOf(gregorianMonthName);
+        };
+        /**
+         * آیا تاریخ وارد شده معتبر می باشد یا نه
+         */
+        PersianDateTime.isValid = function (persianDateTime, dateSeperatorPattern) {
+            if (dateSeperatorPattern === void 0) { dateSeperatorPattern = '\/|-'; }
+            try {
+                this.parse(persianDateTime, dateSeperatorPattern);
+                return true;
+            }
+            catch (e) {
+                return false;
+            }
         };
         Object.defineProperty(PersianDateTime.prototype, "timeOfDay", {
             /**
