@@ -147,9 +147,8 @@
       let numericSecond = Number(second);
       let numericMiliSecond = Number(miliSecond);
 
-      if (!numericYear || !numericMonth || !numericDay) 
+      if (numericYear <= 0 || numericMonth <= 0 || numericMonth > 12 || numericDay <= 0 || numericDay > 31)
         throw new Error('تاریخ وارد شده نامعتبر است');
-      
 
       if (numericYear < 100)
         numericYear += 1300;
