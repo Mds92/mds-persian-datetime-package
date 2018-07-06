@@ -48,7 +48,8 @@ var Mds;
                 amPm = AmPmEnum.AM;
             else if (persianDateTimeInString.indexOf('ب.ظ') > -1)
                 amPm = AmPmEnum.PM;
-            if (persianDateTimeInString.indexOf(':') > -1) {
+            if (persianDateTimeInString.indexOf(':') > -1) // رشته ورودی شامل ساعت نیز هست
+             {
                 persianDateTimeInString = persianDateTimeInString.replace(/-*:-*/img, ':');
                 hour = persianDateTimeInString.match(/-\d{1,2}(?=:)/img)[0].replace(/\D+/img, '');
                 minute = persianDateTimeInString.match(/\d{1,2}:\d{1,2}(?=:?)/img)[0].match(/\d{1,2}$/img)[0];
@@ -69,7 +70,7 @@ var Mds;
                     monthMatch = monthMatch[0].match(/-\d{1,2}/img);
                 if (monthMatch != null && monthMatch.length > 0)
                     month = monthMatch[0].replace(/\D+/img, '');
-                if (month == '' || month == null)
+                if (month)
                     for (var i = 0; i < persianMonthNames.length; i++) {
                         var monthName = persianMonthNames[i];
                         if (persianDateTimeInString.indexOf(monthName) <= -1)
@@ -127,6 +128,8 @@ var Mds;
             var numericMinute = Number(minute);
             var numericSecond = Number(second);
             var numericMiliSecond = Number(miliSecond);
+            if (!numericYear || !numericMonth || !numericDay)
+                throw new Error('تاریخ وارد شده نامعتبر است');
             if (numericYear < 100)
                 numericYear += 1300;
             switch (amPm) {
@@ -898,7 +901,7 @@ var Mds;
             var gregorianYear = persianYear + 621;
             var leapJ = -14, jp = breaks[0], persianMonth, jump = 1, leap, n, i;
             if (persianYear < jp || persianYear >= breaks[bl - 1])
-                throw new Error('Invalid Persian year ' + persianYear);
+                throw new Error('سال شمسی نامعتبر است => ' + persianYear);
             // Find the limiting years for the Persian year persianYear.
             for (i = 1; i < bl; i += 1) {
                 persianMonth = breaks[i];

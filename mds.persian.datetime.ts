@@ -87,7 +87,7 @@
         if (monthMatch != null && monthMatch.length > 0)
           month = monthMatch[0].replace(/\D+/img, '');
 
-        if (month == '' || month == null)
+        if (month)
           for (let i = 0; i < persianMonthNames.length; i++) {
             let monthName = persianMonthNames[i];
             if (persianDateTimeInString.indexOf(monthName) <= -1) continue;
@@ -146,6 +146,10 @@
       let numericMinute = Number(minute);
       let numericSecond = Number(second);
       let numericMiliSecond = Number(miliSecond);
+
+      if (!numericYear || !numericMonth || !numericDay) 
+        throw new Error('تاریخ وارد شده نامعتبر است');
+      
 
       if (numericYear < 100)
         numericYear += 1300;
@@ -486,11 +490,11 @@
      * آیا تاریخ وارد شده معتبر می باشد یا نه
      */
     static isValid(persianDateTime: string, dateSeperatorPattern: string = '\/|-'): boolean {
-      try{
+      try {
         this.parse(persianDateTime, dateSeperatorPattern);
         return true;
       }
-      catch(e){
+      catch (e) {
         return false;
       }
     }
@@ -858,7 +862,7 @@
         i: number;
 
       if (persianYear < jp || persianYear >= breaks[bl - 1])
-        throw new Error('Invalid Persian year ' + persianYear);
+        throw new Error('سال شمسی نامعتبر است => ' + persianYear);
 
       // Find the limiting years for the Persian year persianYear.
       for (i = 1; i < bl; i += 1) {
