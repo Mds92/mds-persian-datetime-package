@@ -56,9 +56,10 @@ var Mds;
                 if (persianDateTimeInString.indexOf(':') != persianDateTimeInString.lastIndexOf(':')) {
                     second = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}(?=(\d{1,2})?)/img)[0].match(/:\d{1,2}$/img)[0].replace(/\D+/img, '');
                     var miliSecondMatch = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}:\d{1,4}(?=(\d{1,2})?)/img);
-                    if (miliSecondMatch == null)
+                    if (!miliSecondMatch || miliSecondMatch.length <= 0)
                         miliSecond = '0';
-                    miliSecond = miliSecondMatch[0].match(/:\d{1,4}-/img)[0].replace(/\D+/img, '');
+                    else
+                        miliSecond = miliSecondMatch[0].match(/:\d{1,4}-/img)[0].replace(/\D+/img, '');
                 }
             }
             var objValues = Object.keys(PersianDateTimeMonthEnum).map(function (k) { return PersianDateTimeMonthEnum[k]; });

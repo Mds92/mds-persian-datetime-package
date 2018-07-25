@@ -26,7 +26,7 @@ export declare namespace Mds {
          * @param dateSeperatorPattern جدا کننده های اعداد ماه و سال که پیش فرض / می باشد
          */
         static parse(persianDateTimeInString: string, dateSeperatorPattern?: string): PersianDateTime;
-        private getPersianDateTime();
+        private getPersianDateTime;
         static readonly now: PersianDateTime;
         static readonly today: PersianDateTime;
         static elapsedFromNow(persianDateTime: PersianDateTime): PersianDateTime;
@@ -227,7 +227,7 @@ export declare namespace Mds {
          */
         subtract(persianDateTime: PersianDateTime): PersianDateTime;
         clone(): PersianDateTime;
-        private cloneDateTime();
+        private cloneDateTime;
         /**
          * بدست آوردن آبجکت استاندارد تاریخ و زمان
          */
@@ -241,9 +241,9 @@ export declare namespace Mds {
         setMillisecond(millisecond: number): PersianDateTime;
         setPersianDate(year: number, month: number, day: number): PersianDateTime;
         setTime(hour: number, minute: number, second: number, millisecond: number): PersianDateTime;
-        private zeroPad(nr, base);
-        private toPersianNumber(input);
-        private static toEnglishNumber(input);
+        private zeroPad;
+        private toPersianNumber;
+        private static toEnglishNumber;
     }
     class PersianDateConverter {
         static toPersian(gregorianYear: number, gregorianMonth: number, gregorianDay: number): {
@@ -260,13 +260,13 @@ export declare namespace Mds {
         static isLeapPersianYear(persianYear: number): boolean;
         static getDaysInPersianMonth(persianYear: any, persianMonth: any): number;
         static getDaysInPersianYear(persianYear: any): number;
-        private static persianCalendar(persianYear);
-        private static j2D(persianYear, persianMonth, persianDay);
-        private static d2J(jdn);
-        private static g2D(gregorianYear, gregorianMonth, gregorianDay);
-        private static d2G(jdn);
-        private static div(a, b);
-        private static mod(a, b);
+        private static persianCalendar;
+        private static j2D;
+        private static d2J;
+        private static g2D;
+        private static d2G;
+        private static div;
+        private static mod;
     }
     enum PersianDayOfWeek {
         Saturday = 0,
@@ -275,7 +275,7 @@ export declare namespace Mds {
         Tuesday = 3,
         Wednesday = 4,
         Thursday = 5,
-        Friday = 6,
+        Friday = 6
     }
     enum GregorianDayOfWeek {
         Saturday = 6,
@@ -284,6 +284,6 @@ export declare namespace Mds {
         Tuesday = 2,
         Wednesday = 3,
         Thursday = 4,
-        Friday = 5,
+        Friday = 5
     }
 }
