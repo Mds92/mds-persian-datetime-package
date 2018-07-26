@@ -66,13 +66,27 @@
       if (persianDateTimeInString.indexOf(':') > -1) // رشته ورودی شامل ساعت نیز هست
       {
         persianDateTimeInString = persianDateTimeInString.replace(/-*:-*/img, ':');
-        hour = persianDateTimeInString.match(/-\d{1,2}(?=:)/img)[0].replace(/\D+/img, '');
-        minute = persianDateTimeInString.match(/\d{1,2}:\d{1,2}(?=:?)/img)[0].match(/\d{1,2}$/img)[0];
+        let hourMatch = persianDateTimeInString.match(/-\d{1,2}(?=:)/img);
+        let minuteMatch = persianDateTimeInString.match(/\d{1,2}:\d{1,2}(?=:?)/img);
+        if (hourMatch && hourMatch.length > 0) hour = hourMatch[0].replace(/\D+/img, '');
+        if (minuteMatch && minuteMatch.length > 0) {
+          minuteMatch = minuteMatch[0].match(/\d{1,2}$/img);
+          if (minuteMatch && minuteMatch.length > 0)
+            minute = minuteMatch[0].replace(/\D+/img, '');
+        }
+        let secondMatch = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}(?=(\d{1,2})?)/img);
+        let miliSecondMatch = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}:\d{1,4}(?=(\d{1,2})?)/img);
         if (persianDateTimeInString.indexOf(':') != persianDateTimeInString.lastIndexOf(':')) {
-          second = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}(?=(\d{1,2})?)/img)[0].match(/:\d{1,2}$/img)[0].replace(/\D+/img, '');
-          const miliSecondMatch = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}:\d{1,4}(?=(\d{1,2})?)/img);
-          if (!miliSecondMatch || miliSecondMatch.length <= 0) miliSecond = '0';
-          else miliSecond = miliSecondMatch[0].match(/:\d{1,4}-/img)[0].replace(/\D+/img, '');
+          if (secondMatch != null && secondMatch.length > 0) {
+            let secondMatch1 = secondMatch[0].match(/:\d{1,2}$/img);
+            if (secondMatch1 != null && secondMatch1.length > 0)
+              second = secondMatch1[0].replace(/\D+/img, '');
+          }
+          if (miliSecondMatch != null && miliSecondMatch.length > 0) {
+            let miliSecondMatch1 = miliSecondMatch[0].match(/:\d{1,4}-/img);
+            if (miliSecondMatch1 != null && miliSecondMatch1.length > 0)
+              miliSecond = miliSecondMatch1[0].replace(/\D+/img, '');
+          }
         }
       }
 
