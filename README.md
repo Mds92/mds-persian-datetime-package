@@ -141,6 +141,8 @@ setSecond(second: number): PersianDateTime // set second
 setMillisecond(millisecond: number): PersianDateTime // set millisecond
 setPersianDate(year: number, month: number, day: number): PersianDateTime // set persian date
 setTime(hour: number, minute: number, second: number, millisecond: number): PersianDateTime // set time
+getShortNumber(): number // Year - Month - Day as number => 13970624
+getLongNumber(): number // Year - Month - Day - Hour - Minute - Second as number => 13970624031526
 ```
 -----------------------------------
 ### DateTimePicker
