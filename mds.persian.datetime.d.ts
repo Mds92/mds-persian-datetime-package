@@ -241,6 +241,8 @@ export declare namespace Mds {
         setMillisecond(millisecond: number): PersianDateTime;
         setPersianDate(year: number, month: number, day: number): PersianDateTime;
         setTime(hour: number, minute: number, second: number, millisecond: number): PersianDateTime;
+        getShortNumber(): number;
+        getLongNumber(): number;
         private zeroPad;
         private toPersianNumber;
         private static toEnglishNumber;

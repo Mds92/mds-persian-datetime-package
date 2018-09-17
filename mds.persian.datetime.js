@@ -800,6 +800,12 @@ var Mds;
             var persianDateTime = this.getPersianDateTime();
             return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day, hour, minute, second, millisecond);
         };
+        PersianDateTime.prototype.getShortNumber = function () {
+            return Number(this.toString('yyyyMMdd'));
+        };
+        PersianDateTime.prototype.getLongNumber = function () {
+            return Number(this.toString('yyyyMMddhhmmss'));
+        };
         PersianDateTime.prototype.zeroPad = function (nr, base) {
             if (nr == undefined || nr == '')
                 return base;

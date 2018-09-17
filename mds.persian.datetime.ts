@@ -747,6 +747,12 @@
       return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day,
         hour, minute, second, millisecond);
     }
+    getShortNumber(): number {
+      return Number(this.toString('yyyyMMdd'));
+    }
+    getLongNumber(): number {
+      return Number(this.toString('yyyyMMddhhmmss'));
+    }
 
     private zeroPad(nr: any, base: string): string {
       if (nr == undefined || nr == '') return base;
