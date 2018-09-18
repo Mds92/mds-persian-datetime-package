@@ -801,10 +801,10 @@ var Mds;
             return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day, hour, minute, second, millisecond);
         };
         PersianDateTime.prototype.getShortNumber = function () {
-            return Number(this.toString('yyyyMMdd'));
+            return Number(this.toEnglishNumber(this.toString('yyyyMMdd')));
         };
         PersianDateTime.prototype.getLongNumber = function () {
-            return Number(this.toString('yyyyMMddhhmmss'));
+            return Number(this.toEnglishNumber(this.toString('yyyyMMddhhmmss')));
         };
         PersianDateTime.prototype.zeroPad = function (nr, base) {
             if (nr == undefined || nr == '')
@@ -827,6 +827,23 @@ var Mds;
                 .replace(/7/img, '۷')
                 .replace(/8/img, '۸')
                 .replace(/9/img, '۹');
+        };
+        PersianDateTime.prototype.toEnglishNumber = function (input) {
+            if (input == '' || input == null)
+                return '';
+            input = input.replace(/ي/img, 'ی').replace(/ك/img, 'ک');
+            //۰ ۱ ۲ ۳ ۴ ۵ ۶ ۷ ۸ ۹
+            return input.replace(/,/img, '')
+                .replace(/۰/img, '0')
+                .replace(/۱/img, '1')
+                .replace(/۲/img, '2')
+                .replace(/۳/img, '3')
+                .replace(/۴/img, '4')
+                .replace(/۵/img, '5')
+                .replace(/۶/img, '6')
+                .replace(/۷/img, '7')
+                .replace(/۸/img, '8')
+                .replace(/۹/img, '9');
         };
         PersianDateTime.toEnglishNumber = function (input) {
             if (input == '' || input == null)

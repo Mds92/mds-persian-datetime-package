@@ -748,10 +748,10 @@
         hour, minute, second, millisecond);
     }
     getShortNumber(): number {
-      return Number(this.toString('yyyyMMdd'));
+      return Number(this.toEnglishNumber(this.toString('yyyyMMdd')));
     }
     getLongNumber(): number {
-      return Number(this.toString('yyyyMMddhhmmss'));
+      return Number(this.toEnglishNumber(this.toString('yyyyMMddhhmmss')));
     }
 
     private zeroPad(nr: any, base: string): string {
@@ -773,6 +773,22 @@
         .replace(/7/img, '۷')
         .replace(/8/img, '۸')
         .replace(/9/img, '۹');
+    }
+    private toEnglishNumber(input: string): string {
+      if (input == '' || input == null) return '';
+      input = input.replace(/ي/img, 'ی').replace(/ك/img, 'ک');
+      //۰ ۱ ۲ ۳ ۴ ۵ ۶ ۷ ۸ ۹
+      return input.replace(/,/img, '')
+        .replace(/۰/img, '0')
+        .replace(/۱/img, '1')
+        .replace(/۲/img, '2')
+        .replace(/۳/img, '3')
+        .replace(/۴/img, '4')
+        .replace(/۵/img, '5')
+        .replace(/۶/img, '6')
+        .replace(/۷/img, '7')
+        .replace(/۸/img, '8')
+        .replace(/۹/img, '9');
     }
     private static toEnglishNumber(input: string): string {
       if (input == '' || input == null) return '';

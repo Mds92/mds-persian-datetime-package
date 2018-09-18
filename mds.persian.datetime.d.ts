@@ -245,6 +245,7 @@ export declare namespace Mds {
         getLongNumber(): number;
         private zeroPad;
         private toPersianNumber;
+        private toEnglishNumber;
         private static toEnglishNumber;
     }
     class PersianDateConverter {
