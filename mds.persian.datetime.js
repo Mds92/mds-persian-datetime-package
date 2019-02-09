@@ -188,7 +188,16 @@ var Mds;
         });
         ;
         PersianDateTime.elapsedFromNow = function (persianDateTime) {
-            return PersianDateTime.now.subtract(persianDateTime);
+            var dateTimeNow = new Date();
+            var datetime = persianDateTime.toDate();
+            return {
+                year: dateTimeNow.getFullYear() - datetime.getFullYear(),
+                month: dateTimeNow.getMonth() - datetime.getMonth(),
+                day: dateTimeNow.getDate() - datetime.getDate(),
+                hour: dateTimeNow.getHours() - datetime.getHours(),
+                minute: dateTimeNow.getMinutes() - datetime.getMinutes(),
+                second: dateTimeNow.getSeconds() - datetime.getSeconds(),
+            };
         };
         ;
         Object.defineProperty(PersianDateTime.prototype, "englishNumber", {

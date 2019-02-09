@@ -29,7 +29,7 @@ export declare namespace Mds {
         private getPersianDateTime;
         static readonly now: PersianDateTime;
         static readonly today: PersianDateTime;
-        static elapsedFromNow(persianDateTime: PersianDateTime): PersianDateTime;
+        static elapsedFromNow(persianDateTime: PersianDateTime): ElapsedTime;
         /**
          * آیا اعداد در خروجی به صورت انگلیسی نمایش داده شوند؟
          */
@@ -288,5 +288,13 @@ export declare namespace Mds {
         Wednesday = 3,
         Thursday = 4,
         Friday = 5
+    }
+    interface ElapsedTime {
+        year: number;
+        month: number;
+        day: number;
+        hour: number;
+        minute: number;
+        second: number;
     }
 }

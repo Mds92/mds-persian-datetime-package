@@ -203,8 +203,17 @@
       return PersianDateTime.fromPersianDate(persianDate.year, persianDate.month, persianDate.day);
     };
 
-    static elapsedFromNow(persianDateTime: PersianDateTime): PersianDateTime {
-      return PersianDateTime.now.subtract(persianDateTime);
+    static elapsedFromNow(persianDateTime: PersianDateTime): ElapsedTime {
+      const dateTimeNow = new Date();
+      const datetime = persianDateTime.toDate();
+      return {
+        year: dateTimeNow.getFullYear() - datetime.getFullYear(),
+        month: dateTimeNow.getMonth() - datetime.getMonth(),
+        day: dateTimeNow.getDate() - datetime.getDate(),
+        hour: dateTimeNow.getHours() - datetime.getHours(),
+        minute: dateTimeNow.getMinutes() - datetime.getMinutes(),
+        second: dateTimeNow.getSeconds() - datetime.getSeconds(),
+      };
     };
 
     /**
@@ -1157,5 +1166,14 @@
     دی = 10,
     بهمن = 11,
     اسفند = 12
+  }
+
+  interface ElapsedTime{
+    year: number;
+    month: number;
+    day: number;
+    hour: number;
+    minute: number;
+    second: number;
   }
 }
