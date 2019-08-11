@@ -14,7 +14,7 @@
      * @param persianMonth ماه شمسی
      * @param persianDay روز شمسی
      */
-    static fromPersianDate(persianYear: number, persianMonth: number, persianDay: number) {
+    static fromPersianDate(persianYear: number, persianMonth: number, persianDay: number): PersianDateTime {
       return PersianDateTime.fromPersianDateTime(persianYear, persianMonth, persianDay, 0, 0, 0, 0);
     }
 
@@ -28,7 +28,7 @@
      * @param second ثانیه
      * @param millisecond میلی ثانیه
      */
-    static fromPersianDateTime(persianYear: number, persianMonth: number, persianDay: number, hour: number, minute: number, second: number, millisecond: number) {
+    static fromPersianDateTime(persianYear: number, persianMonth: number, persianDay: number, hour: number, minute: number, second: number, millisecond: number): PersianDateTime {
       const dateTime = PersianDateConverter.toGregorian(persianYear, persianMonth, persianDay);
       return new PersianDateTime(new Date(dateTime.year, dateTime.month - 1, dateTime.day, hour, minute, second, millisecond));
     }
@@ -38,7 +38,7 @@
      * @param persianDateTimeInString متن مورد نظر برای پارس کردن
      * @param dateSeperatorPattern جدا کننده های اعداد ماه و سال که پیش فرض / می باشد
      */
-    static parse(persianDateTimeInString: string, dateSeperatorPattern: string = '\/|-') {
+    static parse(persianDateTimeInString: string, dateSeperatorPattern: string = '\/|-'): PersianDateTime {
       persianDateTimeInString = this.toEnglishNumber(persianDateTimeInString);
       let month = '',
         year = '0',
@@ -203,7 +203,7 @@
       return PersianDateTime.fromPersianDate(persianDate.year, persianDate.month, persianDate.day);
     };
 
-    static elapsedFromNow(persianDateTime: PersianDateTime): ElapsedTime {
+    static elapsedFromNow(persianDateTime: PersianDateTime): PersianDateTimeSpan1 {
       const dateTimeNow = new Date();
       const datetime = persianDateTime.toDate();
       return {
@@ -704,10 +704,44 @@
     }
 
     /**
-     * بدست آوردن آبجکت استاندارد تاریخ و زمان
+     * @description بدست آوردن آبجکت استاندارد تاریخ و زمان
      */
     toDate() {
       return this.dateTime;
+    }
+    /**
+     * @description بدست آوردن تعداد میلی ثانیه سپری شده از تاریخ 1 ژانویه 1970
+     * معادل getTime آبجکت استاندارد تاریخ
+     */
+    getTime(): number {
+      return this.dateTime.getTime();
+    }
+
+    /**
+     *  @description بدست آوردن اختلاف با تاریخ ورودی
+     */
+    getDifference(persianDateTime: PersianDateTime): PersianDateTimeSpan2 {
+
+      let diff = Math.abs(persianDateTime.getTime() - this.dateTime.getTime());
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      diff -= days * (1000 * 60 * 60 * 24);
+
+      const hours = Math.floor(diff / (1000 * 60 * 60));
+      diff -= hours * (1000 * 60 * 60);
+
+      const mins = Math.floor(diff / (1000 * 60));
+      diff -= mins * (1000 * 60);
+
+      const seconds = Math.floor(diff / (1000));
+      diff -= seconds * (1000);
+
+      return {
+        days,
+        hours,
+        minutes: mins,
+        seconds
+      }
     }
 
     setPersianYear(persianYear: number): PersianDateTime {
@@ -756,9 +790,15 @@
       return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day,
         hour, minute, second, millisecond);
     }
+    /**
+     * گرفتن تاریخ به شکل عدد تا دقت روز
+     */
     getShortNumber(): number {
       return Number(this.toEnglishNumber(this.toString('yyyyMMdd')));
     }
+    /**
+     * دریافت تاریخ به شکل عدد تا دقت ثانیه
+     */
     getLongNumber(): number {
       return Number(this.toEnglishNumber(this.toString('yyyyMMddhhmmss')));
     }
@@ -1168,12 +1208,19 @@
     اسفند = 12
   }
 
-  interface ElapsedTime{
+  interface PersianDateTimeSpan1 {
     year: number;
     month: number;
     day: number;
     hour: number;
     minute: number;
     second: number;
+  }
+
+  interface PersianDateTimeSpan2 {
+    days: number;
+    hours: number;
+    minutes: number;
+    seconds: number;
   }
 }

@@ -759,10 +759,37 @@ var Mds;
             return new Date(this.dateTime.getTime());
         };
         /**
-         * بدست آوردن آبجکت استاندارد تاریخ و زمان
+         * @description بدست آوردن آبجکت استاندارد تاریخ و زمان
          */
         PersianDateTime.prototype.toDate = function () {
             return this.dateTime;
+        };
+        /**
+         * @description بدست آوردن تعداد میلی ثانیه سپری شده از تاریخ 1 ژانویه 1970
+         * معادل getTime آبجکت استاندارد تاریخ
+         */
+        PersianDateTime.prototype.getTime = function () {
+            return this.dateTime.getTime();
+        };
+        /**
+         *  @description بدست آوردن اختلاف با تاریخ ورودی
+         */
+        PersianDateTime.prototype.getDifference = function (persianDateTime) {
+            var diff = Math.abs(persianDateTime.getTime() - this.dateTime.getTime());
+            var days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            diff -= days * (1000 * 60 * 60 * 24);
+            var hours = Math.floor(diff / (1000 * 60 * 60));
+            diff -= hours * (1000 * 60 * 60);
+            var mins = Math.floor(diff / (1000 * 60));
+            diff -= mins * (1000 * 60);
+            var seconds = Math.floor(diff / (1000));
+            diff -= seconds * (1000);
+            return {
+                days: days,
+                hours: hours,
+                minutes: mins,
+                seconds: seconds
+            };
         };
         PersianDateTime.prototype.setPersianYear = function (persianYear) {
             return PersianDateTime.fromPersianDateTime(persianYear, this.month, this.day, this.hour, this.minute, this.second, this.millisecond);
@@ -809,9 +836,15 @@ var Mds;
             var persianDateTime = this.getPersianDateTime();
             return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day, hour, minute, second, millisecond);
         };
+        /**
+         * گرفتن تاریخ به شکل عدد تا دقت روز
+         */
         PersianDateTime.prototype.getShortNumber = function () {
             return Number(this.toEnglishNumber(this.toString('yyyyMMdd')));
         };
+        /**
+         * دریافت تاریخ به شکل عدد تا دقت ثانیه
+         */
         PersianDateTime.prototype.getLongNumber = function () {
             return Number(this.toEnglishNumber(this.toString('yyyyMMddhhmmss')));
         };

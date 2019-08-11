@@ -29,7 +29,7 @@ export declare namespace Mds {
         private getPersianDateTime;
         static readonly now: PersianDateTime;
         static readonly today: PersianDateTime;
-        static elapsedFromNow(persianDateTime: PersianDateTime): ElapsedTime;
+        static elapsedFromNow(persianDateTime: PersianDateTime): PersianDateTimeSpan1;
         /**
          * آیا اعداد در خروجی به صورت انگلیسی نمایش داده شوند؟
          */
@@ -229,9 +229,18 @@ export declare namespace Mds {
         clone(): PersianDateTime;
         private cloneDateTime;
         /**
-         * بدست آوردن آبجکت استاندارد تاریخ و زمان
+         * @description بدست آوردن آبجکت استاندارد تاریخ و زمان
          */
         toDate(): Date;
+        /**
+         * @description بدست آوردن تعداد میلی ثانیه سپری شده از تاریخ 1 ژانویه 1970
+         * معادل getTime آبجکت استاندارد تاریخ
+         */
+        getTime(): number;
+        /**
+         *  @description بدست آوردن اختلاف با تاریخ ورودی
+         */
+        getDifference(persianDateTime: PersianDateTime): PersianDateTimeSpan2;
         setPersianYear(persianYear: number): PersianDateTime;
         setPersianMonth(persianMonth: number): PersianDateTime;
         setPersianDay(persianDay: number): PersianDateTime;
@@ -241,7 +250,13 @@ export declare namespace Mds {
         setMillisecond(millisecond: number): PersianDateTime;
         setPersianDate(year: number, month: number, day: number): PersianDateTime;
         setTime(hour: number, minute: number, second: number, millisecond: number): PersianDateTime;
+        /**
+         * گرفتن تاریخ به شکل عدد تا دقت روز
+         */
         getShortNumber(): number;
+        /**
+         * دریافت تاریخ به شکل عدد تا دقت ثانیه
+         */
         getLongNumber(): number;
         private zeroPad;
         private toPersianNumber;
@@ -289,12 +304,18 @@ export declare namespace Mds {
         Thursday = 4,
         Friday = 5
     }
-    interface ElapsedTime {
+    interface PersianDateTimeSpan1 {
         year: number;
         month: number;
         day: number;
         hour: number;
         minute: number;
         second: number;
+    }
+    interface PersianDateTimeSpan2 {
+        days: number;
+        hours: number;
+        minutes: number;
+        seconds: number;
     }
 }
