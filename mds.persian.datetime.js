@@ -187,6 +187,9 @@ var Mds;
             configurable: true
         });
         ;
+        /**
+         * بدست آوردن زمان سپری شده از زمان فعلی
+         */
         PersianDateTime.elapsedFromNow = function (persianDateTime) {
             var dateTimeNow = new Date();
             var datetime = persianDateTime.toDate();
@@ -772,10 +775,18 @@ var Mds;
             return this.dateTime.getTime();
         };
         /**
+         * @description بدست آوردن تعداد میلی ثانیه سپری شده از تاریخ 1 ژانویه 1970
+         * معادل getTime آبجکت استاندارد تاریخ بر مبنای خط گرینویچ
+         * - یعنی بدون در نظر گرفتن +3.5 یا + یا ...4.5 وقت محلی
+         */
+        PersianDateTime.prototype.getTimeUTC = function () {
+            return Date.UTC(this.dateTime.getUTCFullYear(), this.dateTime.getUTCMonth(), this.dateTime.getUTCDate(), this.dateTime.getUTCHours(), this.dateTime.getUTCMinutes(), this.dateTime.getUTCSeconds());
+        };
+        /**
          *  @description بدست آوردن اختلاف با تاریخ ورودی
          */
         PersianDateTime.prototype.getDifference = function (persianDateTime) {
-            var diff = Math.abs(persianDateTime.getTime() - this.dateTime.getTime());
+            var diff = Math.abs(persianDateTime.getTimeUTC() - this.getTimeUTC());
             var days = Math.floor(diff / (1000 * 60 * 60 * 24));
             diff -= days * (1000 * 60 * 60 * 24);
             var hours = Math.floor(diff / (1000 * 60 * 60));

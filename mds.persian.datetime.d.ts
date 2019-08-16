@@ -29,6 +29,9 @@ export declare namespace Mds {
         private getPersianDateTime;
         static readonly now: PersianDateTime;
         static readonly today: PersianDateTime;
+        /**
+         * بدست آوردن زمان سپری شده از زمان فعلی
+         */
         static elapsedFromNow(persianDateTime: PersianDateTime): PersianDateTimeSpan1;
         /**
          * آیا اعداد در خروجی به صورت انگلیسی نمایش داده شوند؟
@@ -237,6 +240,12 @@ export declare namespace Mds {
          * معادل getTime آبجکت استاندارد تاریخ
          */
         getTime(): number;
+        /**
+         * @description بدست آوردن تعداد میلی ثانیه سپری شده از تاریخ 1 ژانویه 1970
+         * معادل getTime آبجکت استاندارد تاریخ بر مبنای خط گرینویچ
+         * - یعنی بدون در نظر گرفتن +3.5 یا + یا ...4.5 وقت محلی
+         */
+        getTimeUTC(): number;
         /**
          *  @description بدست آوردن اختلاف با تاریخ ورودی
          */
