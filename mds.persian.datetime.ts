@@ -203,6 +203,9 @@
       return PersianDateTime.fromPersianDate(persianDate.year, persianDate.month, persianDate.day);
     };
 
+    /**
+     * بدست آوردن زمان سپری شده از زمان فعلی
+     */
     static elapsedFromNow(persianDateTime: PersianDateTime): PersianDateTimeSpan1 {
       const dateTimeNow = new Date();
       const datetime = persianDateTime.toDate();
@@ -716,13 +719,22 @@
     getTime(): number {
       return this.dateTime.getTime();
     }
+    /**
+     * @description بدست آوردن تعداد میلی ثانیه سپری شده از تاریخ 1 ژانویه 1970
+     * معادل getTime آبجکت استاندارد تاریخ بر مبنای خط گرینویچ
+     * - یعنی بدون در نظر گرفتن +3.5 یا + یا ...4.5 وقت محلی
+     */
+    getTimeUTC(): number {
+      return Date.UTC(this.dateTime.getUTCFullYear(), this.dateTime.getUTCMonth(), this.dateTime.getUTCDate(),
+        this.dateTime.getUTCHours(), this.dateTime.getUTCMinutes(), this.dateTime.getUTCSeconds());
+    }
 
     /**
      *  @description بدست آوردن اختلاف با تاریخ ورودی
      */
     getDifference(persianDateTime: PersianDateTime): PersianDateTimeSpan2 {
 
-      let diff = Math.abs(persianDateTime.getTime() - this.dateTime.getTime());
+      let diff = Math.abs(persianDateTime.getTimeUTC() - this.getTimeUTC());
 
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       diff -= days * (1000 * 60 * 60 * 24);
