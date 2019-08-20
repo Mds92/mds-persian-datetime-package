@@ -59,9 +59,13 @@ export declare namespace Mds {
          */
         readonly monthName: string;
         /**
-         * روز هفته
+         * روز هفته شمسی
          */
         readonly dayOfWeek: PersianDayOfWeek;
+        /**
+         * روز هفته شمسی
+         */
+        readonly dayOfWeekGregorian: GregorianDayOfWeek;
         /**
          * روز شروع ماه
          */
@@ -123,9 +127,13 @@ export declare namespace Mds {
          */
         static getPersianMonthIndex(persianMonthName: string): number;
         /**
-         * لیست روزهای هفته در تقویم فارسی
+         * لیست نام ها روزهای هفته در تقویم فارسی
          */
         static readonly getPersianWeekdayNames: string[];
+        /**
+         * لیست نام ها روزهای هفته خلاصه شده در تقویم فارسی
+         */
+        static readonly getPersianWeekdayNamesShort: string[];
         /**
          * بدست آوردن ایندکس نام روز ایرانی از روی نام روزها
          */
@@ -151,6 +159,11 @@ export declare namespace Mds {
          */
         static isValid(persianDateTime: string, dateSeperatorPattern?: string): boolean;
         /**
+         * آیا آبجکت ورودی از نوع MdsPersianDateTime هست
+         * @param obj
+         */
+        static isPersianDateTimeInstance(obj: any): boolean;
+        /**
         * @description زمان به فرمتی مشابه
         * 13:47:40:530
         **/
@@ -166,11 +179,13 @@ export declare namespace Mds {
         **/
         readonly shortTimeOfDay: string;
         /**
-         *
-         * تاریخ بدون احتساب زمان
-         *
+         * @description تاریخ بدون احتساب زمان
         **/
         readonly date: PersianDateTime;
+        /**
+         * @description برای بررسی اینکه آیا آبجکت اینستنس این آبجکت هست یا نه استفاده می شود
+         */
+        readonly isMdsPersianDateTimInstance: boolean;
         /**
         * @description تبدیل تاریخ به رشته
         * فرمت پیش فرض 1393/09/14   13:49:40
@@ -197,6 +212,12 @@ export declare namespace Mds {
         * t: حرف اول از ب.ظ یا ق.ظ
         **/
         toString(format?: string): string;
+        /**
+         * بدست آوردن تاریخ در فرمت
+         * iso 8601
+         * YYYY-MM-DDTHH:mm:ss.sssZ
+         */
+        toIsoString(): string;
         /**
         * اضافه کردن سال به تاریخ
         */

@@ -1,6 +1,6 @@
 {
   "name": "mds.persian.datetime",
-  "version": "1.0.3",
+  "version": "1.0.7",
   "description": "Persian DateTime in TypeScript",
   "license": "MIT",
   "main": "./mds.persian.datetime.js",

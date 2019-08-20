@@ -59,7 +59,8 @@ year: number // Year of selected date
 shortYear: number // year with two digit
 month: number // month number in year, start from 1
 monthName: string // month name => فروردین، اردیبهشت، ...
-dayOfWeek: string // day name in week, PersianDayOfWeek enum
+dayOfWeek: number // day name in week, PersianDayOfWeek enum
+dayOfWeekGregorian: number // day name in week, GregorianDayOfWeek enum
 startDayOfMonthDayOfWeek: string // start day of week in month
 endDayOfMonthDayOfWeek: string // end day of week in month
 dayOfWeekName: string // name of day in week, شنبه، بکشنبه، ....
@@ -76,6 +77,7 @@ getShortPersianAmPmEnum: string // short ق.ظ or ب.ظ
 static getPersianMonthNames: string[] // list of all persian months فروردین، اردیبهشت، ...
 static getPersianMonthIndex: number // get index of persian month with persian month name
 static getPersianWeekdayNames: string[]  // list of all persian week day names
+static getPersianWeekdayNamesShort: string[]  // list of all short persian week day names
 static getGregorianWeekdayNames: string[] // get list of all gregorian week day names
 timeOfDay: string // get time like 13:47:40:530
 longTimeOfDay: string // get time like ساعت 01:47:40:530 ب.ظ

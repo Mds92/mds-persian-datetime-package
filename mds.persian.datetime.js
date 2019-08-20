@@ -297,7 +297,7 @@ var Mds;
         });
         Object.defineProperty(PersianDateTime.prototype, "dayOfWeek", {
             /**
-             * روز هفته
+             * روز هفته شمسی
              */
             get: function () {
                 var gregorianDayOfWeek = this.dateTime.getDay();
@@ -326,6 +326,16 @@ var Mds;
                         break;
                 }
                 return persianDayOfWeek;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime.prototype, "dayOfWeekGregorian", {
+            /**
+             * روز هفته شمسی
+             */
+            get: function () {
+                return this.dateTime.getDay();
             },
             enumerable: true,
             configurable: true
@@ -508,10 +518,20 @@ var Mds;
         };
         Object.defineProperty(PersianDateTime, "getPersianWeekdayNames", {
             /**
-             * لیست روزهای هفته در تقویم فارسی
+             * لیست نام ها روزهای هفته در تقویم فارسی
              */
             get: function () {
                 return ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"];
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(PersianDateTime, "getPersianWeekdayNamesShort", {
+            /**
+             * لیست نام ها روزهای هفته خلاصه شده در تقویم فارسی
+             */
+            get: function () {
+                return ["ش", "ی", "د", "س", "چ", "پ", "ج"];
             },
             enumerable: true,
             configurable: true
@@ -570,6 +590,15 @@ var Mds;
                 return false;
             }
         };
+        /**
+         * آیا آبجکت ورودی از نوع MdsPersianDateTime هست
+         * @param obj
+         */
+        PersianDateTime.isPersianDateTimeInstance = function (obj) {
+            if (!obj)
+                return false;
+            return obj['isMdsPersianDateTimInstance'] == undefined ? false : true;
+        };
         Object.defineProperty(PersianDateTime.prototype, "timeOfDay", {
             /**
             * @description زمان به فرمتی مشابه
@@ -608,9 +637,7 @@ var Mds;
         ;
         Object.defineProperty(PersianDateTime.prototype, "date", {
             /**
-             *
-             * تاریخ بدون احتساب زمان
-             *
+             * @description تاریخ بدون احتساب زمان
             **/
             get: function () {
                 var persianDateTime = this.getPersianDateTime();
@@ -620,6 +647,16 @@ var Mds;
             configurable: true
         });
         ;
+        Object.defineProperty(PersianDateTime.prototype, "isMdsPersianDateTimInstance", {
+            /**
+             * @description برای بررسی اینکه آیا آبجکت اینستنس این آبجکت هست یا نه استفاده می شود
+             */
+            get: function () {
+                return true;
+            },
+            enumerable: true,
+            configurable: true
+        });
         /**
         * @description تبدیل تاریخ به رشته
         * فرمت پیش فرض 1393/09/14   13:49:40
@@ -677,6 +714,14 @@ var Mds;
             return dateTimeString;
         };
         ;
+        /**
+         * بدست آوردن تاریخ در فرمت
+         * iso 8601
+         * YYYY-MM-DDTHH:mm:ss.sssZ
+         */
+        PersianDateTime.prototype.toIsoString = function () {
+            return this.dateTime.toISOString();
+        };
         /**
         * اضافه کردن سال به تاریخ
         */

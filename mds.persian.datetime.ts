@@ -293,7 +293,7 @@
     }
 
     /**
-     * روز هفته
+     * روز هفته شمسی
      */
     get dayOfWeek(): PersianDayOfWeek {
       const gregorianDayOfWeek = this.dateTime.getDay() as GregorianDayOfWeek;
@@ -322,6 +322,13 @@
           break;
       }
       return persianDayOfWeek;
+    }
+
+    /**
+     * روز هفته شمسی
+     */
+    get dayOfWeekGregorian(): GregorianDayOfWeek {
+      return this.dateTime.getDay() as GregorianDayOfWeek;
     }
 
     /**
@@ -467,10 +474,17 @@
     }
 
     /**
-     * لیست روزهای هفته در تقویم فارسی
+     * لیست نام ها روزهای هفته در تقویم فارسی
      */
     static get getPersianWeekdayNames(): string[] {
       return ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"];
+    }
+
+    /**
+     * لیست نام ها روزهای هفته خلاصه شده در تقویم فارسی
+     */
+    static get getPersianWeekdayNamesShort(): string[] {
+      return ["ش", "ی", "د", "س", "چ", "پ", "ج"];
     }
 
     /**
@@ -525,6 +539,15 @@
     }
 
     /**
+     * آیا آبجکت ورودی از نوع MdsPersianDateTime هست
+     * @param obj 
+     */
+    static isPersianDateTimeInstance(obj: any): boolean {
+      if (!obj) return false;
+      return obj['isMdsPersianDateTimInstance'] == undefined ? false : true;
+    }
+
+    /**
     * @description زمان به فرمتی مشابه 
     * 13:47:40:530
     **/
@@ -549,14 +572,19 @@
     };
 
     /**
-     * 
-     * تاریخ بدون احتساب زمان
-     * 
+     * @description تاریخ بدون احتساب زمان
     **/
     get date(): PersianDateTime {
       const persianDateTime = this.getPersianDateTime();
       return PersianDateTime.fromPersianDate(persianDateTime.year, persianDateTime.month, persianDateTime.day);
     };
+
+    /**
+     * @description برای بررسی اینکه آیا آبجکت اینستنس این آبجکت هست یا نه استفاده می شود
+     */
+    get isMdsPersianDateTimInstance(): boolean {
+      return true;
+    }
 
     /**
     * @description تبدیل تاریخ به رشته 
@@ -613,6 +641,15 @@
         dateTimeString = this.toPersianNumber(dateTimeString);
       return dateTimeString;
     };
+
+    /**
+     * بدست آوردن تاریخ در فرمت 
+     * iso 8601 
+     * YYYY-MM-DDTHH:mm:ss.sssZ
+     */
+    toIsoString(): string {
+      return this.dateTime.toISOString();
+    }
 
     /**
     * اضافه کردن سال به تاریخ
@@ -814,6 +851,7 @@
     getLongNumber(): number {
       return Number(this.toEnglishNumber(this.toString('yyyyMMddhhmmss')));
     }
+
 
     private zeroPad(nr: any, base: string): string {
       if (nr == undefined || nr == '') return base;
