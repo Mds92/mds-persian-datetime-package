@@ -773,6 +773,16 @@
 
       let diff = Math.abs(persianDateTime.getTimeUTC() - this.getTimeUTC());
 
+      if (this.month != persianDateTime.month) {
+        if (this.month <= 6 && persianDateTime.month >= 7 || this.month >= 7 && persianDateTime.month <= 6) {
+          if (this.month <= 6) {
+            diff = Math.abs(persianDateTime.getTimeUTC() - this.addHours(-1).getTimeUTC());
+          } else if (persianDateTime.month <= 6) {
+            diff = Math.abs(persianDateTime.addHours(-1).getTimeUTC() - this.getTimeUTC());
+          }
+        }
+      }
+
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       diff -= days * (1000 * 60 * 60 * 24);
 
