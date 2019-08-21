@@ -658,6 +658,18 @@ var Mds;
             configurable: true
         });
         /**
+         * گرفتن تاریخ به شکل عدد تا دقت روز
+         */
+        PersianDateTime.prototype.getShortNumber = function () {
+            return Number(this.toEnglishNumber(this.toString('yyyyMMdd')));
+        };
+        /**
+         * دریافت تاریخ به شکل عدد تا دقت ثانیه
+         */
+        PersianDateTime.prototype.getLongNumber = function () {
+            return Number(this.toEnglishNumber(this.toString('yyyyMMddhhmmss')));
+        };
+        /**
         * @description تبدیل تاریخ به رشته
         * فرمت پیش فرض 1393/09/14   13:49:40
         * yyyy: سال چهار رقمی
@@ -891,18 +903,6 @@ var Mds;
         PersianDateTime.prototype.setTime = function (hour, minute, second, millisecond) {
             var persianDateTime = this.getPersianDateTime();
             return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day, hour, minute, second, millisecond);
-        };
-        /**
-         * گرفتن تاریخ به شکل عدد تا دقت روز
-         */
-        PersianDateTime.prototype.getShortNumber = function () {
-            return Number(this.toEnglishNumber(this.toString('yyyyMMdd')));
-        };
-        /**
-         * دریافت تاریخ به شکل عدد تا دقت ثانیه
-         */
-        PersianDateTime.prototype.getLongNumber = function () {
-            return Number(this.toEnglishNumber(this.toString('yyyyMMddhhmmss')));
         };
         PersianDateTime.prototype.zeroPad = function (nr, base) {
             if (nr == undefined || nr == '')

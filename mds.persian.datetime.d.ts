@@ -187,6 +187,14 @@ export declare namespace Mds {
          */
         readonly isMdsPersianDateTimInstance: boolean;
         /**
+         * گرفتن تاریخ به شکل عدد تا دقت روز
+         */
+        getShortNumber(): number;
+        /**
+         * دریافت تاریخ به شکل عدد تا دقت ثانیه
+         */
+        getLongNumber(): number;
+        /**
         * @description تبدیل تاریخ به رشته
         * فرمت پیش فرض 1393/09/14   13:49:40
         * yyyy: سال چهار رقمی
@@ -280,14 +288,6 @@ export declare namespace Mds {
         setMillisecond(millisecond: number): PersianDateTime;
         setPersianDate(year: number, month: number, day: number): PersianDateTime;
         setTime(hour: number, minute: number, second: number, millisecond: number): PersianDateTime;
-        /**
-         * گرفتن تاریخ به شکل عدد تا دقت روز
-         */
-        getShortNumber(): number;
-        /**
-         * دریافت تاریخ به شکل عدد تا دقت ثانیه
-         */
-        getLongNumber(): number;
         private zeroPad;
         private toPersianNumber;
         private toEnglishNumber;
