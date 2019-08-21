@@ -587,6 +587,19 @@
     }
 
     /**
+     * گرفتن تاریخ به شکل عدد تا دقت روز
+     */
+    getShortNumber(): number {
+      return Number(this.toEnglishNumber(this.toString('yyyyMMdd')));
+    }
+    /**
+     * دریافت تاریخ به شکل عدد تا دقت ثانیه
+     */
+    getLongNumber(): number {
+      return Number(this.toEnglishNumber(this.toString('yyyyMMddhhmmss')));
+    }
+
+    /**
     * @description تبدیل تاریخ به رشته 
     * فرمت پیش فرض 1393/09/14   13:49:40 
     * yyyy: سال چهار رقمی 
@@ -771,17 +784,9 @@
      */
     getDifference(persianDateTime: PersianDateTime): PersianDateTimeSpan2 {
 
-      let diff = Math.abs(persianDateTime.getTimeUTC() - this.getTimeUTC());
+      const dateTime1 = persianDateTime.toDate().toString()
 
-      if (this.month != persianDateTime.month) {
-        if (this.month <= 6 && persianDateTime.month >= 7 || this.month >= 7 && persianDateTime.month <= 6) {
-          if (this.month <= 6) {
-            diff = Math.abs(persianDateTime.getTimeUTC() - this.addHours(-1).getTimeUTC());
-          } else if (persianDateTime.month <= 6) {
-            diff = Math.abs(persianDateTime.addHours(-1).getTimeUTC() - this.getTimeUTC());
-          }
-        }
-      }
+      let diff = Math.abs(persianDateTime.getTimeUTC() - this.getTimeUTC());
 
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       diff -= days * (1000 * 60 * 60 * 24);
@@ -848,18 +853,6 @@
       const persianDateTime = this.getPersianDateTime();
       return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day,
         hour, minute, second, millisecond);
-    }
-    /**
-     * گرفتن تاریخ به شکل عدد تا دقت روز
-     */
-    getShortNumber(): number {
-      return Number(this.toEnglishNumber(this.toString('yyyyMMdd')));
-    }
-    /**
-     * دریافت تاریخ به شکل عدد تا دقت ثانیه
-     */
-    getLongNumber(): number {
-      return Number(this.toEnglishNumber(this.toString('yyyyMMddhhmmss')));
     }
 
 
