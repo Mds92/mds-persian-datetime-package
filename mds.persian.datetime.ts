@@ -784,8 +784,6 @@
      */
     getDifference(persianDateTime: PersianDateTime): PersianDateTimeSpan2 {
 
-      const dateTime1 = persianDateTime.toDate().toString()
-
       let diff = Math.abs(persianDateTime.getTimeUTC() - this.getTimeUTC());
 
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
