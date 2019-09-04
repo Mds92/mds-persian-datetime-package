@@ -5,6 +5,7 @@ var Mds;
     var PersianDateTime = /** @class */ (function () {
         function PersianDateTime(gregorianDateTime) {
             this.dateTime = null;
+            this.englishNumberPrivate = true;
             this.dateTime = gregorianDateTime;
         }
         /**

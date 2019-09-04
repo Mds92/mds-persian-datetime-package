@@ -228,7 +228,7 @@
     set englishNumber(value: boolean) {
       this.englishNumberPrivate = value;
     };
-    private englishNumberPrivate: boolean;
+    private englishNumberPrivate = true;
 
     /**
      * سال
