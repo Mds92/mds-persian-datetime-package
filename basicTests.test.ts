@@ -2,7 +2,7 @@
 
 import { Mds } from "./mds.persian.datetime";
 
-describe('getDifference', function() {
+describe('getDifference', () => {
 	it('1 Year difference should return 365 days and 0 hours', function() {
 		var testObj = new Mds.PersianDateTime(new Date());
 		let oneYearAgo = new Date();
