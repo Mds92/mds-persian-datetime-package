@@ -288,6 +288,7 @@ export declare namespace Mds {
         setMillisecond(millisecond: number): PersianDateTime;
         setPersianDate(year: number, month: number, day: number): PersianDateTime;
         setTime(hour: number, minute: number, second: number, millisecond: number): PersianDateTime;
+        private isDST;
         private zeroPad;
         private toPersianNumber;
         private toEnglishNumber;
@@ -333,6 +334,20 @@ export declare namespace Mds {
         Wednesday = 3,
         Thursday = 4,
         Friday = 5
+    }
+    enum PersianDateTimeMonthEnum {
+        فروردین = 1,
+        اردیبهشت = 2,
+        خرداد = 3,
+        تیر = 4,
+        مرداد = 5,
+        شهریور = 6,
+        مهر = 7,
+        آبان = 8,
+        آذر = 9,
+        دی = 10,
+        بهمن = 11,
+        اسفند = 12
     }
     interface PersianDateTimeSpan1 {
         year: number;

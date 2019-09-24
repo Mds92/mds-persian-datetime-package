@@ -1,10 +1,25 @@
 {
   "name": "mds.persian.datetime",
-  "version": "1.0.14",
+  "version": "1.0.15",
   "description": "Persian DateTime in TypeScript",
   "license": "MIT",
   "main": "./mds.persian.datetime.js",
   "types": "./mds.persian.datetime.d.ts",
+  "scripts": {
+    "build": "tsc -d",
+    "test": "jest"
+  },
+  "jest": {
+    "transform": {
+      ".(ts|tsx)": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(ts|tsx|js)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ]
+  },
   "author": {
     "email": "mds_soft@yahoo.com",
     "name": "Mohammad Dayyan",
@@ -14,5 +29,13 @@
     "type": "public",
     "url": "https://github.com/Mds92/mds-persian-datetime-package"
   },
-  "homepage": "https://github.com/Mds92/mds-persian-datetime-package"
+  "homepage": "https://github.com/Mds92/mds-persian-datetime-package",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^24.0.18",
+    "@types/node": "^12.7.5",
+    "jest": "^24.9.0",
+    "ts-jest": "^24.1.0",
+    "typescript": "^3.6.3"
+  }
 }

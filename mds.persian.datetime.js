@@ -844,10 +844,22 @@ var Mds;
          *  @description بدست آوردن اختلاف با تاریخ ورودی
          */
         PersianDateTime.prototype.getDifference = function (persianDateTime) {
+            var isFirstDst = this.isDST(persianDateTime.toDate());
+            var isSecondDst = this.isDST(this.dateTime);
+            if (isFirstDst && !isSecondDst) {
+                persianDateTime.addHours(-1);
+            }
+            if (isSecondDst && !isFirstDst) {
+                this.dateTime.setHours(this.dateTime.getHours() + 1);
+            }
             var diff = Math.abs(persianDateTime.getTimeUTC() - this.getTimeUTC());
             var days = Math.floor(diff / (1000 * 60 * 60 * 24));
             diff -= days * (1000 * 60 * 60 * 24);
             var hours = Math.floor(diff / (1000 * 60 * 60));
+            if (this.isDST(persianDateTime.toDate()))
+                hours -= 1;
+            if (this.isDST(this.dateTime))
+                hours += 1;
             diff -= hours * (1000 * 60 * 60);
             var mins = Math.floor(diff / (1000 * 60));
             diff -= mins * (1000 * 60);
@@ -904,6 +916,11 @@ var Mds;
         PersianDateTime.prototype.setTime = function (hour, minute, second, millisecond) {
             var persianDateTime = this.getPersianDateTime();
             return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day, hour, minute, second, millisecond);
+        };
+        PersianDateTime.prototype.isDST = function (dateTime) {
+            var farvardin = new Date(dateTime.getFullYear(), 3, 21).getTimezoneOffset();
+            var mehr = new Date(dateTime.getFullYear(), 9, 23).getTimezoneOffset();
+            return Math.max(farvardin, mehr) != dateTime.getTimezoneOffset();
         };
         PersianDateTime.prototype.zeroPad = function (nr, base) {
             if (nr == undefined || nr == '')
@@ -1275,6 +1292,6 @@ var Mds;
         PersianDateTimeMonthEnum[PersianDateTimeMonthEnum["\u062F\u06CC"] = 10] = "\u062F\u06CC";
         PersianDateTimeMonthEnum[PersianDateTimeMonthEnum["\u0628\u0647\u0645\u0646"] = 11] = "\u0628\u0647\u0645\u0646";
         PersianDateTimeMonthEnum[PersianDateTimeMonthEnum["\u0627\u0633\u0641\u0646\u062F"] = 12] = "\u0627\u0633\u0641\u0646\u062F";
-    })(PersianDateTimeMonthEnum || (PersianDateTimeMonthEnum = {}));
+    })(PersianDateTimeMonthEnum = Mds.PersianDateTimeMonthEnum || (Mds.PersianDateTimeMonthEnum = {}));
 })(Mds = exports.Mds || (exports.Mds = {}));
 //# sourceMappingURL=mds.persian.datetime.js.map

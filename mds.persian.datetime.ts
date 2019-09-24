@@ -784,12 +784,27 @@
      */
     getDifference(persianDateTime: PersianDateTime): PersianDateTimeSpan2 {
 
-      let diff = Math.abs(persianDateTime.getTimeUTC() - this.getTimeUTC());
+      const isFirstDst = this.isDST(persianDateTime.toDate());
+      const isSecondDst = this.isDST(this.dateTime);
+      if(isFirstDst && !isSecondDst){
+        persianDateTime.addHours(-1);
+      }
 
+      if(isSecondDst && !isFirstDst){
+        this.dateTime.setHours(this.dateTime.getHours() +1);
+      }
+      
+      let diff = Math.abs(persianDateTime.getTimeUTC() - this.getTimeUTC());
+      
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       diff -= days * (1000 * 60 * 60 * 24);
 
-      const hours = Math.floor(diff / (1000 * 60 * 60));
+      let hours = Math.floor(diff / (1000 * 60 * 60));
+      if(this.isDST(persianDateTime.toDate())) 
+        hours -= 1;
+      if (this.isDST(this.dateTime))
+        hours +=1;
+
       diff -= hours * (1000 * 60 * 60);
 
       const mins = Math.floor(diff / (1000 * 60));
@@ -854,6 +869,11 @@
     }
 
 
+    private isDST(dateTime: Date) {
+      let farvardin = new Date(dateTime.getFullYear(), 3, 21).getTimezoneOffset();
+      let mehr = new Date(dateTime.getFullYear(), 9, 23).getTimezoneOffset();
+      return Math.max(farvardin, mehr) != dateTime.getTimezoneOffset();
+    }
     private zeroPad(nr: any, base: string): string {
       if (nr == undefined || nr == '') return base;
       const len = (String(base).length - String(nr).length) + 1;
@@ -1244,7 +1264,7 @@
   }
 
   // در پارس کردن مورد استفاده قرا میگیرد
-  enum PersianDateTimeMonthEnum {
+  export enum PersianDateTimeMonthEnum {
     فروردین = 1,
     اردیبهشت = 2,
     خرداد = 3,
@@ -1259,7 +1279,7 @@
     اسفند = 12
   }
 
-  interface PersianDateTimeSpan1 {
+  export interface PersianDateTimeSpan1 {
     year: number;
     month: number;
     day: number;
@@ -1268,7 +1288,7 @@
     second: number;
   }
 
-  interface PersianDateTimeSpan2 {
+  export interface PersianDateTimeSpan2 {
     days: number;
     hours: number;
     minutes: number;
