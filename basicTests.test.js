@@ -44,4 +44,11 @@ describe('getDifference', function () {
         expect(res.hours).toBe(0);
     });
 });
+describe('getLongNumber', function () {
+    it('getLongNumber should return correct time', function () {
+        var persianDateTime = mds_persian_datetime_1.Mds.PersianDateTime.fromPersianDateTime(1398, 2, 1, 22, 14, 30, 0);
+        var persianDateTimeLongNumber = persianDateTime.getLongNumber();
+        expect(persianDateTimeLongNumber).toBe(13980201221430);
+    });
+});
 //# sourceMappingURL=basicTests.test.js.map

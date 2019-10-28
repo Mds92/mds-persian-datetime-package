@@ -51,3 +51,12 @@ describe('getDifference', () => {
 		expect(res.hours).toBe(0);
 	});
 });
+
+
+describe('getLongNumber', () => {
+	it('getLongNumber should return correct time', function() {
+		var persianDateTime = Mds.PersianDateTime.fromPersianDateTime(1398, 2, 1, 22, 14, 30, 0)
+		const persianDateTimeLongNumber = persianDateTime.getLongNumber();
+		expect(persianDateTimeLongNumber).toBe(13980201221430);
+	});
+});

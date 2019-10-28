@@ -668,7 +668,7 @@ var Mds;
          * دریافت تاریخ به شکل عدد تا دقت ثانیه
          */
         PersianDateTime.prototype.getLongNumber = function () {
-            return Number(this.toEnglishNumber(this.toString('yyyyMMddhhmmss')));
+            return Number(this.toEnglishNumber(this.toString('yyyyMMddHHmmss')));
         };
         /**
         * @description تبدیل تاریخ به رشته

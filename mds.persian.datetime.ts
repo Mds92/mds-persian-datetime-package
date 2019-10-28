@@ -596,7 +596,7 @@
      * دریافت تاریخ به شکل عدد تا دقت ثانیه
      */
     getLongNumber(): number {
-      return Number(this.toEnglishNumber(this.toString('yyyyMMddhhmmss')));
+      return Number(this.toEnglishNumber(this.toString('yyyyMMddHHmmss')));
     }
 
     /**
