@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.Mds = void 0;
 var Mds;
 (function (Mds) {
     var PersianDateTime = /** @class */ (function () {
@@ -174,7 +175,7 @@ var Mds;
             get: function () {
                 return new PersianDateTime(new Date());
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         ;
@@ -184,7 +185,7 @@ var Mds;
                 var persianDate = PersianDateConverter.toPersian(dateTime.getFullYear(), dateTime.getMonth() + 1, dateTime.getDay());
                 return PersianDateTime.fromPersianDate(persianDate.year, persianDate.month, persianDate.day);
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         ;
@@ -214,7 +215,7 @@ var Mds;
             set: function (value) {
                 this.englishNumberPrivate = value;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         ;
@@ -226,7 +227,7 @@ var Mds;
             get: function () {
                 return this.getPersianDateTime().year;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PersianDateTime.prototype, "shortYear", {
@@ -236,7 +237,7 @@ var Mds;
             get: function () {
                 return this.getPersianDateTime().year % 100;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PersianDateTime.prototype, "month", {
@@ -246,7 +247,7 @@ var Mds;
             get: function () {
                 return this.getPersianDateTime().month;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PersianDateTime.prototype, "day", {
@@ -256,7 +257,7 @@ var Mds;
             get: function () {
                 return this.getPersianDateTime().day;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PersianDateTime.prototype, "monthName", {
@@ -293,7 +294,7 @@ var Mds;
                         return '';
                 }
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PersianDateTime.prototype, "dayOfWeek", {
@@ -328,7 +329,7 @@ var Mds;
                 }
                 return persianDayOfWeek;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PersianDateTime.prototype, "dayOfWeekGregorian", {
@@ -338,7 +339,7 @@ var Mds;
             get: function () {
                 return this.dateTime.getDay();
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PersianDateTime.prototype, "startDayOfMonthDayOfWeek", {
@@ -349,7 +350,7 @@ var Mds;
                 var persianDateTime = this.getPersianDateTime();
                 return PersianDateTime.fromPersianDate(persianDateTime.year, persianDateTime.month, 1).dayOfWeek;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PersianDateTime.prototype, "endDayOfMonthDayOfWeek", {
@@ -360,7 +361,7 @@ var Mds;
                 var persianDateTime = this.getPersianDateTime();
                 return PersianDateTime.fromPersianDate(persianDateTime.year, persianDateTime.month, this.getMonthDays).dayOfWeek;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PersianDateTime.prototype, "dayOfWeekName", {
@@ -387,7 +388,7 @@ var Mds;
                         return '';
                 }
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PersianDateTime.prototype, "getShortDayOfWeekName", {
@@ -397,7 +398,7 @@ var Mds;
             get: function () {
                 return this.dayOfWeekName[0];
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PersianDateTime.prototype, "getMonthDays", {
@@ -408,7 +409,7 @@ var Mds;
                 var persianDateTime = this.getPersianDateTime();
                 return PersianDateConverter.getDaysInPersianMonth(persianDateTime.year, persianDateTime.month);
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PersianDateTime.prototype, "hour", {
@@ -418,7 +419,7 @@ var Mds;
             get: function () {
                 return this.getPersianDateTime().hour;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PersianDateTime.prototype, "shortHour", {
@@ -431,7 +432,7 @@ var Mds;
                     shortHour = shortHour - 12;
                 return shortHour;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PersianDateTime.prototype, "minute", {
@@ -441,7 +442,7 @@ var Mds;
             get: function () {
                 return this.getPersianDateTime().minute;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PersianDateTime.prototype, "second", {
@@ -451,7 +452,7 @@ var Mds;
             get: function () {
                 return this.getPersianDateTime().second;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PersianDateTime.prototype, "millisecond", {
@@ -461,7 +462,7 @@ var Mds;
             get: function () {
                 return this.getPersianDateTime().millisecond;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PersianDateTime.prototype, "isLeapYear", {
@@ -471,7 +472,7 @@ var Mds;
             get: function () {
                 return PersianDateConverter.isLeapPersianYear(this.dateTime.getFullYear());
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PersianDateTime.prototype, "getPersianAmPmEnum", {
@@ -483,7 +484,7 @@ var Mds;
                     return 'قبل از ظهر';
                 return 'بعد از ظهر';
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PersianDateTime.prototype, "getShortPersianAmPmEnum", {
@@ -495,7 +496,7 @@ var Mds;
                     return 'ق.ظ';
                 return 'ب.ظ';
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PersianDateTime, "getPersianMonthNames", {
@@ -508,7 +509,7 @@ var Mds;
                     "مهر", "آبان", "آذر",
                     "دی", "بهمن", "اسفند"];
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -524,7 +525,7 @@ var Mds;
             get: function () {
                 return ["شنبه", "یکشنبه", "دوشنبه", "سه شنبه", "چهارشنبه", "پنج شنبه", "جمعه"];
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         Object.defineProperty(PersianDateTime, "getPersianWeekdayNamesShort", {
@@ -534,7 +535,7 @@ var Mds;
             get: function () {
                 return ["ش", "ی", "د", "س", "چ", "پ", "ج"];
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -550,7 +551,7 @@ var Mds;
             get: function () {
                 return ["Saturday", "Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday"];
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -569,7 +570,7 @@ var Mds;
                     "July", "August", "September",
                     "October", "November", "December"];
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**
@@ -608,7 +609,7 @@ var Mds;
             get: function () {
                 return this.zeroPad(this.hour, '00') + " : " + this.zeroPad(this.minute, '00') + " : " + this.zeroPad(this.second, '00') + " : " + this.zeroPad(this.millisecond, '000');
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         ;
@@ -620,7 +621,7 @@ var Mds;
             get: function () {
                 return "\u0633\u0627\u0639\u062A " + this.zeroPad(this.hour, '00') + " : " + this.zeroPad(this.minute, '00') + " : " + this.zeroPad(this.second, '00') + " : " + this.zeroPad(this.millisecond, '000') + " " + this.getShortPersianAmPmEnum;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         ;
@@ -632,7 +633,7 @@ var Mds;
             get: function () {
                 return this.zeroPad(this.hour, '00') + " : " + this.zeroPad(this.minute, '00') + " : " + this.zeroPad(this.second, '00') + " " + this.getShortPersianAmPmEnum;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         ;
@@ -644,7 +645,7 @@ var Mds;
                 var persianDateTime = this.getPersianDateTime();
                 return PersianDateTime.fromPersianDate(persianDateTime.year, persianDateTime.month, persianDateTime.day);
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         ;
@@ -655,7 +656,7 @@ var Mds;
             get: function () {
                 return true;
             },
-            enumerable: true,
+            enumerable: false,
             configurable: true
         });
         /**

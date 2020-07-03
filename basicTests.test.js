@@ -4,10 +4,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var mds_persian_datetime_1 = require("./mds.persian.datetime");
 describe('getDifference', function () {
     it('1 Year difference should return 365 days and 0 hours', function () {
-        var testObj = new mds_persian_datetime_1.Mds.PersianDateTime(new Date());
-        var oneYearAgo = new Date();
-        oneYearAgo.setFullYear(oneYearAgo.getFullYear() - 1);
-        var res = testObj.getDifference(new mds_persian_datetime_1.Mds.PersianDateTime(oneYearAgo));
+        var testObj = mds_persian_datetime_1.Mds.PersianDateTime.fromPersianDate(1398, 1, 1);
+        var oneYearAgo = mds_persian_datetime_1.Mds.PersianDateTime.fromPersianDate(1397, 1, 1);
+        var res = testObj.getDifference(oneYearAgo);
         expect(res.days).toBe(365);
         expect(res.hours).toBe(0);
     });

@@ -27,8 +27,8 @@ export declare namespace Mds {
          */
         static parse(persianDateTimeInString: string, dateSeperatorPattern?: string): PersianDateTime;
         private getPersianDateTime;
-        static readonly now: PersianDateTime;
-        static readonly today: PersianDateTime;
+        static get now(): PersianDateTime;
+        static get today(): PersianDateTime;
         /**
          * بدست آوردن زمان سپری شده از زمان فعلی
          */
@@ -36,92 +36,93 @@ export declare namespace Mds {
         /**
          * آیا اعداد در خروجی به صورت انگلیسی نمایش داده شوند؟
          */
-        englishNumber: boolean;
+        get englishNumber(): boolean;
+        set englishNumber(value: boolean);
         private englishNumberPrivate;
         /**
          * سال
          */
-        readonly year: number;
+        get year(): number;
         /**
          * سال دو رقمی
          */
-        readonly shortYear: number;
+        get shortYear(): number;
         /**
          * ماه
          */
-        readonly month: number;
+        get month(): number;
         /**
          * روز ماه
          */
-        readonly day: number;
+        get day(): number;
         /**
          * نام شمسی ماه
          */
-        readonly monthName: string;
+        get monthName(): string;
         /**
          * روز هفته شمسی
          */
-        readonly dayOfWeek: PersianDayOfWeek;
+        get dayOfWeek(): PersianDayOfWeek;
         /**
          * روز هفته شمسی
          */
-        readonly dayOfWeekGregorian: GregorianDayOfWeek;
+        get dayOfWeekGregorian(): GregorianDayOfWeek;
         /**
          * روز شروع ماه
          */
-        readonly startDayOfMonthDayOfWeek: PersianDayOfWeek;
+        get startDayOfMonthDayOfWeek(): PersianDayOfWeek;
         /**
          * روز پایان ماه
          */
-        readonly endDayOfMonthDayOfWeek: PersianDayOfWeek;
+        get endDayOfMonthDayOfWeek(): PersianDayOfWeek;
         /**
          * نام روز هفته
          */
-        readonly dayOfWeekName: string;
+        get dayOfWeekName(): string;
         /**
          * شکل کوتاه شده نام روز هفته
          */
-        readonly getShortDayOfWeekName: string;
+        get getShortDayOfWeekName(): string;
         /**
          * تعدا روز در ماه
          */
-        readonly getMonthDays: number;
+        get getMonthDays(): number;
         /**
          * ساعت 1 تا 24
          */
-        readonly hour: number;
+        get hour(): number;
         /**
          * ساعت 1 تا 12
          */
-        readonly shortHour: number;
+        get shortHour(): number;
         /**
          * دقیقه
          */
-        readonly minute: number;
+        get minute(): number;
         /**
          * ثانیه
          */
-        readonly second: number;
+        get second(): number;
         /**
          * میلی ثانیه
          */
-        readonly millisecond: number;
+        get millisecond(): number;
         /**
          * آیا سال کبیسه است
          */
-        readonly isLeapYear: boolean;
+        get isLeapYear(): boolean;
         /**
          * بعد از ظهر یا قبل از ظهر
          */
-        readonly getPersianAmPmEnum: string;
+        get getPersianAmPmEnum(): string;
         /**
          * شکل کوتاه شده قبل از ظهر یا بعد از ظهر
          */
-        readonly getShortPersianAmPmEnum: string;
+        get getShortPersianAmPmEnum(): string;
         /**
          * لیست نام ماه های تقویم فارسی
          */
-        static readonly getPersianMonthNames: string[];
+        static get getPersianMonthNames(): string[];
         /**
          * بدست آوردن ایندکس ماه ایرانی از روی نام ماه
          */
@@ -129,11 +130,11 @@ export declare namespace Mds {
         /**
          * لیست نام ها روزهای هفته در تقویم فارسی
          */
-        static readonly getPersianWeekdayNames: string[];
+        static get getPersianWeekdayNames(): string[];
         /**
          * لیست نام ها روزهای هفته خلاصه شده در تقویم فارسی
          */
-        static readonly getPersianWeekdayNamesShort: string[];
+        static get getPersianWeekdayNamesShort(): string[];
         /**
          * بدست آوردن ایندکس نام روز ایرانی از روی نام روزها
          */
@@ -141,7 +142,7 @@ export declare namespace Mds {
         /**
          * لیست روزهای هفته در تقویم میلادی
          */
-        static readonly getGregorianWeekdayNames: string[];
+        static get getGregorianWeekdayNames(): string[];
         /**
          * بدست آوردن ایندکس نام روز میلادی از روی نام روزها
          */
@@ -149,7 +150,7 @@ export declare namespace Mds {
         /**
          * لیست نام ماه های تقویم میلادی
          */
-        static readonly getGregorianMonthNames: string[];
+        static get getGregorianMonthNames(): string[];
         /**
         * بدست آوردن ایندکس نام ماه میلادی از روی نام ماه ها
         */
@@ -167,25 +168,25 @@ export declare namespace Mds {
         * @description زمان به فرمتی مشابه
         * 13:47:40:530
         **/
-        readonly timeOfDay: string;
+        get timeOfDay(): string;
         /**
          * @description  زمان به فرمتی مشابه زیر
          * ساعت 01:47:40:530 ب.ظ
         **/
-        readonly longTimeOfDay: string;
+        get longTimeOfDay(): string;
         /**
         * @description زمان به فرمتی مشابه زیر
         * 01:47:40 ب.ظ
         **/
-        readonly shortTimeOfDay: string;
+        get shortTimeOfDay(): string;
         /**
          * @description تاریخ بدون احتساب زمان
         **/
-        readonly date: PersianDateTime;
+        get date(): PersianDateTime;
         /**
          * @description برای بررسی اینکه آیا آبجکت اینستنس این آبجکت هست یا نه استفاده می شود
          */
-        readonly isMdsPersianDateTimInstance: boolean;
+        get isMdsPersianDateTimInstance(): boolean;
         /**
          * گرفتن تاریخ به شکل عدد تا دقت روز
          */
