@@ -26,16 +26,6 @@ describe('getDifference', () => {
     expect(res.hours).toBe(0);
   });
 
-  it('negetive difference should return -1', function () {
-    var startDateTime1 = Mds.PersianDateTime.fromPersianDateTime(1398, 1, 1, 9, 10, 0, 0);
-    let endDateTime1 = Mds.PersianDateTime.fromPersianDateTime(1398, 1, 1, 9, 0, 0, 0);
-    let res: Mds.PersianDateTimeSpan2 = endDateTime1.getDifference(startDateTime1);
-    expect(res.days).toBe(0);
-    expect(res.hours).toBe(0);
-    expect(res.minutes).toBe(-10);
-    expect(res.seconds).toBe(0);
-  });
-
   it('1/7 - 1-6 Should Return 31 days and 0 hours', function () {
     var mehr = new Mds.PersianDateTime(new Date('9/23/2019'));
     let shahrivar = new Mds.PersianDateTime(new Date('8/23/2019'));
