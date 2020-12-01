@@ -786,24 +786,24 @@
 
       const isFirstDst = this.isDST(persianDateTime.toDate());
       const isSecondDst = this.isDST(this.dateTime);
-      if(isFirstDst && !isSecondDst){
+      if (isFirstDst && !isSecondDst) {
         persianDateTime.addHours(-1);
       }
 
-      if(isSecondDst && !isFirstDst){
-        this.dateTime.setHours(this.dateTime.getHours() +1);
+      if (isSecondDst && !isFirstDst) {
+        this.dateTime.setHours(this.dateTime.getHours() + 1);
       }
-      
+
       let diff = Math.abs(persianDateTime.getTimeUTC() - this.getTimeUTC());
-      
+
       const days = Math.floor(diff / (1000 * 60 * 60 * 24));
       diff -= days * (1000 * 60 * 60 * 24);
 
       let hours = Math.floor(diff / (1000 * 60 * 60));
-      if(this.isDST(persianDateTime.toDate())) 
+      if (this.isDST(persianDateTime.toDate()))
         hours -= 1;
       if (this.isDST(this.dateTime))
-        hours +=1;
+        hours += 1;
 
       diff -= hours * (1000 * 60 * 60);
 
@@ -869,7 +869,7 @@
     }
 
 
-    private isDST(dateTime: Date) {
+    private isDST(dateTime: Date) {
       let farvardin = new Date(dateTime.getFullYear(), 3, 21).getTimezoneOffset();
       let mehr = new Date(dateTime.getFullYear(), 9, 23).getTimezoneOffset();
       return Math.max(farvardin, mehr) != dateTime.getTimezoneOffset();
