@@ -1,11 +1,16 @@
 {
-  "compilerOptions": {
+  "compilerOptions": {    
     "module": "commonjs",
-    "target": "es5",
+    "target": "es2017",    
+    "outDir": "dist",
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "sourceMap": true,
-    "outDir": "dist"
+    "declaration": true,
+    "version": true
   },
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "src/basicTests.test.ts"
   ]
 }

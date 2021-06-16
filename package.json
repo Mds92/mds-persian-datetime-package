@@ -1,12 +1,12 @@
 {
   "name": "mds.persian.datetime",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "Persian DateTime in TypeScript",
   "license": "MIT",
   "main": "./mds.persian.datetime.js",
   "types": "./mds.persian.datetime.d.ts",
   "scripts": {
-    "build": "tsc -t es5 ./src/mds.persian.datetime.ts",
+    "build": "tsc --project tsconfig.json",
     "test": "jest"
   },
   "jest": {
