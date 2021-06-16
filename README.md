@@ -29,7 +29,7 @@ let pc = PersianDateTime.fromPersianDateTime(1396, 03, 14, 23, 12, 22, 10)
 ```
 * Parse
 
- You can parse diffrent date string 
+ You can parse different date string 
  ```typescript
 let pc1 = PersianDateTime.parse('14 خرداد 1396')
 let pc2 = PersianDateTime.parse('1396-03-16')
@@ -63,7 +63,7 @@ dayOfWeek: number // day name in week, PersianDayOfWeek enum
 dayOfWeekGregorian: number // day name in week, GregorianDayOfWeek enum
 startDayOfMonthDayOfWeek: string // start day of week in month
 endDayOfMonthDayOfWeek: string // end day of week in month
-dayOfWeekName: string // name of day in week, شنبه، بکشنبه، ....
+dayOfWeekName: string // name of day in week, شنبه، یکشنبه ....
 getShortDayOfWeekName: string // first character of dayOfWeekName ش، ی ، د، ...
 getMonthDays: number // days number in month
 hour: number // hour from 1 to 24
@@ -149,7 +149,7 @@ getLongNumber(): number // Year - Month - Day - Hour - Minute - Second as number
 -----------------------------------
 ### DateTimePicker
 
-If you need a DateTimePicker for your apps, I recommned the following:
+If you need a DateTimePicker for your apps, I recommend the following:
 
 https://github.com/Mds92/mds-angular-datetime-picker-package
 
