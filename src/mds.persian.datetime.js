@@ -7,7 +7,10 @@ var Mds;
         function PersianDateTime(gregorianDateTime) {
             this.dateTime = null;
             this.englishNumberPrivate = true;
-            this.dateTime = gregorianDateTime;
+            if (typeof gregorianDateTime == 'string')
+                this.dateTime = new Date(gregorianDateTime);
+            else
+                this.dateTime = gregorianDateTime;
         }
         /**
          * بدست آوردن آبجکت از یه تاریخ مشخص شمسی
@@ -35,14 +38,14 @@ var Mds;
         /**
          * پارس کردن رشته و تبدیل آن به آبجکت
          * @param persianDateTimeInString متن مورد نظر برای پارس کردن
-         * @param dateSeperatorPattern جدا کننده های اعداد ماه و سال که پیش فرض / می باشد
+         * @param dateSeparatorPattern جدا کننده های اعداد ماه و سال که پیش فرض / می باشد
          */
-        PersianDateTime.parse = function (persianDateTimeInString, dateSeperatorPattern) {
-            if (dateSeperatorPattern === void 0) { dateSeperatorPattern = '\/|-'; }
+        PersianDateTime.parse = function (persianDateTimeInString, dateSeparatorPattern) {
+            if (dateSeparatorPattern === void 0) { dateSeparatorPattern = '\/|-'; }
             persianDateTimeInString = this.toEnglishNumber(persianDateTimeInString);
-            var month = '', year = '0', day = '0', hour = '0', minute = '0', second = '0', miliSecond = '0', amPm = AmPmEnum.None, dateSeperatorPatternRegExp = new RegExp(dateSeperatorPattern, 'img'), containMonthSeperator = dateSeperatorPatternRegExp.test(persianDateTimeInString);
+            var month = '', year = '0', day = '0', hour = '0', minute = '0', second = '0', millisecond = '0', amPm = AmPmEnum.None, dateSeparatorPatternRegExp = new RegExp(dateSeparatorPattern, 'img'), containMonthSeparator = dateSeparatorPatternRegExp.test(persianDateTimeInString);
             persianDateTimeInString = persianDateTimeInString.replace(/&nbsp;/img, ' ').replace(/\s+/img, '-').replace(/\\/img, '-');
-            persianDateTimeInString = persianDateTimeInString.replace(dateSeperatorPatternRegExp, '-');
+            persianDateTimeInString = persianDateTimeInString.replace(dateSeparatorPatternRegExp, '-');
             persianDateTimeInString = persianDateTimeInString.replace(/ك/img, 'ک').replace(/ي/img, 'ی');
             persianDateTimeInString = "-" + persianDateTimeInString + "-";
             // بدست آوردن ب.ظ یا ق.ظ
@@ -63,23 +66,23 @@ var Mds;
                         minute = minuteMatch[0].replace(/\D+/img, '');
                 }
                 var secondMatch = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}(?=(\d{1,2})?)/img);
-                var miliSecondMatch = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}:\d{1,4}(?=(\d{1,2})?)/img);
+                var millisecondMatch = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}:\d{1,4}(?=(\d{1,2})?)/img);
                 if (persianDateTimeInString.indexOf(':') != persianDateTimeInString.lastIndexOf(':')) {
                     if (secondMatch != null && secondMatch.length > 0) {
                         var secondMatch1 = secondMatch[0].match(/:\d{1,2}$/img);
                         if (secondMatch1 != null && secondMatch1.length > 0)
                             second = secondMatch1[0].replace(/\D+/img, '');
                     }
-                    if (miliSecondMatch != null && miliSecondMatch.length > 0) {
-                        var miliSecondMatch1 = miliSecondMatch[0].match(/:\d{1,4}-/img);
-                        if (miliSecondMatch1 != null && miliSecondMatch1.length > 0)
-                            miliSecond = miliSecondMatch1[0].replace(/\D+/img, '');
+                    if (millisecondMatch != null && millisecondMatch.length > 0) {
+                        var millisecondMatch1 = millisecondMatch[0].match(/:\d{1,4}-/img);
+                        if (millisecondMatch1 != null && millisecondMatch1.length > 0)
+                            millisecond = millisecondMatch1[0].replace(/\D+/img, '');
                     }
                 }
             }
             var objValues = Object.keys(PersianDateTimeMonthEnum).map(function (k) { return PersianDateTimeMonthEnum[k]; });
             var persianMonthNames = objValues.filter(function (v) { return typeof v === "string"; });
-            if (containMonthSeperator) {
+            if (containMonthSeparator) {
                 // بدست آوردن ماه
                 var monthMatch = persianDateTimeInString.match(/\d{2,4}-\d{1,2}(?=-\d{1,2}[^:])/img);
                 if (monthMatch != null && monthMatch.length > 0)
@@ -143,7 +146,7 @@ var Mds;
             var numericHour = Number(hour);
             var numericMinute = Number(minute);
             var numericSecond = Number(second);
-            var numericMiliSecond = Number(miliSecond);
+            var numericMillisecond = Number(millisecond);
             if (numericYear <= 0 || numericMonth <= 0 || numericMonth > 12 || numericDay <= 0 || numericDay > 31)
                 throw new Error('تاریخ وارد شده نامعتبر است');
             if (numericYear < 100)
@@ -157,7 +160,7 @@ var Mds;
                 case AmPmEnum.None:
                     break;
             }
-            return PersianDateTime.fromPersianDateTime(numericYear, numericMonth, numericDay, numericHour, numericMinute, numericSecond, numericMiliSecond);
+            return PersianDateTime.fromPersianDateTime(numericYear, numericMonth, numericDay, numericHour, numericMinute, numericSecond, numericMillisecond);
         };
         PersianDateTime.prototype.getPersianDateTime = function () {
             var persianDate = PersianDateConverter.toPersian(this.dateTime.getFullYear(), this.dateTime.getMonth() + 1, this.dateTime.getDate());
@@ -403,7 +406,7 @@ var Mds;
         });
         Object.defineProperty(PersianDateTime.prototype, "getMonthDays", {
             /**
-             * تعدا روز در ماه
+             * تعداد روز در ماه
              */
             get: function () {
                 var persianDateTime = this.getPersianDateTime();
@@ -582,10 +585,10 @@ var Mds;
         /**
          * آیا تاریخ وارد شده معتبر می باشد یا نه
          */
-        PersianDateTime.isValid = function (persianDateTime, dateSeperatorPattern) {
-            if (dateSeperatorPattern === void 0) { dateSeperatorPattern = '\/|-'; }
+        PersianDateTime.isValid = function (persianDateTime, dateSeparatorPattern) {
+            if (dateSeparatorPattern === void 0) { dateSeparatorPattern = '\/|-'; }
             try {
-                this.parse(persianDateTime, dateSeperatorPattern);
+                this.parse(persianDateTime, dateSeparatorPattern);
                 return true;
             }
             catch (e) {
@@ -798,21 +801,6 @@ var Mds;
             dateTime.setMilliseconds(dateTime.getMilliseconds() + milliseconds);
             return new PersianDateTime(dateTime);
         };
-        /**
-         * کم کردن دو تاریخ از همدیگر
-         */
-        PersianDateTime.prototype.subtract = function (persianDateTime) {
-            var datetime1 = this.cloneDateTime();
-            var datetime2 = persianDateTime.toDate();
-            datetime1.setFullYear(datetime1.getFullYear() - datetime2.getFullYear());
-            datetime1.setMonth(datetime1.getMonth() - datetime2.getMonth());
-            datetime1.setDate(datetime1.getDate() - datetime2.getDate());
-            datetime1.setHours(datetime1.getHours() - datetime2.getHours());
-            datetime1.setMinutes(datetime1.getMinutes() - datetime2.getMinutes());
-            datetime1.setSeconds(datetime1.getSeconds() - datetime2.getSeconds());
-            datetime1.setMilliseconds(datetime1.getMilliseconds() - datetime2.getMilliseconds());
-            return new PersianDateTime(datetime1);
-        };
         PersianDateTime.prototype.clone = function () {
             var dateTime = new Date(this.dateTime.getTime());
             return new PersianDateTime(dateTime);
@@ -994,8 +982,8 @@ var Mds;
         /*
          Converts a Persian date to Gregorian.
          */
-        PersianDateConverter.toGregorian = function (persinYear, persianMonth, persianDay) {
-            return this.d2G(this.j2D(persinYear, persianMonth, persianDay));
+        PersianDateConverter.toGregorian = function (persianYear, persianMonth, persianDay) {
+            return this.d2G(this.j2D(persianYear, persianMonth, persianDay));
         };
         /*
          Checks whether a Persian date is valid or not.
@@ -1041,7 +1029,7 @@ var Mds;
          @return
          leap: number of years since the last leap year (0 to 4)
          gregorianYear: Gregorian year of the beginning of Persian year
-         march: the march day of Farletdin the 1st (1st day of persianYear)
+         march: the march day of Farvardin the 1st (1st day of persianYear)
          @see: http://www.astro.uni.torun.pl/~kb/Papers/EMP/PersianC-EMP.htm
          @see: http://www.fourmilab.ch/documents/calendar/
          */
@@ -1073,7 +1061,7 @@ var Mds;
                 leapJ += 1;
             // And the same in the Gregorian calendar (until the year gregorianYear).
             var leapG = this.div(gregorianYear, 4) - this.div((this.div(gregorianYear, 100) + 1) * 3, 4) - 150;
-            // Determine the Gregorian date of Farletdin the 1st.
+            // Determine the Gregorian date of Farvardin the 1st.
             var march = 20 + leapJ - leapG;
             // Find how many years have passed since the last leap year.
             if (jump - n < 6)
@@ -1114,12 +1102,11 @@ var Mds;
          */
         PersianDateConverter.d2J = function (jdn) {
             var gregorianYear = this.d2G(jdn).year;
-            var // Calendarculate Gregorian year (gregorianYear).
-            persianYear = gregorianYear - 621;
+            var persianYear = gregorianYear - 621;
             var r = this.persianCalendar(persianYear);
             var jdn1F = this.g2D(gregorianYear, 3, r.march);
             var persianDay, persianMonth, k;
-            // Find number of days that passed since 1 Farletdin.
+            // Find number of days that passed since 1 Farvardin.
             k = jdn - jdn1F;
             if (k >= 0) {
                 if (k <= 185) {
@@ -1159,9 +1146,9 @@ var Mds;
          The procedure was tested to be good since 1 march, -100100 (of both
          calendars) up to a few million years into the future.
      
-         @param gregorianYear Calendarendar year (years BC numbered 0, -1, -2, ...)
-         @param gregorianMonth Calendarendar month (1 to 12)
-         @param gregorianDay Calendarendar day of the month (1 to 28/29/30/31)
+         @param gregorianYear Calendar year (years BC numbered 0, -1, -2, ...)
+         @param gregorianMonth Calendar month (1 to 12)
+         @param gregorianDay Calendar day of the month (1 to 28/29/30/31)
          @return Julian day number
          */
         PersianDateConverter.g2D = function (gregorianYear, gregorianMonth, gregorianDay) {
@@ -1179,9 +1166,9 @@ var Mds;
      
          @param jdn Julian day number
          @return
-         gregorianYear: Calendarendar year (years BC numbered 0, -1, -2, ...)
-         gregorianMonth: Calendarendar month (1 to 12)
-         gregorianDay: Calendarendar day of the month M (1 to 28/29/30/31)
+         gregorianYear: Calendar year (years BC numbered 0, -1, -2, ...)
+         gregorianMonth: Calendar month (1 to 12)
+         gregorianDay: Calendar day of the month M (1 to 28/29/30/31)
          */
         PersianDateConverter.d2G = function (jdn) {
             var j;
@@ -1278,7 +1265,7 @@ var Mds;
         AmPmEnum[AmPmEnum["AM"] = 1] = "AM";
         AmPmEnum[AmPmEnum["PM"] = 2] = "PM";
     })(AmPmEnum || (AmPmEnum = {}));
-    // در پارس کردن مورد استفاده قرا میگیرد
+    // در پارس کردن مورد استفاده قرا می گیرد
     var PersianDateTimeMonthEnum;
     (function (PersianDateTimeMonthEnum) {
         PersianDateTimeMonthEnum[PersianDateTimeMonthEnum["\u0641\u0631\u0648\u0631\u062F\u06CC\u0646"] = 1] = "\u0641\u0631\u0648\u0631\u062F\u06CC\u0646";
@@ -1295,4 +1282,3 @@ var Mds;
         PersianDateTimeMonthEnum[PersianDateTimeMonthEnum["\u0627\u0633\u0641\u0646\u062F"] = 12] = "\u0627\u0633\u0641\u0646\u062F";
     })(PersianDateTimeMonthEnum = Mds.PersianDateTimeMonthEnum || (Mds.PersianDateTimeMonthEnum = {}));
 })(Mds = exports.Mds || (exports.Mds = {}));
-//# sourceMappingURL=mds.persian.datetime.js.map
