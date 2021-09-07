@@ -11,6 +11,7 @@
   },
   "exclude": [
     "node_modules",
-    "src/basicTests.test.ts"
+    "src/basicTests.test.ts",
+    "dist"
   ]
 }

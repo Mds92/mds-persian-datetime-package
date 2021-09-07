@@ -368,7 +368,7 @@
           return 'سه شنبه';
 
         case PersianDayOfWeek.Wednesday:
-          return 'چهار شنبه';
+          return 'چهارشنبه';
 
         case PersianDayOfWeek.Thursday:
           return 'پنج شنبه';
@@ -857,8 +857,8 @@
 
 
     private isDST(dateTime: Date) {
-      let farvardin = new Date(dateTime.getFullYear(), 3, 21).getTimezoneOffset();
-      let mehr = new Date(dateTime.getFullYear(), 9, 23).getTimezoneOffset();
+      const farvardin = new Date(dateTime.getFullYear(), 3, 21).getTimezoneOffset();
+      const mehr = new Date(dateTime.getFullYear(), 9, 23).getTimezoneOffset();
       return Math.max(farvardin, mehr) != dateTime.getTimezoneOffset();
     }
     private zeroPad(nr: any, base: string): string {
@@ -1191,7 +1191,7 @@
     Tuesday = 3,
 
     /// <summary>
-    /// چهار شنبه
+    /// چهارشنبه
     /// </summary>
     Wednesday = 4,
 
@@ -1228,7 +1228,7 @@
     Tuesday = 2,
 
     /// <summary>
-    /// چهار شنبه
+    /// چهارشنبه
     /// </summary>
     Wednesday = 3,
 

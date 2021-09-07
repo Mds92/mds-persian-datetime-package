@@ -332,7 +332,7 @@ var Mds;
                 case PersianDayOfWeek.Tuesday:
                     return 'سه شنبه';
                 case PersianDayOfWeek.Wednesday:
-                    return 'چهار شنبه';
+                    return 'چهارشنبه';
                 case PersianDayOfWeek.Thursday:
                     return 'پنج شنبه';
                 case PersianDayOfWeek.Friday:
@@ -772,8 +772,8 @@ var Mds;
             return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day, hour, minute, second, millisecond);
         }
         isDST(dateTime) {
-            let farvardin = new Date(dateTime.getFullYear(), 3, 21).getTimezoneOffset();
-            let mehr = new Date(dateTime.getFullYear(), 9, 23).getTimezoneOffset();
+            const farvardin = new Date(dateTime.getFullYear(), 3, 21).getTimezoneOffset();
+            const mehr = new Date(dateTime.getFullYear(), 9, 23).getTimezoneOffset();
             return Math.max(farvardin, mehr) != dateTime.getTimezoneOffset();
         }
         zeroPad(nr, base) {
@@ -1077,7 +1077,7 @@ var Mds;
         /// </summary>
         PersianDayOfWeek[PersianDayOfWeek["Tuesday"] = 3] = "Tuesday";
         /// <summary>
-        /// چهار شنبه
+        /// چهارشنبه
         /// </summary>
         PersianDayOfWeek[PersianDayOfWeek["Wednesday"] = 4] = "Wednesday";
         /// <summary>
@@ -1108,7 +1108,7 @@ var Mds;
         /// </summary>
         GregorianDayOfWeek[GregorianDayOfWeek["Tuesday"] = 2] = "Tuesday";
         /// <summary>
-        /// چهار شنبه
+        /// چهارشنبه
         /// </summary>
         GregorianDayOfWeek[GregorianDayOfWeek["Wednesday"] = 3] = "Wednesday";
         /// <summary>
