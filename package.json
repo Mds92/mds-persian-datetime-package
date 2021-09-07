@@ -6,7 +6,7 @@
   "main": "./dist/mds.persian.datetime.js",
   "types": "./dist/mds.persian.datetime.d.ts",
   "scripts": {
-    "build": "tsc --project tsconfig.json",
+    "build": "tsc -d --project tsconfig.json",
     "test": "jest"
   },
   "jest": {
