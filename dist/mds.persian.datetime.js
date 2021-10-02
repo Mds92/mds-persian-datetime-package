@@ -355,6 +355,18 @@ var Mds;
             return PersianDateConverter.getDaysInPersianMonth(persianDateTime.year, persianDateTime.month);
         }
         /**
+         * تاریخ آخرین روز ماه
+         */
+        get getDateOfLastDayOfMonth() {
+            return PersianDateTime.fromPersianDate(this.year, this.month, this.getMonthDays);
+        }
+        /**
+         * تاریخ آخرین روز سال
+         */
+        get getDateOfLastDayOfYear() {
+            return PersianDateTime.fromPersianDate(this.year, 12, PersianDateConverter.getDaysInPersianMonth(this.year, 12));
+        }
+        /**
          * ساعت 1 تا 24
          */
         get hour() {

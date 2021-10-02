@@ -397,6 +397,20 @@
     }
 
     /**
+     * تاریخ آخرین روز ماه
+     */
+    get getDateOfLastDayOfMonth(): PersianDateTime {
+      return PersianDateTime.fromPersianDate(this.year, this.month, this.getMonthDays);
+    }
+
+    /**
+     * تاریخ آخرین روز سال
+     */
+     get getDateOfLastDayOfYear(): PersianDateTime {
+      return PersianDateTime.fromPersianDate(this.year, 12, PersianDateConverter.getDaysInPersianMonth(this.year, 12));
+    }
+
+    /**
      * ساعت 1 تا 24
      */
     get hour(): number {

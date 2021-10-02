@@ -88,6 +88,14 @@ export declare namespace Mds {
          */
         get getMonthDays(): number;
         /**
+         * تاریخ آخرین روز ماه
+         */
+        get getDateOfLastDayOfMonth(): PersianDateTime;
+        /**
+         * تاریخ آخرین روز سال
+         */
+        get getDateOfLastDayOfYear(): PersianDateTime;
+        /**
          * ساعت 1 تا 24
          */
         get hour(): number;
