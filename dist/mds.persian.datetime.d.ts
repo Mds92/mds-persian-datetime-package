@@ -3,14 +3,14 @@ export declare namespace Mds {
         dateTime: Date;
         constructor(gregorianDateTime: Date | string);
         /**
-         * بدست آوردن آبجکت از یه تاریخ مشخص شمسی
+         * @description بدست آوردن آبجکت از یه تاریخ مشخص شمسی
          * @param persianYear سال شمسی
          * @param persianMonth ماه شمسی
          * @param persianDay روز شمسی
          */
         static fromPersianDate(persianYear: number, persianMonth: number, persianDay: number): PersianDateTime;
         /**
-         * بدست آوردن آبجکت از یه تاریخ مشخص شمسی
+         * @description بدست آوردن آبجکت از یه تاریخ مشخص شمسی
          * @param persianYear سال شمسی
          * @param persianMonth ماه شمسی
          * @param persianDay روز شمسی
@@ -21,154 +21,160 @@ export declare namespace Mds {
          */
         static fromPersianDateTime(persianYear: number, persianMonth: number, persianDay: number, hour: number, minute: number, second: number, millisecond: number): PersianDateTime;
         /**
-         * پارس کردن رشته و تبدیل آن به آبجکت
+         * @description پارس کردن رشته و تبدیل آن به آبجکت
          * @param persianDateTimeInString متن مورد نظر برای پارس کردن
          * @param dateSeparatorPattern جدا کننده های اعداد ماه و سال که پیش فرض / می باشد
          */
         static parse(persianDateTimeInString: string, dateSeparatorPattern?: string): PersianDateTime;
         private getPersianDateTime;
+        /**
+         * @description تاریخ الان به همراه ساعت
+         */
         static get now(): PersianDateTime;
+        /**
+         * @description تاریخ الان بدون ساعت
+         */
         static get today(): PersianDateTime;
         /**
-         * بدست آوردن زمان سپری شده از زمان فعلی
+         * @description بدست آوردن زمان سپری شده از زمان فعلی
          */
         static elapsedFromNow(persianDateTime: PersianDateTime): PersianDateTimeSpan1;
         /**
-         * آیا اعداد در خروجی به صورت انگلیسی نمایش داده شوند؟
+         * @description آیا اعداد در خروجی به صورت انگلیسی نمایش داده شوند؟
          */
         get englishNumber(): boolean;
         set englishNumber(value: boolean);
         private englishNumberPrivate;
         /**
-         * سال
+         * @description سال
          */
         get year(): number;
         /**
-         * سال دو رقمی
+         * @description سال دو رقمی
          */
         get shortYear(): number;
         /**
-         * ماه
+         * @description ماه
          */
         get month(): number;
         /**
-         * روز ماه
+         * @description روز ماه
          */
         get day(): number;
         /**
-         * نام شمسی ماه
+         * @description نام شمسی ماه
          */
         get monthName(): string;
         /**
-         * روز هفته شمسی
+         * @description روز هفته شمسی
          */
         get dayOfWeek(): PersianDayOfWeek;
         /**
-         * روز هفته شمسی
+         * @description روز هفته میلادی
          */
         get dayOfWeekGregorian(): GregorianDayOfWeek;
         /**
-         * روز شروع ماه
+         * @description روز شروع ماه
          */
         get startDayOfMonthDayOfWeek(): PersianDayOfWeek;
         /**
-         * روز پایان ماه
+         * @description روز پایان ماه
          */
         get endDayOfMonthDayOfWeek(): PersianDayOfWeek;
         /**
-         * نام روز هفته
+         * @description نام روز هفته
          */
         get dayOfWeekName(): string;
         /**
-         * شکل کوتاه شده نام روز هفته
+         * @description شکل کوتاه شده نام روز هفته
          */
         get getShortDayOfWeekName(): string;
         /**
-         * تعداد روز در ماه
+         * @description تعداد روز در ماه
          */
         get getMonthDays(): number;
         /**
-         * تاریخ آخرین روز ماه
+         * @description تاریخ آخرین روز ماه
          */
         get getDateOfLastDayOfMonth(): PersianDateTime;
         /**
-         * تاریخ آخرین روز سال
+         * @description تاریخ آخرین روز سال
          */
         get getDateOfLastDayOfYear(): PersianDateTime;
         /**
-         * ساعت 1 تا 24
+         * @description ساعت 1 تا 24
          */
         get hour(): number;
         /**
-         * ساعت 1 تا 12
+         * @description ساعت 1 تا 12
          */
         get shortHour(): number;
         /**
-         * دقیقه
+         * @description دقیقه
          */
         get minute(): number;
         /**
-         * ثانیه
+         * @description ثانیه
          */
         get second(): number;
         /**
-         * میلی ثانیه
+         * @description میلی ثانیه
          */
         get millisecond(): number;
         /**
-         * آیا سال کبیسه است
+         *@description  آیا سال کبیسه است
          */
         get isLeapYear(): boolean;
         /**
-         * بعد از ظهر یا قبل از ظهر
+         * @description بعد از ظهر یا قبل از ظهر
          */
         get getPersianAmPmEnum(): string;
         /**
-         * شکل کوتاه شده قبل از ظهر یا بعد از ظهر
+         * @description شکل کوتاه شده قبل از ظهر یا بعد از ظهر
          */
         get getShortPersianAmPmEnum(): string;
         /**
-         * لیست نام ماه های تقویم فارسی
+         * @description لیست نام ماه های تقویم فارسی
          */
         static get getPersianMonthNames(): string[];
         /**
-         * بدست آوردن ایندکس ماه ایرانی از روی نام ماه
+         * @description بدست آوردن ایندکس ماه ایرانی از روی نام ماه
          */
         static getPersianMonthIndex(persianMonthName: string): number;
         /**
-         * لیست نام ها روزهای هفته در تقویم فارسی
+         * @description لیست نام ها روزهای هفته در تقویم فارسی
          */
         static get getPersianWeekdayNames(): string[];
         /**
-         * لیست نام ها روزهای هفته خلاصه شده در تقویم فارسی
+         * @description لیست نام ها روزهای هفته خلاصه شده در تقویم فارسی
          */
         static get getPersianWeekdayNamesShort(): string[];
         /**
-         * بدست آوردن ایندکس نام روز ایرانی از روی نام روزها
+         * @description بدست آوردن ایندکس نام روز ایرانی از روی نام روزها
          */
         static getPersianWeekdayIndex(persianWeekdayName: string): number;
         /**
-         * لیست روزهای هفته در تقویم میلادی
+         * @description لیست روزهای هفته در تقویم میلادی
          */
         static get getGregorianWeekdayNames(): string[];
         /**
-         * بدست آوردن ایندکس نام روز میلادی از روی نام روزها
+         * @description بدست آوردن ایندکس نام روز میلادی از روی نام روزها
          */
         static getGregorianWeekdayIndex(gregorianWeekdayName: string): number;
         /**
-         * لیست نام ماه های تقویم میلادی
+         * @description لیست نام ماه های تقویم میلادی
          */
         static get getGregorianMonthNames(): string[];
         /**
-        * بدست آوردن ایندکس نام ماه میلادی از روی نام ماه ها
+        * @description بدست آوردن ایندکس نام ماه میلادی از روی نام ماه ها
         */
         static getGregorianMonthNameIndex(gregorianMonthName: string): number;
         /**
-         * آیا تاریخ وارد شده معتبر می باشد یا نه
+         * @description آیا تاریخ وارد شده معتبر می باشد یا نه
          */
         static isValid(persianDateTime: string, dateSeparatorPattern?: string): boolean;
         /**
-         * آیا آبجکت ورودی از نوع MdsPersianDateTime هست
+         * @description آیا آبجکت ورودی از نوع MdsPersianDateTime هست
          * @param obj
          */
         static isPersianDateTimeInstance(obj: any): boolean;
@@ -196,11 +202,11 @@ export declare namespace Mds {
          */
         get isMdsPersianDateTimeInstance(): boolean;
         /**
-         * گرفتن تاریخ به شکل عدد تا دقت روز
+         * @description گرفتن تاریخ به شکل عدد تا دقت روز
          */
         getShortNumber(): number;
         /**
-         * دریافت تاریخ به شکل عدد تا دقت ثانیه
+         * @description دریافت تاریخ به شکل عدد تا دقت ثانیه
          */
         getLongNumber(): number;
         /**
@@ -230,39 +236,42 @@ export declare namespace Mds {
         **/
         toString(format?: string): string;
         /**
-         * بدست آوردن تاریخ در فرمت
+         * @description بدست آوردن تاریخ در فرمت
          * iso 8601
          * YYYY-MM-DDTHH:mm:ss.sssZ
          */
         toIsoString(): string;
         /**
-        * اضافه کردن سال به تاریخ
+        * @description اضافه کردن سال به تاریخ
         */
         addYears(years: number): PersianDateTime;
         /**
-         * اضافه کردن ماه به تاریخ
+         * @description اضافه کردن ماه به تاریخ
          */
         addMonths(months: number): PersianDateTime;
         /**
-         * اضافه کردن روز به تاریخ
+         * @description اضافه کردن روز به تاریخ
          */
         addDays(days: number): PersianDateTime;
         /**
-         * اضافه کردن ساعت به تاریخ
+         * @description اضافه کردن ساعت به تاریخ
          */
         addHours(hours: number): PersianDateTime;
         /**
-         * اضافه کردن دقیقه به تاریخ
+         * @description اضافه کردن دقیقه به تاریخ
          */
         addMinutes(minutes: number): PersianDateTime;
         /**
-         * اضافه کردن به ثانیه به تاریخ
+         * @description اضافه کردن به ثانیه به تاریخ
          */
         addSeconds(seconds: number): PersianDateTime;
         /**
-         * اضافه کردن به میلی ثانیه به تاریخ
+         * @description اضافه کردن به میلی ثانیه به تاریخ
          */
         addMilliSeconds(milliseconds: number): PersianDateTime;
+        /**
+         * @description گرفتن کپی از آبجکت
+         */
         clone(): PersianDateTime;
         private cloneDateTime;
         /**
@@ -284,14 +293,62 @@ export declare namespace Mds {
          *  @description بدست آوردن اختلاف با تاریخ ورودی
          */
         getDifference(persianDateTime: PersianDateTime): PersianDateTimeSpan2;
+        /**
+         * @description تغییر سال
+         * @param persianYear سال شمسی جدید
+         * @returns تاریخ جدید
+         */
         setPersianYear(persianYear: number): PersianDateTime;
+        /**
+         * @description تغییر ماه
+         * @param persianMonth ماه شمسی جدید
+         * @returns تاریخ جدید
+         */
         setPersianMonth(persianMonth: number): PersianDateTime;
+        /**
+         * @description تغییر روز
+         * @param persianDay روز شمسی جدید
+         * @returns تاریخ جدید
+         */
         setPersianDay(persianDay: number): PersianDateTime;
+        /**
+         * @description تغییر ساعت
+         * @param hour ساعت جدید
+         * @returns تاریخ جدید
+         */
         setHour(hour: number): PersianDateTime;
+        /**
+         * @description تغییر دقیقه
+         * @param minute دقیقه جدید
+         * @returns تاریخ جدید
+         */
         setMinute(minute: number): PersianDateTime;
+        /**
+         * @description تغییر ثانیه
+         */
         setSecond(second: number): PersianDateTime;
+        /**
+         * @description تغییر میلی ثانیه
+         * @param millisecond میلی ثانیه جدید
+         * @returns تاریخ جدید
+         */
         setMillisecond(millisecond: number): PersianDateTime;
+        /**
+         * @description تغییر تاریخ
+         * @param year  سال شمسی
+         * @param month ماه شمسی
+         * @param day روز شمسی
+         * @returns تاریخ جدید
+         */
         setPersianDate(year: number, month: number, day: number): PersianDateTime;
+        /**
+         * @description تغییر ساعت
+         * @param hour ساعت
+         * @param minute دقیقه
+         * @param second ثانیه
+         * @param millisecond میلی ثانیه
+         * @returns تاریخ جدید
+         */
         setTime(hour: number, minute: number, second: number, millisecond: number): PersianDateTime;
         private isDST;
         private zeroPad;
