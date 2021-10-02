@@ -151,8 +151,6 @@ getLongNumber(): number // Year - Month - Day - Hour - Minute - Second as number
 
 If you need a DateTimePicker for your apps, I recommend the following:
 
-https://github.com/Mds92/mds-angular-datetime-picker-package
+![Mds Angular Persian and Gregorian DateTimePicker](https://raw.githubusercontent.com/Mds92/MD.BootstrapPersianDateTimePicker/master-bs5/images/MdPersianDateTimePicker.jpg)
 
-![Mds Angular Persian and Gregorian DateTimePicker](https://raw.githubusercontent.com/Mds92/Mds92.github.io/master/MdsDateTimePickerSample/images/Angular-Persian-Date-Time-Picker-1.jpg)
-![Mds Angular Persian and Gregorian DateTimePicker](https://raw.githubusercontent.com/Mds92/Mds92.github.io/master/MdsDateTimePickerSample/images/Angular-Persian-Date-Time-Picker-2.jpg)
 
