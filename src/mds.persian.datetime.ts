@@ -547,7 +547,7 @@
      */
     static isPersianDateTimeInstance(obj: any): boolean {
       if (!obj) return false;
-      return obj['isMdsPersianDateTimInstance'] == undefined ? false : true;
+      return obj['isMdsPersianDateTimeInstance'] == undefined ? false : true;
     }
 
     /**
@@ -585,7 +585,7 @@
     /**
      * @description برای بررسی اینکه آیا آبجکت اینستنس این آبجکت هست یا نه استفاده می شود
      */
-    get isMdsPersianDateTimInstance(): boolean {
+    get isMdsPersianDateTimeInstance(): boolean {
       return true;
     }
 

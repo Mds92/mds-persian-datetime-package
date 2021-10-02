@@ -488,7 +488,7 @@ var Mds;
         static isPersianDateTimeInstance(obj) {
             if (!obj)
                 return false;
-            return obj['isMdsPersianDateTimInstance'] == undefined ? false : true;
+            return obj['isMdsPersianDateTimeInstance'] == undefined ? false : true;
         }
         /**
         * @description زمان به فرمتی مشابه
@@ -525,7 +525,7 @@ var Mds;
         /**
          * @description برای بررسی اینکه آیا آبجکت اینستنس این آبجکت هست یا نه استفاده می شود
          */
-        get isMdsPersianDateTimInstance() {
+        get isMdsPersianDateTimeInstance() {
             return true;
         }
         /**

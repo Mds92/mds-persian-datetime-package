@@ -186,7 +186,7 @@ export declare namespace Mds {
         /**
          * @description برای بررسی اینکه آیا آبجکت اینستنس این آبجکت هست یا نه استفاده می شود
          */
-        get isMdsPersianDateTimInstance(): boolean;
+        get isMdsPersianDateTimeInstance(): boolean;
         /**
          * گرفتن تاریخ به شکل عدد تا دقت روز
          */
