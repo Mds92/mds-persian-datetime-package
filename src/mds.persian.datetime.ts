@@ -403,6 +403,13 @@
     }
 
     /**
+    * @description تاریخ اولین روز ماه
+    */
+    get getDateOfFirstDayOfMonth(): PersianDateTime {
+      return PersianDateTime.fromPersianDate(this.year, this.month, 1);
+    }
+
+    /**
      * @description تاریخ آخرین روز ماه
      */
     get getDateOfLastDayOfMonth(): PersianDateTime {
@@ -410,9 +417,16 @@
     }
 
     /**
+     * @description تاریخ اولین روز سال
+     */
+    get getDateOfFirstDayOfYear(): PersianDateTime {
+      return PersianDateTime.fromPersianDate(this.year, 1, 1);
+    }
+
+    /**
      * @description تاریخ آخرین روز سال
      */
-     get getDateOfLastDayOfYear(): PersianDateTime {
+    get getDateOfLastDayOfYear(): PersianDateTime {
       return PersianDateTime.fromPersianDate(this.year, 12, PersianDateConverter.getDaysInPersianMonth(this.year, 12));
     }
 

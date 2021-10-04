@@ -94,9 +94,17 @@ export declare namespace Mds {
          */
         get getMonthDays(): number;
         /**
+        * @description تاریخ اولین روز ماه
+        */
+        get getDateOfFirstDayOfMonth(): PersianDateTime;
+        /**
          * @description تاریخ آخرین روز ماه
          */
         get getDateOfLastDayOfMonth(): PersianDateTime;
+        /**
+         * @description تاریخ اولین روز سال
+         */
+        get getDateOfFirstDayOfYear(): PersianDateTime;
         /**
          * @description تاریخ آخرین روز سال
          */

@@ -361,10 +361,22 @@ var Mds;
             return PersianDateConverter.getDaysInPersianMonth(persianDateTime.year, persianDateTime.month);
         }
         /**
+        * @description تاریخ اولین روز ماه
+        */
+        get getDateOfFirstDayOfMonth() {
+            return PersianDateTime.fromPersianDate(this.year, this.month, 1);
+        }
+        /**
          * @description تاریخ آخرین روز ماه
          */
         get getDateOfLastDayOfMonth() {
             return PersianDateTime.fromPersianDate(this.year, this.month, this.getMonthDays);
+        }
+        /**
+         * @description تاریخ اولین روز سال
+         */
+        get getDateOfFirstDayOfYear() {
+            return PersianDateTime.fromPersianDate(this.year, 1, 1);
         }
         /**
          * @description تاریخ آخرین روز سال
