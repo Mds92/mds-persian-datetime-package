@@ -759,8 +759,7 @@
      * @description گرفتن کپی از آبجکت     
      */
     clone(): PersianDateTime {
-      const dateTime = new Date(this.dateTime.getTime());
-      return new PersianDateTime(dateTime);
+      return new PersianDateTime(new Date(this.dateTime.getTime()));
     }
     private cloneDateTime() {
       return new Date(this.dateTime.getTime());

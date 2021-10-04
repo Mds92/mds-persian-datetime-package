@@ -688,8 +688,7 @@ var Mds;
          * @description گرفتن کپی از آبجکت
          */
         clone() {
-            const dateTime = new Date(this.dateTime.getTime());
-            return new PersianDateTime(dateTime);
+            return new PersianDateTime(new Date(this.dateTime.getTime()));
         }
         cloneDateTime() {
             return new Date(this.dateTime.getTime());
