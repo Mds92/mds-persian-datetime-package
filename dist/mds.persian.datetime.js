@@ -697,7 +697,7 @@ var Mds;
          * @description بدست آوردن آبجکت استاندارد تاریخ و زمان
          */
         toDate() {
-            return this.dateTime;
+            return this.cloneDateTime();
         }
         /**
          * @description بدست آوردن تعداد میلی ثانیه سپری شده از تاریخ 1 ژانویه 1970
