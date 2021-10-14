@@ -727,6 +727,23 @@ var Mds;
             return Date.UTC(this.dateTime.getUTCFullYear(), this.dateTime.getUTCMonth(), this.dateTime.getUTCDate(), this.dateTime.getUTCHours(), this.dateTime.getUTCMinutes(), this.dateTime.getUTCSeconds());
         }
         /**
+         * @description دریافت تمامی تاریخ های روزهایی از هفته در طول سال
+         * به طول مثال تاریخ های تمامی 5 شنبه های سال
+         */
+        static getDatesInYearByPersianDayOfWeek(year, daysOfWeek) {
+            const firstDayOfYear = PersianDateTime.fromPersianDate(year, 1, 1);
+            const lastDayOfYear = firstDayOfYear.getDateOfLastDayOfYear.getTime();
+            let tempDate = PersianDateTime.fromPersianDate(year, 1, 1);
+            const persianDates = [];
+            while (tempDate.getTime() <= lastDayOfYear) {
+                if (daysOfWeek.findIndex(dw => dw == tempDate.dayOfWeek) > -1) {
+                    persianDates.push(tempDate.clone());
+                }
+                tempDate = tempDate.addDays(1);
+            }
+            return persianDates;
+        }
+        /**
          *  @description بدست آوردن اختلاف با تاریخ ورودی
          */
         getDifference(persianDateTime) {
@@ -1137,7 +1154,6 @@ var Mds;
             return a - ~~(a / b) * b;
         }
     }
-    Mds.PersianDateConverter = PersianDateConverter;
     let PersianDayOfWeek;
     (function (PersianDayOfWeek) {
         /// <summary>
@@ -1221,6 +1237,6 @@ var Mds;
         PersianDateTimeMonthEnum[PersianDateTimeMonthEnum["\u062F\u06CC"] = 10] = "\u062F\u06CC";
         PersianDateTimeMonthEnum[PersianDateTimeMonthEnum["\u0628\u0647\u0645\u0646"] = 11] = "\u0628\u0647\u0645\u0646";
         PersianDateTimeMonthEnum[PersianDateTimeMonthEnum["\u0627\u0633\u0641\u0646\u062F"] = 12] = "\u0627\u0633\u0641\u0646\u062F";
-    })(PersianDateTimeMonthEnum = Mds.PersianDateTimeMonthEnum || (Mds.PersianDateTimeMonthEnum = {}));
+    })(PersianDateTimeMonthEnum || (PersianDateTimeMonthEnum = {}));
 })(Mds = exports.Mds || (exports.Mds = {}));
 //# sourceMappingURL=mds.persian.datetime.js.map

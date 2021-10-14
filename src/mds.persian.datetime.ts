@@ -803,6 +803,24 @@
     }
 
     /**
+     * @description دریافت تمامی تاریخ های روزهایی از هفته در طول سال
+     * به طول مثال تاریخ های تمامی 5 شنبه های سال
+     */
+    static getDatesInYearByPersianDayOfWeek(year: number, daysOfWeek: PersianDayOfWeek[]): PersianDateTime[] {
+      const firstDayOfYear = PersianDateTime.fromPersianDate(year, 1, 1);
+      const lastDayOfYear = firstDayOfYear.getDateOfLastDayOfYear.getTime();
+      let tempDate = PersianDateTime.fromPersianDate(year, 1, 1);
+      const persianDates: PersianDateTime[] = [];
+      while (tempDate.getTime() <= lastDayOfYear) {
+        if (daysOfWeek.findIndex(dw => dw == tempDate.dayOfWeek) > -1) {
+          persianDates.push(tempDate.clone());
+        }
+        tempDate = tempDate.addDays(1);
+      }
+      return persianDates;
+    }
+
+    /**
      *  @description بدست آوردن اختلاف با تاریخ ورودی
      */
     getDifference(persianDateTime: PersianDateTime): PersianDateTimeSpan2 {

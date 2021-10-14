@@ -51,10 +51,20 @@ describe('getDifference', () => {
   });
 });
 
-
 describe('getLongNumber', () => {
   it('getLongNumber should return correct time', function () {
     var persianDateTime = Mds.PersianDateTime.fromPersianDateTime(1398, 2, 1, 22, 14, 30, 0)
     expect(persianDateTime.getLongNumber()).toBe(13980201221430);
+  });
+});
+
+describe('getDatesInYearByPersianDayOfWeek', () => {
+  it('getDatesInYearByPersianDayOfWeek should return correct dates', function () {
+    var persianDateTimes = Mds.PersianDateTime.getDatesInYearByPersianDayOfWeek(1400, [Mds.PersianDayOfWeek.Friday]);
+    persianDateTimes.forEach(pdt => {
+      expect(pdt.dayOfWeek).toBe(Mds.PersianDayOfWeek.Friday);
+    });
+    expect(persianDateTimes[0].getShortNumber()).toBe(14000106);
+    expect(persianDateTimes[persianDateTimes.length - 1].getShortNumber()).toBe(14001227);
   });
 });

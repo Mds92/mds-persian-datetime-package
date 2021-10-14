@@ -298,6 +298,11 @@ export declare namespace Mds {
          */
         getTimeUTC(): number;
         /**
+         * @description دریافت تمامی تاریخ های روزهایی از هفته در طول سال
+         * به طول مثال تاریخ های تمامی 5 شنبه های سال
+         */
+        static getDatesInYearByPersianDayOfWeek(year: number, daysOfWeek: PersianDayOfWeek[]): PersianDateTime[];
+        /**
          *  @description بدست آوردن اختلاف با تاریخ ورودی
          */
         getDifference(persianDateTime: PersianDateTime): PersianDateTimeSpan2;
@@ -364,29 +369,6 @@ export declare namespace Mds {
         private toEnglishNumber;
         private static toEnglishNumber;
     }
-    class PersianDateConverter {
-        static toPersian(gregorianYear: number, gregorianMonth: number, gregorianDay: number): {
-            year: number;
-            month: number;
-            day: number;
-        };
-        static toGregorian(persianYear: number, persianMonth: number, persianDay: number): {
-            year: number;
-            month: number;
-            day: number;
-        };
-        static isValidPersianDate(persianYear: number, persianMonth: number, persianDay: number): boolean;
-        static isLeapPersianYear(persianYear: number): boolean;
-        static getDaysInPersianMonth(persianYear: any, persianMonth: any): number;
-        static getDaysInPersianYear(persianYear: any): number;
-        private static persianCalendar;
-        private static j2D;
-        private static d2J;
-        private static g2D;
-        private static d2G;
-        private static div;
-        private static mod;
-    }
     enum PersianDayOfWeek {
         Saturday = 0,
         Sunday = 1,
@@ -404,20 +386,6 @@ export declare namespace Mds {
         Wednesday = 3,
         Thursday = 4,
         Friday = 5
-    }
-    enum PersianDateTimeMonthEnum {
-        فروردین = 1,
-        اردیبهشت = 2,
-        خرداد = 3,
-        تیر = 4,
-        مرداد = 5,
-        شهریور = 6,
-        مهر = 7,
-        آبان = 8,
-        آذر = 9,
-        دی = 10,
-        بهمن = 11,
-        اسفند = 12
     }
     interface PersianDateTimeSpan1 {
         year: number;
