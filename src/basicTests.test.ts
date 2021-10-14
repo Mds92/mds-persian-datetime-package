@@ -6,7 +6,6 @@ describe('convertToPersianDate', () => {
   it('1363-01-01 without time 1', function () {
     let persianDate1 = Mds.PersianDateTime.fromPersianDate(1363, 1, 1);
     let date1 = new Date(1984, 2, 21);
-    console.log(date1);
     expect(persianDate1.getTime()).toBe(date1.getTime());
   });
 
@@ -66,5 +65,16 @@ describe('getDatesInYearByPersianDayOfWeek', () => {
     });
     expect(persianDateTimes[0].getShortNumber()).toBe(14000106);
     expect(persianDateTimes[persianDateTimes.length - 1].getShortNumber()).toBe(14001227);
+  });
+});
+
+describe('toDate', () => {
+  it('toDate should return correct and cloned value', function () {
+    var date1 = new Date('2021/10/14');
+    var persianDateTime1 = new Mds.PersianDateTime(date1);
+    var date2 = persianDateTime1.toDate();
+    expect(date1.getTime()).toBe(date2.getTime()); // بکی بودن مقادیر
+    date1 = new Date(date1.setHours(1, 0, 0, 0));
+    expect(date1.getTime()).not.toBe(date2.getTime());
   });
 });
