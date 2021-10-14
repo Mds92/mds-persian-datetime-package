@@ -4,7 +4,7 @@
 
     dateTime: Date = null;
 
-    public constructor(gregorianDateTime: Date | string) {
+    constructor(gregorianDateTime: Date | string) {
       if (typeof gregorianDateTime == 'string')
         this.dateTime = new Date(gregorianDateTime);
       else
