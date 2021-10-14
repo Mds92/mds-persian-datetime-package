@@ -939,7 +939,6 @@
         hour, minute, second, millisecond);
     }
 
-
     private isDST(dateTime: Date) {
       const farvardin = new Date(dateTime.getFullYear(), 3, 21).getTimezoneOffset();
       const mehr = new Date(dateTime.getFullYear(), 9, 23).getTimezoneOffset();
@@ -999,7 +998,7 @@
     }
   }
 
-  export class PersianDateConverter {
+  class PersianDateConverter {
 
     /*
      Converts a Gregorian date to Persian.
@@ -1334,7 +1333,7 @@
   }
 
   // در پارس کردن مورد استفاده قرا می گیرد
-  export enum PersianDateTimeMonthEnum {
+  enum PersianDateTimeMonthEnum {
     فروردین = 1,
     اردیبهشت = 2,
     خرداد = 3,
