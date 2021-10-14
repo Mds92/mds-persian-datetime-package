@@ -2,6 +2,7 @@
 
 import { Mds } from "./mds.persian.datetime";
 
+
 describe('convertToPersianDate', () => {
   it('1363-01-01 without time 1', function () {
     let persianDate1 = Mds.PersianDateTime.fromPersianDate(1363, 1, 1);
@@ -58,13 +59,18 @@ describe('getLongNumber', () => {
 });
 
 describe('getDatesInYearByPersianDayOfWeek', () => {
-  it('getDatesInYearByPersianDayOfWeek should return correct dates', function () {
-    var persianDateTimes = Mds.PersianDateTime.getDatesInYearByPersianDayOfWeek(1400, [Mds.PersianDayOfWeek.Friday]);
+  var persianDateTimes = Mds.PersianDateTime.getDatesInYearByPersianDayOfWeek(1400, [Mds.PersianDayOfWeek.Friday]);
+  it('1- getDatesInYearByPersianDayOfWeek should return correct dates', function () {
     persianDateTimes.forEach(pdt => {
       expect(pdt.dayOfWeek).toBe(Mds.PersianDayOfWeek.Friday);
     });
     expect(persianDateTimes[0].getShortNumber()).toBe(14000106);
     expect(persianDateTimes[persianDateTimes.length - 1].getShortNumber()).toBe(14001227);
+  });
+  it('2- getDatesInYearByPersianDayOfWeek dates should be without time', function () {
+    persianDateTimes.forEach(pdt => {
+      expect(pdt.toString('HH:mm:ss')).toBe('00:00:00');
+    });
   });
 });
 
@@ -78,3 +84,24 @@ describe('toDate', () => {
     expect(date1.getTime()).not.toBe(date2.getTime());
   });
 });
+
+describe('fromPersianDate', () => {
+  it('fromPersianDate should return hour 00:00:00', function () {
+    var persianDateTime1 = Mds.PersianDateTime.fromPersianDate(1400, 7, 21);
+    expect(persianDateTime1.hour).toBe(0);
+    expect(persianDateTime1.minute).toBe(0);
+    expect(persianDateTime1.second).toBe(0);
+    expect(persianDateTime1.millisecond).toBe(0);
+  });
+});
+
+describe('addDays', () => {
+  it('addDays should add just one day', function () {
+    var persianDateTime1 = Mds.PersianDateTime.fromPersianDate(1400, 7, 21);
+    persianDateTime1 = persianDateTime1.addDays(1);
+    var dateTime = new Date('10/14/2021');
+    expect(dateTime.getTime()).toBe(persianDateTime1.getTime());
+  });
+});
+
+

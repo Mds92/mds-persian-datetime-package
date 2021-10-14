@@ -737,7 +737,7 @@ var Mds;
             const persianDates = [];
             while (tempDate.getTime() <= lastDayOfYear) {
                 if (daysOfWeek.findIndex(dw => dw == tempDate.dayOfWeek) > -1) {
-                    persianDates.push(tempDate.clone());
+                    persianDates.push(tempDate.date.clone());
                 }
                 tempDate = tempDate.addDays(1);
             }
