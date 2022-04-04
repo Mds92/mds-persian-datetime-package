@@ -148,6 +148,10 @@ var Mds;
             let numericMillisecond = Number(millisecond);
             if (numericYear <= 0 || numericMonth <= 0 || numericMonth > 12 || numericDay <= 0 || numericDay > 31)
                 throw new Error('تاریخ وارد شده نامعتبر است');
+            if (numericMonth == 12 && !PersianDateConverter.isLeapPersianYear(numericYear) && numericDay > 29)
+                throw new Error(`سال ${numericYear} کبیسه نیست!`);
+            if (numericMonth > 6 && numericDay > 30)
+                throw new Error(`ماه ${numericMonth} باید 30 روزه باشد!`);
             if (numericYear < 100)
                 numericYear += 1300;
             switch (amPm) {

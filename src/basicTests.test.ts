@@ -104,4 +104,17 @@ describe('addDays', () => {
   });
 });
 
+describe('isValid', () => {
+  it('isValid should be correct', function () {
+    expect(Mds.PersianDateTime.isValid('1400/12/31')).toBe(false);
+    expect(Mds.PersianDateTime.isValid('1400/12/30')).toBe(false);
+    expect(Mds.PersianDateTime.isValid('1400/12/29')).toBe(true);
+    expect(Mds.PersianDateTime.isValid('1400/06/32')).toBe(false);
+    expect(Mds.PersianDateTime.isValid('1400/07/31')).toBe(false);
+    expect(Mds.PersianDateTime.isValid('1401/11/31')).toBe(false);
+  });
+});
+
+
+
 
