@@ -1,11 +1,8 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.Mds = void 0;
-var Mds;
+export var Mds;
 (function (Mds) {
     class PersianDateTime {
         constructor(gregorianDateTime) {
-            this.dateTime = null;
+            this.dateTime = new Date();
             this.englishNumberPrivate = true;
             if (typeof gregorianDateTime == 'string')
                 this.dateTime = new Date(gregorianDateTime);
@@ -42,7 +39,8 @@ var Mds;
          */
         static parse(persianDateTimeInString, dateSeparatorPattern = '\/|-') {
             persianDateTimeInString = this.toEnglishNumber(persianDateTimeInString);
-            let month = '', year = '0', day = '0', hour = '0', minute = '0', second = '0', millisecond = '0', amPm = AmPmEnum.None, dateSeparatorPatternRegExp = new RegExp(dateSeparatorPattern, 'img'), containMonthSeparator = dateSeparatorPatternRegExp.test(persianDateTimeInString);
+            let month = '', year = '0', day = '0', hour = '0', minute = '0', second = '0', millisecond = '0', amPm = AmPmEnum.None;
+            const dateSeparatorPatternRegExp = new RegExp(dateSeparatorPattern, 'img'), containMonthSeparator = dateSeparatorPatternRegExp.test(persianDateTimeInString);
             persianDateTimeInString = persianDateTimeInString.replace(/&nbsp;/img, ' ').replace(/\s+/img, '-').replace(/\\/img, '-');
             persianDateTimeInString = persianDateTimeInString.replace(dateSeparatorPatternRegExp, '-');
             persianDateTimeInString = persianDateTimeInString.replace(/ك/img, 'ک').replace(/ي/img, 'ی');
@@ -55,7 +53,7 @@ var Mds;
             if (persianDateTimeInString.indexOf(':') > -1) // رشته ورودی شامل ساعت نیز هست
              {
                 persianDateTimeInString = persianDateTimeInString.replace(/-*:-*/img, ':');
-                let hourMatch = persianDateTimeInString.match(/-\d{1,2}(?=:)/img);
+                const hourMatch = persianDateTimeInString.match(/-\d{1,2}(?=:)/img);
                 let minuteMatch = persianDateTimeInString.match(/\d{1,2}:\d{1,2}(?=:?)/img);
                 if (hourMatch && hourMatch.length > 0)
                     hour = hourMatch[0].replace(/\D+/img, '');
@@ -64,22 +62,22 @@ var Mds;
                     if (minuteMatch && minuteMatch.length > 0)
                         minute = minuteMatch[0].replace(/\D+/img, '');
                 }
-                let secondMatch = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}(?=(\d{1,2})?)/img);
-                let millisecondMatch = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}:\d{1,4}(?=(\d{1,2})?)/img);
+                const secondMatch = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}(?=(\d{1,2})?)/img);
+                const millisecondMatch = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}:\d{1,4}(?=(\d{1,2})?)/img);
                 if (persianDateTimeInString.indexOf(':') != persianDateTimeInString.lastIndexOf(':')) {
                     if (secondMatch != null && secondMatch.length > 0) {
-                        let secondMatch1 = secondMatch[0].match(/:\d{1,2}$/img);
+                        const secondMatch1 = secondMatch[0].match(/:\d{1,2}$/img);
                         if (secondMatch1 != null && secondMatch1.length > 0)
                             second = secondMatch1[0].replace(/\D+/img, '');
                     }
                     if (millisecondMatch != null && millisecondMatch.length > 0) {
-                        let millisecondMatch1 = millisecondMatch[0].match(/:\d{1,4}-/img);
+                        const millisecondMatch1 = millisecondMatch[0].match(/:\d{1,4}-/img);
                         if (millisecondMatch1 != null && millisecondMatch1.length > 0)
                             millisecond = millisecondMatch1[0].replace(/\D+/img, '');
                     }
                 }
             }
-            const objValues = Object.keys(PersianDateTimeMonthEnum).map(k => PersianDateTimeMonthEnum[k]);
+            const objValues = Object.keys(PersianDateTimeMonthEnum).map((k) => PersianDateTimeMonthEnum[k]);
             const persianMonthNames = objValues.filter(v => typeof v === "string");
             if (containMonthSeparator) {
                 // بدست آوردن ماه
@@ -90,7 +88,7 @@ var Mds;
                     month = monthMatch[0].replace(/\D+/img, '');
                 if (month)
                     for (let i = 0; i < persianMonthNames.length; i++) {
-                        let monthName = persianMonthNames[i];
+                        const monthName = persianMonthNames[i];
                         if (persianDateTimeInString.indexOf(monthName) <= -1)
                             continue;
                         month = PersianDateTimeMonthEnum[monthName];
@@ -111,7 +109,7 @@ var Mds;
             }
             else {
                 for (let i = 0; i < persianMonthNames.length; i++) {
-                    let monthName = persianMonthNames[i];
+                    const monthName = persianMonthNames[i];
                     if (persianDateTimeInString.indexOf(monthName) <= -1)
                         continue;
                     month = PersianDateTimeMonthEnum[monthName];
@@ -120,7 +118,7 @@ var Mds;
                 if (month == '' || month == null)
                     throw new Error("عدد یا حرف ماه در رشته ورودی وجود ندارد");
                 // بدست آوردن روز
-                let dayMatch = persianDateTimeInString.match(/-\d{1,2}(?=-)/img);
+                const dayMatch = persianDateTimeInString.match(/-\d{1,2}(?=-)/img);
                 if (dayMatch != null) {
                     day = dayMatch[0].replace(/\D+/img, '');
                     persianDateTimeInString = persianDateTimeInString.replace(new RegExp(`-${day}(?=-)`, 'img'), '-');
@@ -140,12 +138,12 @@ var Mds;
                 }
             }
             let numericYear = Number(year);
-            let numericMonth = Number(month);
-            let numericDay = Number(day);
             let numericHour = Number(hour);
-            let numericMinute = Number(minute);
-            let numericSecond = Number(second);
-            let numericMillisecond = Number(millisecond);
+            const numericMonth = Number(month);
+            const numericDay = Number(day);
+            const numericMinute = Number(minute);
+            const numericSecond = Number(second);
+            const numericMillisecond = Number(millisecond);
             if (numericYear <= 0 || numericMonth <= 0 || numericMonth > 12 || numericDay <= 0 || numericDay > 31)
                 throw new Error('تاریخ وارد شده نامعتبر است');
             if (numericMonth == 12 && !PersianDateConverter.isLeapPersianYear(numericYear) && numericDay > 29)
@@ -1242,5 +1240,5 @@ var Mds;
         PersianDateTimeMonthEnum[PersianDateTimeMonthEnum["\u0628\u0647\u0645\u0646"] = 11] = "\u0628\u0647\u0645\u0646";
         PersianDateTimeMonthEnum[PersianDateTimeMonthEnum["\u0627\u0633\u0641\u0646\u062F"] = 12] = "\u0627\u0633\u0641\u0646\u062F";
     })(PersianDateTimeMonthEnum || (PersianDateTimeMonthEnum = {}));
-})(Mds = exports.Mds || (exports.Mds = {}));
+})(Mds || (Mds = {}));
 //# sourceMappingURL=mds.persian.datetime.js.map

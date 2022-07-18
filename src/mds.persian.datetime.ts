@@ -2,7 +2,7 @@
 
   export class PersianDateTime {
 
-    dateTime: Date = null;
+    dateTime = new Date();
 
     constructor(gregorianDateTime: Date | string) {
       if (typeof gregorianDateTime == 'string')
@@ -50,8 +50,8 @@
         minute = '0',
         second = '0',
         millisecond = '0',
-        amPm = AmPmEnum.None,
-        dateSeparatorPatternRegExp = new RegExp(dateSeparatorPattern, 'img'),
+        amPm = AmPmEnum.None;
+      const dateSeparatorPatternRegExp = new RegExp(dateSeparatorPattern, 'img'),
         containMonthSeparator = dateSeparatorPatternRegExp.test(persianDateTimeInString);
 
       persianDateTimeInString = persianDateTimeInString.replace(/&nbsp;/img, ' ').replace(/\s+/img, '-').replace(/\\/img, '-');
@@ -69,7 +69,7 @@
       if (persianDateTimeInString.indexOf(':') > -1) // رشته ورودی شامل ساعت نیز هست
       {
         persianDateTimeInString = persianDateTimeInString.replace(/-*:-*/img, ':');
-        let hourMatch = persianDateTimeInString.match(/-\d{1,2}(?=:)/img);
+        const hourMatch = persianDateTimeInString.match(/-\d{1,2}(?=:)/img);
         let minuteMatch = persianDateTimeInString.match(/\d{1,2}:\d{1,2}(?=:?)/img);
         if (hourMatch && hourMatch.length > 0) hour = hourMatch[0].replace(/\D+/img, '');
         if (minuteMatch && minuteMatch.length > 0) {
@@ -77,23 +77,23 @@
           if (minuteMatch && minuteMatch.length > 0)
             minute = minuteMatch[0].replace(/\D+/img, '');
         }
-        let secondMatch = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}(?=(\d{1,2})?)/img);
-        let millisecondMatch = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}:\d{1,4}(?=(\d{1,2})?)/img);
+        const secondMatch = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}(?=(\d{1,2})?)/img);
+        const millisecondMatch = persianDateTimeInString.match(/-\d{1,2}:\d{1,2}:\d{1,2}:\d{1,4}(?=(\d{1,2})?)/img);
         if (persianDateTimeInString.indexOf(':') != persianDateTimeInString.lastIndexOf(':')) {
           if (secondMatch != null && secondMatch.length > 0) {
-            let secondMatch1 = secondMatch[0].match(/:\d{1,2}$/img);
+            const secondMatch1 = secondMatch[0].match(/:\d{1,2}$/img);
             if (secondMatch1 != null && secondMatch1.length > 0)
               second = secondMatch1[0].replace(/\D+/img, '');
           }
           if (millisecondMatch != null && millisecondMatch.length > 0) {
-            let millisecondMatch1 = millisecondMatch[0].match(/:\d{1,4}-/img);
+            const millisecondMatch1 = millisecondMatch[0].match(/:\d{1,4}-/img);
             if (millisecondMatch1 != null && millisecondMatch1.length > 0)
               millisecond = millisecondMatch1[0].replace(/\D+/img, '');
           }
         }
       }
 
-      const objValues = Object.keys(PersianDateTimeMonthEnum).map(k => PersianDateTimeMonthEnum[k]);
+      const objValues = Object.keys(PersianDateTimeMonthEnum).map((k: any) => PersianDateTimeMonthEnum[k]);
       const persianMonthNames = objValues.filter(v => typeof v === "string") as string[];
 
       if (containMonthSeparator) {
@@ -106,7 +106,7 @@
 
         if (month)
           for (let i = 0; i < persianMonthNames.length; i++) {
-            let monthName = persianMonthNames[i];
+            const monthName: any = persianMonthNames[i];
             if (persianDateTimeInString.indexOf(monthName) <= -1) continue;
             month = PersianDateTimeMonthEnum[monthName];
             break;
@@ -128,7 +128,7 @@
       }
       else {
         for (let i = 0; i < persianMonthNames.length; i++) {
-          let monthName = persianMonthNames[i];
+          const monthName: any = persianMonthNames[i];
           if (persianDateTimeInString.indexOf(monthName) <= -1) continue;
           month = PersianDateTimeMonthEnum[monthName];
           break;
@@ -136,7 +136,7 @@
         if (month == '' || month == null)
           throw new Error("عدد یا حرف ماه در رشته ورودی وجود ندارد");
         // بدست آوردن روز
-        let dayMatch = persianDateTimeInString.match(/-\d{1,2}(?=-)/img);
+        const dayMatch = persianDateTimeInString.match(/-\d{1,2}(?=-)/img);
         if (dayMatch != null) {
           day = dayMatch[0].replace(/\D+/img, '');
           persianDateTimeInString = persianDateTimeInString.replace(new RegExp(`-${day}(?=-)`, 'img'), '-');
@@ -157,12 +157,12 @@
       }
 
       let numericYear = Number(year);
-      let numericMonth = Number(month);
-      let numericDay = Number(day);
       let numericHour = Number(hour);
-      let numericMinute = Number(minute);
-      let numericSecond = Number(second);
-      let numericMillisecond = Number(millisecond);
+      const numericMonth = Number(month);
+      const numericDay = Number(day);
+      const numericMinute = Number(minute);
+      const numericSecond = Number(second);
+      const numericMillisecond = Number(millisecond);
 
       if (numericYear <= 0 || numericMonth <= 0 || numericMonth > 12 || numericDay <= 0 || numericDay > 31)
         throw new Error('تاریخ وارد شده نامعتبر است');
@@ -1068,14 +1068,14 @@
     /*
      Number of days in a given month in a Persian year.
      */
-    static getDaysInPersianMonth(persianYear, persianMonth): number {
+    static getDaysInPersianMonth(persianYear: number, persianMonth: number): number {
       if (persianMonth <= 6) return 31;
       if (persianMonth <= 11) return 30;
       if (this.isLeapPersianYear(persianYear)) return 30;
       return 29;
     }
 
-    static getDaysInPersianYear(persianYear): number {
+    static getDaysInPersianYear(persianYear: number): number {
       if (this.isLeapPersianYear(persianYear)) return 366;
       return 365;
     }
@@ -1157,7 +1157,7 @@
      @param persianDay Persian day (1 to 29/31)
      @return Julian day number
      */
-    private static j2D(persianYear, persianMonth, persianDay): number {
+    private static j2D(persianYear: number, persianMonth: number, persianDay: number): number {
       const r = this.persianCalendar(persianYear);
       return this.g2D(r.gregorianYear, 3, r.march) +
         (persianMonth - 1) * 31 -
@@ -1175,7 +1175,7 @@
      persianMonth: Persian month (1 to 12)
      persianDay: Persian day (1 to 29/31)
      */
-    private static d2J(jdn) {
+    private static d2J(jdn: number) {
       const gregorianYear = this.d2G(jdn).year;
       let persianYear = gregorianYear - 621;
       const r = this.persianCalendar(persianYear);
@@ -1228,7 +1228,7 @@
      @param gregorianDay Calendar day of the month (1 to 28/29/30/31)
      @return Julian day number
      */
-    private static g2D(gregorianYear, gregorianMonth, gregorianDay): number {
+    private static g2D(gregorianYear: number, gregorianMonth: number, gregorianDay: number): number {
       let d = this.div((gregorianYear + this.div(gregorianMonth - 8, 6) + 100100) * 1461, 4) +
         this.div(153 * this.mod(gregorianMonth + 9, 12) + 2, 5) +
         gregorianDay -
@@ -1248,7 +1248,7 @@
      gregorianMonth: Calendar month (1 to 12)
      gregorianDay: Calendar day of the month M (1 to 28/29/30/31)
      */
-    private static d2G(jdn) {
+    private static d2G(jdn: number) {
       let j: number;
       j = 4 * jdn + 139361631;
       j = j + this.div(this.div(4 * jdn + 183187720, 146097) * 3, 4) * 4 - 3908;
@@ -1267,11 +1267,11 @@
      Utility helper functions.
      */
 
-    private static div(a, b) {
+    private static div(a: number, b: number) {
       return ~~(a / b);
     }
 
-    private static mod(a, b) {
+    private static mod(a: number, b: number) {
       return a - ~~(a / b) * b;
     }
   }

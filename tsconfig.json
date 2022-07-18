@@ -1,13 +1,22 @@
 {
   "compilerOptions": {    
-    "module": "commonjs",
+    "module": "es2020",
     "target": "es2017",    
     "outDir": "dist",
     "noImplicitReturns": true,
     "noFallthroughCasesInSwitch": true,
+    "forceConsistentCasingInFileNames": true,
     "sourceMap": true,
     "declaration": true,
-    "version": true
+    "version": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "noImplicitOverride": true,
+    "noPropertyAccessFromIndexSignature": true,
+    "resolveJsonModule": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "moduleResolution":"node"
   },
   "exclude": [
     "node_modules",
