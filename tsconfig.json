@@ -1,22 +1,31 @@
 {
-  "compilerOptions": {    
-    "module": "es2020",
-    "target": "es2017",    
-    "outDir": "dist",
-    "noImplicitReturns": true,
-    "noFallthroughCasesInSwitch": true,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
     "forceConsistentCasingInFileNames": true,
-    "sourceMap": true,
-    "declaration": true,
-    "version": true,
     "strict": true,
     "noImplicitAny": true,
     "noImplicitOverride": true,
     "noPropertyAccessFromIndexSignature": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
     "resolveJsonModule": true,
+    "sourceMap": true,
+    "declaration": false,
+    "downlevelIteration": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node",
+    "importHelpers": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "moduleResolution":"node"
+    "alwaysStrict": true,
+    "removeComments": true,
+    "target": "es2017",
+    "module": "es2020",
+    "lib": [
+      "es2020",
+      "dom"
+    ]
   },
   "exclude": [
     "node_modules",
