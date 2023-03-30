@@ -70,7 +70,7 @@ export declare namespace Mds {
         getTimeUTC(): number;
         static getDatesInYearByPersianDayOfWeek(year: number, daysOfWeek: PersianDayOfWeek[]): PersianDateTime[];
         getDifference(persianDateTime: PersianDateTime): PersianDateTimeSpan2;
-        static getStartEndDayOfWeek(date: Date | PersianDateTime): [PersianDateTime, PersianDateTime];
+        getStartEndDayOfWeek(): [PersianDateTime, PersianDateTime];
         setPersianYear(persianYear: number): PersianDateTime;
         setPersianMonth(persianMonth: number): PersianDateTime;
         setPersianDay(persianDay: number): PersianDateTime;

@@ -534,9 +534,9 @@ export var Mds;
                 seconds
             };
         }
-        static getStartEndDayOfWeek(date) {
-            const datePersian = date instanceof Date ? new PersianDateTime(date) : date;
-            const startDayOfWeek = datePersian.addDays(-1 * datePersian.dayOfWeek);
+        getStartEndDayOfWeek() {
+            const persianDate = this.date;
+            const startDayOfWeek = persianDate.addDays(-1 * persianDate.dayOfWeek);
             const endDayOfWeek = startDayOfWeek.addDays(6);
             return [startDayOfWeek, endDayOfWeek];
         }
