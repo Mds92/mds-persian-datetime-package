@@ -869,6 +869,16 @@
     }
 
     /**
+    *  @description دریافت تاریخ روز شروع و پایان هفته - شمسی
+    */
+    static getStartEndDayOfWeek(date: Date | PersianDateTime): [PersianDateTime, PersianDateTime] {
+      const datePersian = date instanceof Date ? new PersianDateTime(date) : date;
+      const startDayOfWeek = datePersian.addDays(-1 * datePersian.dayOfWeek);
+      const endDayOfWeek = startDayOfWeek.addDays(6);
+      return [startDayOfWeek, endDayOfWeek];
+    }
+
+    /**
      * @description تغییر سال
      * @param persianYear سال شمسی جدید
      * @returns تاریخ جدید

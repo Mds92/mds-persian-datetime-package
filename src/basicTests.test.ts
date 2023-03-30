@@ -115,6 +115,29 @@ describe('isValid', () => {
   });
 });
 
+describe('getStartEndDayOfWeek', () => {
+  it('getStartEndDayOfWeek should be correct, test with 1402/01/05 - 1402/01/11', function () {
+    const startWeekDate = Mds.PersianDateTime.fromPersianDate(1402, 1, 5);
+    const endWeekDate = Mds.PersianDateTime.fromPersianDate(1402, 1, 11);
+    const startEndDateOfCurrentWeek = Mds.PersianDateTime.getStartEndDayOfWeek(Mds.PersianDateTime.fromPersianDate(1402, 1, 11));
+    expect(startEndDateOfCurrentWeek[0].getTime()).toBe(startWeekDate.getTime());
+    expect(startEndDateOfCurrentWeek[1].getTime()).toBe(endWeekDate.getTime());
+  });
+  it('getStartEndDayOfWeek should be correct, test with 1402/01/12 - 1402/01/18', function () {
+    const startWeekDate = Mds.PersianDateTime.fromPersianDate(1402, 1, 12);
+    const endWeekDate = Mds.PersianDateTime.fromPersianDate(1402, 1, 18);
+    const startEndDateOfCurrentWeek = Mds.PersianDateTime.getStartEndDayOfWeek(Mds.PersianDateTime.fromPersianDate(1402, 1, 12));
+    expect(startEndDateOfCurrentWeek[0].getTime()).toBe(startWeekDate.getTime());
+    expect(startEndDateOfCurrentWeek[1].getTime()).toBe(endWeekDate.getTime());
+  });
+  it('getStartEndDayOfWeek between two years should be correct, test with 1401/12/27 - 1402/01/04', function () {
+    const startWeekDate = Mds.PersianDateTime.fromPersianDate(1401, 12, 27);
+    const endWeekDate = Mds.PersianDateTime.fromPersianDate(1402, 1, 4);
+    const startEndDateOfCurrentWeek = Mds.PersianDateTime.getStartEndDayOfWeek(Mds.PersianDateTime.fromPersianDate(1401, 12, 28));
+    expect(startEndDateOfCurrentWeek[0].getTime()).toBe(startWeekDate.getTime());
+    expect(startEndDateOfCurrentWeek[1].getTime()).toBe(endWeekDate.getTime());
+  });
+});
 
 
 
