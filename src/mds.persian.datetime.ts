@@ -591,6 +591,15 @@
     }
 
     /**
+     * @description آیا آبجکت ورودی از نوع DateTime هست
+     * @param obj 
+     */
+    static isDateTimeInstance(obj: any): boolean {
+      if (!obj) return false;
+      return Object.prototype.toString.call(obj) === '[object Date]';
+    }
+
+    /**
     * @description زمان به فرمتی مشابه 
     * 13:47:40:530
     **/

@@ -376,6 +376,11 @@ export var Mds;
                 return false;
             return obj['isMdsPersianDateTimeInstance'] == undefined ? false : true;
         }
+        static isDateTimeInstance(obj) {
+            if (!obj)
+                return false;
+            return Object.prototype.toString.call(obj) === '[object Date]';
+        }
         get timeOfDay() {
             return `${this.zeroPad(this.hour, '00')} : ${this.zeroPad(this.minute, '00')} : ${this.zeroPad(this.second, '00')} : ${this.zeroPad(this.millisecond, '000')}`;
         }

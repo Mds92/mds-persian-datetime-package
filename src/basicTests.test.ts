@@ -139,5 +139,30 @@ describe('getStartEndDayOfWeek', () => {
   });
 });
 
+describe('isPersianDateTimeInstance', () => {
+  it('isPersianDateTimeInstance should be correct', function () {
+    const persianDateTime = Mds.PersianDateTime.fromPersianDate(1402, 1, 26);
+    expect(Mds.PersianDateTime.isPersianDateTimeInstance(new Date())).toBe(false);
+    expect(Mds.PersianDateTime.isPersianDateTimeInstance(persianDateTime)).toBe(true);
+  });
+});
+
+describe('isDateTimeInstance', () => {
+  it('isDateTimeInstance should be correct, test with new Date()', function () {
+    expect(Mds.PersianDateTime.isDateTimeInstance(new Date())).toBe(true);
+    expect(Mds.PersianDateTime.isDateTimeInstance(new Date("2023-04-15"))).toBe(true);
+  });
+  it('isDateTimeInstance should be correct, test with toDate of PersianDateTime', function () {
+    const dateTime1 = Mds.PersianDateTime.fromPersianDate(1402, 1, 12).toDate();
+    const dateTime2 = Mds.PersianDateTime.fromPersianDate(1402, 1, 12).date.toDate();
+    expect(Mds.PersianDateTime.isDateTimeInstance(dateTime1)).toBe(true);
+    expect(Mds.PersianDateTime.isDateTimeInstance(dateTime2)).toBe(true);
+  });
+  it('isDateTimeInstance should not be correct, test with PersianDateTime', function () {
+    const persianDateTime = Mds.PersianDateTime.fromPersianDate(1402, 1, 12);
+    expect(Mds.PersianDateTime.isDateTimeInstance(persianDateTime)).toBe(false);
+  });
+});
+
 
 

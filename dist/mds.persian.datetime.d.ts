@@ -47,6 +47,7 @@ export declare namespace Mds {
         static getGregorianMonthNameIndex(gregorianMonthName: string): number;
         static isValid(persianDateTime: string, dateSeparatorPattern?: string): boolean;
         static isPersianDateTimeInstance(obj: any): boolean;
+        static isDateTimeInstance(obj: any): boolean;
         get timeOfDay(): string;
         get longTimeOfDay(): string;
         get shortTimeOfDay(): string;
