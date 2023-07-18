@@ -55,6 +55,7 @@ export declare namespace Mds {
         get isMdsPersianDateTimeInstance(): boolean;
         getShortNumber(): number;
         getLongNumber(): number;
+        getTimeNumber(second?: boolean): number;
         toString(format?: string): string;
         toIsoString(): string;
         addYears(years: number): PersianDateTime;
@@ -80,7 +81,7 @@ export declare namespace Mds {
         setSecond(second: number): PersianDateTime;
         setMillisecond(millisecond: number): PersianDateTime;
         setPersianDate(year: number, month: number, day: number): PersianDateTime;
-        setTime(hour: number, minute: number, second: number, millisecond: number): PersianDateTime;
+        setTime(hour: number, minute: number, second: number, millisecond?: number): PersianDateTime;
         private isDST;
         private zeroPad;
         private toPersianNumber;

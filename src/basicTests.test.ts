@@ -164,5 +164,17 @@ describe('isDateTimeInstance', () => {
   });
 });
 
+describe('getTimeNumber', () => {
+  it('getTimeNumber should be correct', function () {
+    const persianDateTimeNow = Mds.PersianDateTime.now;
+    expect(persianDateTimeNow.setTime(10, 12, 13).getTimeNumber()).toBe(1012);
+    expect(persianDateTimeNow.setTime(10, 12, 13).getTimeNumber(true)).toBe(101213);
+    expect(persianDateTimeNow.setTime(9, 12, 13).getTimeNumber(true)).toBe(91213);
+    expect(persianDateTimeNow.setTime(9, 12, 7).getTimeNumber(true)).toBe(91207);
+    expect(persianDateTimeNow.setTime(6, 7, 3).getTimeNumber(true)).toBe(60703);
+    expect(persianDateTimeNow.setTime(6, 7, 3).getTimeNumber()).toBe(607);
+  });
+});
+
 
 

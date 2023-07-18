@@ -407,6 +407,12 @@ export var Mds;
         getLongNumber() {
             return Number(this.toEnglishNumber(this.toString('yyyyMMddHHmmss')));
         }
+        getTimeNumber(second = false) {
+            let format = "HHmm";
+            if (second)
+                format += "ss";
+            return Number(this.toEnglishNumber(this.toString(format)));
+        }
         toString(format = '') {
             const persianDateTime = this.getPersianDateTime();
             if (format == '' || format == null)
@@ -586,7 +592,7 @@ export var Mds;
             const persianDateTime = this.getPersianDateTime();
             return PersianDateTime.fromPersianDateTime(year, month, day, persianDateTime.hour, persianDateTime.minute, persianDateTime.second, persianDateTime.millisecond);
         }
-        setTime(hour, minute, second, millisecond) {
+        setTime(hour, minute, second, millisecond = 0) {
             const persianDateTime = this.getPersianDateTime();
             return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day, hour, minute, second, millisecond);
         }

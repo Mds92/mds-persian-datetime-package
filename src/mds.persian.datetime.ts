@@ -639,16 +639,28 @@
     }
 
     /**
-     * @description گرفتن تاریخ به شکل عدد تا دقت روز
+     * @description گرفتن تاریخ روز به شکل عدد تا دقت روز
      */
     getShortNumber(): number {
       return Number(this.toEnglishNumber(this.toString('yyyyMMdd')));
     }
+
     /**
-     * @description دریافت تاریخ به شکل عدد تا دقت ثانیه
+     * @description دریافت تاریخ روز به شکل عدد تا دقت ثانیه
      */
     getLongNumber(): number {
       return Number(this.toEnglishNumber(this.toString('yyyyMMddHHmmss')));
+    }
+
+    /**
+     * @description دریافت ساعت و دقیقه و ثانیه به شکل عدد 
+     * @param second آیا ثانیه نیز اضافه در عدد خروجی وجود داشته باشد یا خیر
+     */
+    getTimeNumber(second = false): number {
+      let format = "HHmm";
+      if(second)
+        format += "ss";
+      return Number(this.toEnglishNumber(this.toString(format)));
     }
 
     /**
@@ -976,7 +988,7 @@
      * @param millisecond میلی ثانیه
      * @returns تاریخ جدید
      */
-    setTime(hour: number, minute: number, second: number, millisecond: number): PersianDateTime {
+    setTime(hour: number, minute: number, second: number, millisecond = 0): PersianDateTime {
       const persianDateTime = this.getPersianDateTime();
       return PersianDateTime.fromPersianDateTime(persianDateTime.year, persianDateTime.month, persianDateTime.day,
         hour, minute, second, millisecond);
