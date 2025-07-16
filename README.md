@@ -1,58 +1,79 @@
 # Persian DateTime In TypeScript
+
 ### Persian datetime library in TypeScript for using in TypeScript projects like angular
 
 ### Install
+
 Use npm to install:
+
 ```
 npm install mds.persian.datetime@latest --save
 ```
+
 Then import `Mds` namespace it in your project
+
 ```typescript
-import { Mds } from 'mds.persian.datetime'
+import { Mds } from "mds.persian.datetime";
 import PersianDateTime = Mds.PersianDateTime;
 ```
 
------------------------------
+---
+
 ### Define new object
+
 You can define new `PersianDateTime` object with following ways:
-* Constructor and with date object
- ```typescript
+
+- Constructor and with date object
+
+```typescript
 let pc = new PersianDateTime(new Date());
 ```
-* FromPersianDate
- ```typescript
-let pc = PersianDateTime.fromPersianDate(1396, 03, 14)
-```
-* FromPersianDateTime
- ```typescript
-let pc = PersianDateTime.fromPersianDateTime(1396, 03, 14, 23, 12, 22, 10)
-```
-* Parse
 
- You can parse different date string 
- ```typescript
-let pc1 = PersianDateTime.parse('14 خرداد 1396')
-let pc2 = PersianDateTime.parse('1396-03-16')
-let pc3 = PersianDateTime.parse('1396-03-16  22:12:30')
-let pc4 = PersianDateTime.parse('14 خرداد 1396 ساعت 22:10')
-let pc5 = PersianDateTime.parse('1396/01/03')
-let pc6 = PersianDateTime.parse('یکشنبه 14 خرداد 1396')
-```
-* Now property
+- FromPersianDate
 
- you can get current datetime with `now` property
- ```typescript
-let pc = PersianDateTime.now
+```typescript
+let pc = PersianDateTime.fromPersianDate(1396, 03, 14);
 ```
 
-* Today property
+- FromPersianDateTime
 
- you can get current date without time with `today` property
- ```typescript
-let pc = PersianDateTime.today
+```typescript
+let pc = PersianDateTime.fromPersianDateTime(1396, 03, 14, 23, 12, 22, 10);
 ```
------------------------------------
+
+- Parse
+
+You can parse different date string
+
+```typescript
+let pc1 = PersianDateTime.parse("14 خرداد 1396");
+let pc2 = PersianDateTime.parse("1396-03-16");
+let pc3 = PersianDateTime.parse("1396-03-16  22:12:30");
+let pc4 = PersianDateTime.parse("14 خرداد 1396 ساعت 22:10");
+let pc5 = PersianDateTime.parse("1396/01/03");
+let pc6 = PersianDateTime.parse("یکشنبه 14 خرداد 1396");
+```
+
+- Now property
+
+you can get current datetime with `now` property
+
+```typescript
+let pc = PersianDateTime.now;
+```
+
+- Today property
+
+you can get current date without time with `today` property
+
+```typescript
+let pc = PersianDateTime.today;
+```
+
+---
+
 ### Properties
+
 ```typescript
 englishNumber: boolean // English number or persian number in output of object
 year: number // Year of selected date
@@ -84,18 +105,22 @@ longTimeOfDay: string // get time like ساعت 01:47:40:530 ب.ظ
 shortTimeOfDay: string // get time like 01:47:40 ب.ظ
 date: PersianDateTime // get new object of date without time
 ```
------------------------------------
+
+---
+
 ### Methods
+
 ```typescript
 static getPersianMonthIndex(persianMonthName: string): number // Get persian index of input month name
 static getPersianWeekdayIndex(persianWeekdayName: string): number // Get persian index of input week day name
 static getGregorianWeekdayIndex(gregorianWeekdayName: string): number // Get gregorian index of input week day name
 static getGregorianMonthNameIndex(gregorianMonthName: string): number // Get gregorian index of input month name
 ```
+
 ```typescript
 /**
  * convert datetime to string
- * فرمت پیش فرض 1393/09/14   13:49:40 
+ * فرمت پیش فرض 1393/09/14   13:49:40
  * yyyy: year with four digit
  * yy: year with two digit
  * MMMM: persian month name
@@ -111,15 +136,16 @@ static getGregorianMonthNameIndex(gregorianMonthName: string): number // Get gre
  * mm: minute with two digit
  * m: minute
  * ss: second with two digit
- * s: second 
+ * s: second
  * fff: millisecond with three digit
  * ff: millisecond with two digit
  * f: millisecond
- * tt: ب.ظ or ق.ظ 
+ * tt: ب.ظ or ق.ظ
  * t: first character of ب.ظ or ق.ظ
  **/
 toString(format: string = ''): string
 ```
+
 ```typescript
 addYears(years: number): PersianDateTime // add years to datetime object
 addMonths(years: number): PersianDateTime // add months to datetime object
@@ -129,10 +155,12 @@ addMinutes(minutes: number): PersianDateTime // add minutes to datetime object
 addSeconds(seconds: number): PersianDateTime // add seconds to datetime object
 addMilliSeconds(milliseconds: number): PersianDateTime // add milliseconds to datetime object
 ```
+
 ```typescript
 // get date object
 toDate(): Date
 ```
+
 ```typescript
 setPersianYear(persianYear: number): PersianDateTime // set persian year
 setPersianMonth(persianMonth: number): PersianDateTime // set persian month
@@ -146,11 +174,11 @@ setTime(hour: number, minute: number, second: number, millisecond: number): Pers
 getShortNumber(): number // Year - Month - Day as number => 13970624
 getLongNumber(): number // Year - Month - Day - Hour - Minute - Second as number => 13970624031526
 ```
------------------------------------
+
+---
+
 ### DateTimePicker
 
 If you need a DateTimePicker for your apps, I recommend the following:
 https://github.com/Mds92/MD.BootstrapPersianDateTimePicker
 ![Mds Angular Persian and Gregorian DateTimePicker](https://raw.githubusercontent.com/Mds92/MD.BootstrapPersianDateTimePicker/master-bs5/images/MdPersianDateTimePicker.jpg)
-
-
