@@ -155,22 +155,40 @@ var Mds;
         }
         ;
         static get today() {
-            const dateTime = new Date();
-            const persianDate = PersianDateConverter.toPersian(dateTime.getFullYear(), dateTime.getMonth() + 1, dateTime.getDay());
-            return PersianDateTime.fromPersianDate(persianDate.year, persianDate.month, persianDate.day);
+            return PersianDateTime.now.date;
         }
         ;
         static elapsedFromNow(persianDateTime) {
-            const dateTimeNow = new Date();
-            const datetime = persianDateTime.toDate();
-            return {
-                year: dateTimeNow.getFullYear() - datetime.getFullYear(),
-                month: dateTimeNow.getMonth() - datetime.getMonth(),
-                day: dateTimeNow.getDate() - datetime.getDate(),
-                hour: dateTimeNow.getHours() - datetime.getHours(),
-                minute: dateTimeNow.getMinutes() - datetime.getMinutes(),
-                second: dateTimeNow.getSeconds() - datetime.getSeconds(),
-            };
+            const now = new Date();
+            const past = persianDateTime.toDate();
+            let year = now.getFullYear() - past.getFullYear();
+            let month = now.getMonth() - past.getMonth();
+            let day = now.getDate() - past.getDate();
+            let hour = now.getHours() - past.getHours();
+            let minute = now.getMinutes() - past.getMinutes();
+            let second = now.getSeconds() - past.getSeconds();
+            if (second < 0) {
+                second += 60;
+                minute--;
+            }
+            if (minute < 0) {
+                minute += 60;
+                hour--;
+            }
+            if (hour < 0) {
+                hour += 24;
+                day--;
+            }
+            if (day < 0) {
+                const daysInPreviousMonth = new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+                day += daysInPreviousMonth;
+                month--;
+            }
+            if (month < 0) {
+                month += 12;
+                year--;
+            }
+            return { year, month, day, hour, minute, second };
         }
         ;
         get englishNumber() {
@@ -305,10 +323,8 @@ var Mds;
             return this.getPersianDateTime().hour;
         }
         get shortHour() {
-            let shortHour = this.hour;
-            if (shortHour > 12)
-                shortHour = shortHour - 12;
-            return shortHour;
+            const shortHour = this.hour % 12;
+            return shortHour === 0 ? 12 : shortHour;
         }
         get minute() {
             return this.getPersianDateTime().minute;
@@ -320,7 +336,7 @@ var Mds;
             return this.getPersianDateTime().millisecond;
         }
         get isLeapYear() {
-            return PersianDateConverter.isLeapPersianYear(this.dateTime.getFullYear());
+            return PersianDateConverter.isLeapPersianYear(this.year);
         }
         get getPersianAmPmEnum() {
             if (this.hour < 12)
@@ -389,11 +405,11 @@ var Mds;
         }
         ;
         get longTimeOfDay() {
-            return `ساعت ${this.zeroPad(this.hour, '00')} : ${this.zeroPad(this.minute, '00')} : ${this.zeroPad(this.second, '00')} : ${this.zeroPad(this.millisecond, '000')} ${this.getShortPersianAmPmEnum}`;
+            return `ساعت ${this.zeroPad(this.shortHour, '00')} : ${this.zeroPad(this.minute, '00')} : ${this.zeroPad(this.second, '00')} : ${this.zeroPad(this.millisecond, '000')} ${this.getShortPersianAmPmEnum}`;
         }
         ;
         get shortTimeOfDay() {
-            return `${this.zeroPad(this.hour, '00')} : ${this.zeroPad(this.minute, '00')} : ${this.zeroPad(this.second, '00')} ${this.getShortPersianAmPmEnum}`;
+            return `${this.zeroPad(this.shortHour, '00')} : ${this.zeroPad(this.minute, '00')} : ${this.zeroPad(this.second, '00')} ${this.getShortPersianAmPmEnum}`;
         }
         ;
         get date() {
@@ -405,16 +421,16 @@ var Mds;
             return true;
         }
         getShortNumber() {
-            return Number(this.toEnglishNumber(this.toString('yyyyMMdd')));
+            return Number(PersianDateTime.toEnglishNumber(this.toString('yyyyMMdd')));
         }
         getLongNumber() {
-            return Number(this.toEnglishNumber(this.toString('yyyyMMddHHmmss')));
+            return Number(PersianDateTime.toEnglishNumber(this.toString('yyyyMMddHHmmss')));
         }
         getTimeNumber(second = false) {
             let format = "HHmm";
             if (second)
                 format += "ss";
-            return Number(this.toEnglishNumber(this.toString(format)));
+            return Number(PersianDateTime.toEnglishNumber(this.toString(format)));
         }
         toString(format = '') {
             const persianDateTime = this.getPersianDateTime();
@@ -438,8 +454,8 @@ var Mds;
             dateTimeString = dateTimeString.replace(/ss/mg, this.zeroPad(persianDateTime.second, '00'));
             dateTimeString = dateTimeString.replace(/s/mg, persianDateTime.second.toString());
             dateTimeString = dateTimeString.replace(/fff/mg, this.zeroPad(persianDateTime.millisecond, '000'));
-            dateTimeString = dateTimeString.replace(/ff/mg, this.zeroPad(persianDateTime.millisecond / 10, '00'));
-            dateTimeString = dateTimeString.replace(/f/mg, (this.millisecond / 10).toString());
+            dateTimeString = dateTimeString.replace(/ff/mg, this.zeroPad(Math.floor(persianDateTime.millisecond / 10), '00'));
+            dateTimeString = dateTimeString.replace(/f/mg, Math.floor(persianDateTime.millisecond / 100).toString());
             dateTimeString = dateTimeString.replace(/tt/mg, this.getShortPersianAmPmEnum);
             dateTimeString = dateTimeString.replace(/t/mg, this.getPersianAmPmEnum[0]);
             if (!this.englishNumber)
@@ -454,17 +470,10 @@ var Mds;
             return this.setPersianYear(this.year + years);
         }
         addMonths(months) {
-            const currentMonth = this.month;
-            let currentYear = this.year;
-            let newMonth = currentMonth + months;
-            if (newMonth < 1) {
-                newMonth += 12;
-                currentYear--;
-                return this.setPersianYear(currentYear).setPersianMonth(newMonth);
-            }
-            else {
-                return this.setPersianMonth(newMonth);
-            }
+            const totalMonths = (this.month - 1) + months;
+            const yearOffset = Math.floor(totalMonths / 12);
+            const newMonth = totalMonths - yearOffset * 12 + 1;
+            return this.setPersianYear(this.year + yearOffset).setPersianMonth(newMonth);
         }
         addDays(days) {
             const dateTime = this.cloneDateTime();
@@ -522,19 +531,19 @@ var Mds;
         getDifference(persianDateTime) {
             const isFirstDst = this.isDST(persianDateTime.toDate());
             const isSecondDst = this.isDST(this.dateTime);
-            if (isFirstDst && !isSecondDst) {
-                persianDateTime.addHours(-1);
-            }
+            let thisDateTimeForDiff = this.dateTime;
             if (isSecondDst && !isFirstDst) {
-                this.dateTime.setHours(this.dateTime.getHours() + 1);
+                thisDateTimeForDiff = this.cloneDateTime();
+                thisDateTimeForDiff.setHours(thisDateTimeForDiff.getHours() + 1);
             }
-            let diff = Math.abs(persianDateTime.getTimeUTC() - this.getTimeUTC());
+            const thisTimeUTC = Date.UTC(thisDateTimeForDiff.getUTCFullYear(), thisDateTimeForDiff.getUTCMonth(), thisDateTimeForDiff.getUTCDate(), thisDateTimeForDiff.getUTCHours(), thisDateTimeForDiff.getUTCMinutes(), thisDateTimeForDiff.getUTCSeconds());
+            let diff = Math.abs(persianDateTime.getTimeUTC() - thisTimeUTC);
             const days = Math.floor(diff / (1000 * 60 * 60 * 24));
             diff -= days * (1000 * 60 * 60 * 24);
             let hours = Math.floor(diff / (1000 * 60 * 60));
-            if (this.isDST(persianDateTime.toDate()))
+            if (isFirstDst)
                 hours -= 1;
-            if (this.isDST(this.dateTime))
+            if (this.isDST(thisDateTimeForDiff))
                 hours += 1;
             diff -= hours * (1000 * 60 * 60);
             const mins = Math.floor(diff / (1000 * 60));
@@ -624,22 +633,6 @@ var Mds;
                 .replace(/7/img, '۷')
                 .replace(/8/img, '۸')
                 .replace(/9/img, '۹');
-        }
-        toEnglishNumber(input) {
-            if (input == '' || input == null)
-                return '';
-            input = input.replace(/ي/img, 'ی').replace(/ك/img, 'ک');
-            return input.replace(/,/img, '')
-                .replace(/۰/img, '0')
-                .replace(/۱/img, '1')
-                .replace(/۲/img, '2')
-                .replace(/۳/img, '3')
-                .replace(/۴/img, '4')
-                .replace(/۵/img, '5')
-                .replace(/۶/img, '6')
-                .replace(/۷/img, '7')
-                .replace(/۸/img, '8')
-                .replace(/۹/img, '9');
         }
         static toEnglishNumber(input) {
             if (input == '' || input == null)

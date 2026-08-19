@@ -1,8 +1,30 @@
-# Persian DateTime In TypeScript
+# mds.persian.datetime
 
-### Persian datetime library in TypeScript for using in TypeScript projects like angular
+[![npm version](https://img.shields.io/npm/v/mds.persian.datetime.svg)](https://www.npmjs.com/package/mds.persian.datetime)
+[![npm downloads](https://img.shields.io/npm/dm/mds.persian.datetime.svg)](https://www.npmjs.com/package/mds.persian.datetime)
+[![license](https://img.shields.io/npm/l/mds.persian.datetime.svg)](https://github.com/Mds92/mds-persian-datetime-package/blob/master/LICENSE)
 
-### Install
+A dependency-free Persian (Jalali/Shamsi) date-time library for TypeScript and JavaScript projects (Angular, React, Node, etc.), with no external calendar dependency — the Gregorian ⇄ Jalali conversion is implemented directly in the package.
+
+## Table of contents
+
+- [Install](#install)
+- [Import](#import)
+- [Creating a `PersianDateTime`](#creating-a-persiandatetime)
+- [Properties](#properties)
+- [Formatting: `toString`](#formatting-tostring)
+- [Adding to a date](#adding-to-a-date)
+- [Setting parts of a date](#setting-parts-of-a-date)
+- [Comparing & measuring](#comparing--measuring)
+- [Numeric representations](#numeric-representations)
+- [Static helpers](#static-helpers)
+- [Interfaces](#interfaces)
+- [DateTimePicker](#datetimepicker)
+- [Development](#development)
+
+---
+
+## Install
 
 Use npm to install:
 
@@ -10,7 +32,7 @@ Use npm to install:
 npm install mds.persian.datetime@latest --save
 ```
 
-Then import `Mds` namespace it in your project
+Then import the `Mds` namespace in your project:
 
 ```typescript
 import { Mds } from "mds.persian.datetime";
@@ -19,31 +41,28 @@ import PersianDateTime = Mds.PersianDateTime;
 
 ---
 
-### Define new object
+## Creating a `PersianDateTime`
 
-You can define new `PersianDateTime` object with following ways:
-
-- Constructor and with date object
+- Constructor, from a native `Date` (or an ISO/date string)
 
 ```typescript
 let pc = new PersianDateTime(new Date());
+let pc2 = new PersianDateTime("2021-10-14");
 ```
 
-- FromPersianDate
+- `fromPersianDate` — from a Jalali year/month/day (time defaults to 00:00:00)
 
 ```typescript
-let pc = PersianDateTime.fromPersianDate(1396, 03, 14);
+let pc = PersianDateTime.fromPersianDate(1396, 3, 14);
 ```
 
-- FromPersianDateTime
+- `fromPersianDateTime` — from a full Jalali date and time
 
 ```typescript
-let pc = PersianDateTime.fromPersianDateTime(1396, 03, 14, 23, 12, 22, 10);
+let pc = PersianDateTime.fromPersianDateTime(1396, 3, 14, 23, 12, 22, 10);
 ```
 
-- Parse
-
-You can parse different date string
+- `parse` — parse a variety of Persian date/time string formats
 
 ```typescript
 let pc1 = PersianDateTime.parse("14 خرداد 1396");
@@ -54,131 +73,249 @@ let pc5 = PersianDateTime.parse("1396/01/03");
 let pc6 = PersianDateTime.parse("یکشنبه 14 خرداد 1396");
 ```
 
-- Now property
-
-you can get current datetime with `now` property
+- `now` — current date and time
 
 ```typescript
 let pc = PersianDateTime.now;
 ```
 
-- Today property
-
-you can get current date without time with `today` property
+- `today` — current date, time reset to 00:00:00
 
 ```typescript
 let pc = PersianDateTime.today;
 ```
 
----
-
-### Properties
+- `clone` — a copy of an existing instance
 
 ```typescript
-englishNumber: boolean // English number or persian number in output of object
-year: number // Year of selected date
-shortYear: number // year with two digit
-month: number // month number in year, start from 1
-monthName: string // month name => فروردین، اردیبهشت، ...
-dayOfWeek: number // day name in week, PersianDayOfWeek enum
-dayOfWeekGregorian: number // day name in week, GregorianDayOfWeek enum
-startDayOfMonthDayOfWeek: string // start day of week in month
-endDayOfMonthDayOfWeek: string // end day of week in month
-dayOfWeekName: string // name of day in week, شنبه، یکشنبه ....
-getShortDayOfWeekName: string // first character of dayOfWeekName ش، ی ، د، ...
-getMonthDays: number // days number in month
-hour: number // hour from 1 to 24
-shortHour: number // hour from 1 to 12
-minute: number
-second: number
-millisecond: number
-isLeapYear: boolean // is year leap آیا سال کبیسه است
-getPersianAmPmEnum: string // show قبل از ظهر or بعد از ظهر
-getShortPersianAmPmEnum: string // short ق.ظ or ب.ظ
-static getPersianMonthNames: string[] // list of all persian months فروردین، اردیبهشت، ...
-static getPersianMonthIndex: number // get index of persian month with persian month name
-static getPersianWeekdayNames: string[]  // list of all persian week day names
-static getPersianWeekdayNamesShort: string[]  // list of all short persian week day names
-static getGregorianWeekdayNames: string[] // get list of all gregorian week day names
-timeOfDay: string // get time like 13:47:40:530
-longTimeOfDay: string // get time like ساعت 01:47:40:530 ب.ظ
-shortTimeOfDay: string // get time like 01:47:40 ب.ظ
-date: PersianDateTime // get new object of date without time
+let copy = pc.clone();
 ```
 
 ---
 
-### Methods
+## Properties
+
+| Property | Type | Description |
+|---|---|---|
+| `englishNumber` | `boolean` | Read/write. Whether output strings use English or Persian digits (defaults to `true`). |
+| `year` | `number` | Jalali year. |
+| `shortYear` | `number` | Jalali year, two digits (e.g. `1403` → `3`). |
+| `month` | `number` | Jalali month, `1`–`12`. |
+| `monthName` | `string` | Jalali month name — فروردین، اردیبهشت، ... |
+| `day` | `number` | Day of the Jalali month. |
+| `dayOfWeek` | `PersianDayOfWeek` | Day of the week using the Persian week (Saturday = `0`). |
+| `dayOfWeekGregorian` | `GregorianDayOfWeek` | Day of the week using the Gregorian week (Sunday = `0`). |
+| `dayOfWeekName` | `string` | Persian day name — شنبه، یکشنبه، ... |
+| `getShortDayOfWeekName` | `string` | First character of `dayOfWeekName` — ش، ی، د، ... |
+| `startDayOfMonthDayOfWeek` | `PersianDayOfWeek` | Day of week the current month starts on. |
+| `endDayOfMonthDayOfWeek` | `PersianDayOfWeek` | Day of week the current month ends on. |
+| `getMonthDays` | `number` | Number of days in the current Jalali month. |
+| `getDateOfFirstDayOfMonth` | `PersianDateTime` | Date of the 1st day of the current month. |
+| `getDateOfLastDayOfMonth` | `PersianDateTime` | Date of the last day of the current month. |
+| `getDateOfFirstDayOfYear` | `PersianDateTime` | Date of the 1st day of the current year (1 Farvardin). |
+| `getDateOfLastDayOfYear` | `PersianDateTime` | Date of the last day of the current year. |
+| `hour` | `number` | Hour, `0`–`24`. |
+| `shortHour` | `number` | Hour, `0`–`12`. |
+| `minute` | `number` | Minute. |
+| `second` | `number` | Second. |
+| `millisecond` | `number` | Millisecond. |
+| `isLeapYear` | `boolean` | Whether the Jalali year is a leap year (کبیسه). |
+| `getPersianAmPmEnum` | `string` | `قبل از ظهر` or `بعد از ظهر`. |
+| `getShortPersianAmPmEnum` | `string` | `ق.ظ` or `ب.ظ`. |
+| `timeOfDay` | `string` | Time formatted like `13 : 47 : 40 : 530`. |
+| `longTimeOfDay` | `string` | Time formatted like `ساعت 01 : 47 : 40 : 530 ب.ظ`. |
+| `shortTimeOfDay` | `string` | Time formatted like `01 : 47 : 40 ب.ظ`. |
+| `date` | `PersianDateTime` | A new instance with the time reset to `00:00:00`. |
+| `isMdsPersianDateTimeInstance` | `boolean` | Always `true`; used internally by `isPersianDateTimeInstance`. |
+
+### Static properties
+
+| Property | Type | Description |
+|---|---|---|
+| `getPersianMonthNames` | `string[]` | All Jalali month names. |
+| `getPersianWeekdayNames` | `string[]` | All Jalali weekday names. |
+| `getPersianWeekdayNamesShort` | `string[]` | All Jalali weekday names, single character each. |
+| `getGregorianWeekdayNames` | `string[]` | All Gregorian weekday names (English). |
+| `getGregorianMonthNames` | `string[]` | All Gregorian month names (English). |
+
+---
+
+## Formatting: `toString`
 
 ```typescript
-static getPersianMonthIndex(persianMonthName: string): number // Get persian index of input month name
-static getPersianWeekdayIndex(persianWeekdayName: string): number // Get persian index of input week day name
-static getGregorianWeekdayIndex(gregorianWeekdayName: string): number // Get gregorian index of input week day name
-static getGregorianMonthNameIndex(gregorianMonthName: string): number // Get gregorian index of input month name
-```
-
-```typescript
-/**
- * convert datetime to string
- * فرمت پیش فرض 1393/09/14   13:49:40
- * yyyy: year with four digit
- * yy: year with two digit
- * MMMM: persian month name
- * MM: month number with two digit
- * M: month number
- * dddd: persian week day name
- * dd: month day number with two digit
- * d: month day number
- * HH: hour with two digit from 0 to 24
- * H: hour from 0 to 24
- * hh: hour with two digit from 0 to 12
- * h: hour from 0 to 12
- * mm: minute with two digit
- * m: minute
- * ss: second with two digit
- * s: second
- * fff: millisecond with three digit
- * ff: millisecond with two digit
- * f: millisecond
- * tt: ب.ظ or ق.ظ
- * t: first character of ب.ظ or ق.ظ
- **/
 toString(format: string = ''): string
 ```
 
-```typescript
-addYears(years: number): PersianDateTime // add years to datetime object
-addMonths(years: number): PersianDateTime // add months to datetime object
-addDays(days: number): PersianDateTime // add days to datetime object
-addHours(hours: number): PersianDateTime // add hours to datetime object
-addMinutes(minutes: number): PersianDateTime // add minutes to datetime object
-addSeconds(seconds: number): PersianDateTime // add seconds to datetime object
-addMilliSeconds(milliseconds: number): PersianDateTime // add milliseconds to datetime object
-```
+Calling `toString()` with no arguments returns the default format `1393/09/14   13:49:40`. Pass a custom format string using the tokens below:
+
+| Token | Meaning |
+|---|---|
+| `yyyy` | Year, 4 digits |
+| `yy` | Year, 2 digits |
+| `MMMM` | Persian month name |
+| `MM` | Month, 2 digits |
+| `M` | Month |
+| `dddd` | Persian weekday name |
+| `dd` | Day of month, 2 digits |
+| `d` | Day of month |
+| `HH` | Hour, 2 digits, 0–24 |
+| `H` | Hour, 0–24 |
+| `hh` | Hour, 2 digits, 0–12 |
+| `h` | Hour, 0–12 |
+| `mm` | Minute, 2 digits |
+| `m` | Minute |
+| `ss` | Second, 2 digits |
+| `s` | Second |
+| `fff` | Millisecond, 3 digits |
+| `ff` | Millisecond, 2 digits |
+| `f` | Millisecond |
+| `tt` | `ب.ظ` or `ق.ظ` |
+| `t` | First character of `tt` |
 
 ```typescript
-// get date object
-toDate(): Date
+PersianDateTime.now.toString('yyyy/MM/dd dddd HH:mm'); // => 1403/05/28 یکشنبه 14:32
 ```
 
+`toIsoString(): string` returns the underlying date as an ISO 8601 string (`YYYY-MM-DDTHH:mm:ss.sssZ`).
+
+---
+
+## Adding to a date
+
+Each method returns a **new** `PersianDateTime` instance and does not mutate the original.
+
 ```typescript
-setPersianYear(persianYear: number): PersianDateTime // set persian year
-setPersianMonth(persianMonth: number): PersianDateTime // set persian month
-setPersianDay(persianDay: number): PersianDateTime // set persian day
-setHour(hour: number): PersianDateTime // set hour
-setMinute(minute: number): PersianDateTime // set minute
-setSecond(second: number): PersianDateTime // set second
-setMillisecond(millisecond: number): PersianDateTime // set millisecond
-setPersianDate(year: number, month: number, day: number): PersianDateTime // set persian date
-setTime(hour: number, minute: number, second: number, millisecond: number): PersianDateTime // set time
-getShortNumber(): number // Year - Month - Day as number => 13970624
-getLongNumber(): number // Year - Month - Day - Hour - Minute - Second as number => 13970624031526
+addYears(years: number): PersianDateTime
+addMonths(months: number): PersianDateTime
+addDays(days: number): PersianDateTime
+addHours(hours: number): PersianDateTime
+addMinutes(minutes: number): PersianDateTime
+addSeconds(seconds: number): PersianDateTime
+addMilliSeconds(milliseconds: number): PersianDateTime
 ```
 
 ---
 
-### DateTimePicker
+## Setting parts of a date
+
+Each method returns a **new** `PersianDateTime` instance and does not mutate the original.
+
+```typescript
+setPersianYear(persianYear: number): PersianDateTime
+setPersianMonth(persianMonth: number): PersianDateTime
+setPersianDay(persianDay: number): PersianDateTime
+setPersianDate(year: number, month: number, day: number): PersianDateTime
+setHour(hour: number): PersianDateTime
+setMinute(minute: number): PersianDateTime
+setSecond(second: number): PersianDateTime
+setMillisecond(millisecond: number): PersianDateTime
+setTime(hour: number, minute: number, second: number, millisecond?: number): PersianDateTime
+```
+
+---
+
+## Comparing & measuring
+
+```typescript
+// Difference between this instance and another, as days/hours/minutes/seconds
+getDifference(persianDateTime: PersianDateTime): Mds.PersianDateTimeSpan2
+
+// Elapsed time between now and the given instance
+static elapsedFromNow(persianDateTime: PersianDateTime): Mds.PersianDateTimeSpan1
+
+// [start, end] of the week (Saturday..Friday) containing this date
+getStartEndDayOfWeek(): [PersianDateTime, PersianDateTime]
+
+// All dates in a Jalali year that fall on the given weekday(s), e.g. every Friday
+static getDatesInYearByPersianDayOfWeek(year: number, daysOfWeek: Mds.PersianDayOfWeek[]): PersianDateTime[]
+```
+
+```typescript
+const fridays = PersianDateTime.getDatesInYearByPersianDayOfWeek(1403, [Mds.PersianDayOfWeek.Friday]);
+```
+
+---
+
+## Numeric representations
+
+```typescript
+getShortNumber(): number // year-month-day as a number, e.g. 13970624
+getLongNumber(): number  // year-month-day-hour-minute-second as a number, e.g. 13970624031526
+getTimeNumber(second?: boolean): number // hour-minute(-second) as a number, e.g. 1012 or 101213
+```
+
+```typescript
+toDate(): Date       // a cloned, standard JS Date object
+getTime(): number     // ms since epoch, same as Date.getTime()
+getTimeUTC(): number  // ms since epoch, based on UTC (ignores local timezone offset)
+```
+
+---
+
+## Static helpers
+
+```typescript
+// Validate a date/time string without throwing
+static isValid(persianDateTime: string, dateSeparatorPattern?: string): boolean
+
+// Type guards
+static isPersianDateTimeInstance(obj: any): boolean // true if obj is a Mds.PersianDateTime
+static isDateTimeInstance(obj: any): boolean        // true if obj is a native Date
+
+// Index lookups
+static getPersianMonthIndex(persianMonthName: string): number
+static getPersianWeekdayIndex(persianWeekdayName: string): number
+static getGregorianWeekdayIndex(gregorianWeekdayName: string): number
+static getGregorianMonthNameIndex(gregorianMonthName: string): number
+```
+
+```typescript
+PersianDateTime.isValid('1400/12/30'); // => false (1400 is not a leap year)
+PersianDateTime.isValid('1400/12/29'); // => true
+```
+
+---
+
+## Interfaces
+
+```typescript
+interface PersianDateTimeSpan1 {
+  year: number;
+  month: number;
+  day: number;
+  hour: number;
+  minute: number;
+  second: number;
+}
+
+interface PersianDateTimeSpan2 {
+  days: number;
+  hours: number;
+  minutes: number;
+  seconds: number;
+}
+
+enum PersianDayOfWeek { Saturday = 0, Sunday, Monday, Tuesday, Wednesday, Thursday, Friday }
+
+enum GregorianDayOfWeek { Sunday = 0, Monday, Tuesday, Wednesday, Thursday, Friday, Saturday }
+```
+
+---
+
+## DateTimePicker
 
 If you need a DateTimePicker for your apps, I recommend the following:
 https://github.com/Mds92/MD.BootstrapPersianDateTimePicker
+
 ![Mds Angular Persian and Gregorian DateTimePicker](https://raw.githubusercontent.com/Mds92/MD.BootstrapPersianDateTimePicker/master-bs5/images/MdPersianDateTimePicker.jpg)
+
+---
+
+## Development
+
+```
+npm install    # install dependencies
+npm run build  # build ESM + CJS output into dist/
+npm run lint   # run eslint
+npm test       # run the jest test suite
+```

@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "baseUrl": "./",
+    "rootDir": "./src",
     "outDir": "./dist",
     "forceConsistentCasingInFileNames": true,
     "strict": true,
@@ -12,9 +12,8 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "declaration": true,
-    "downlevelIteration": true,
     "experimentalDecorators": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "importHelpers": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
@@ -25,11 +24,13 @@
     "lib": [
       "es2020",
       "dom"
+    ],
+    "types": [
+      "jest"
     ]
   },
   "exclude": [
     "node_modules",
-    "src/basicTests.test.ts",
     "dist"
   ]
 }

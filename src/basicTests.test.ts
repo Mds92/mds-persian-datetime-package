@@ -176,5 +176,93 @@ describe('getTimeNumber', () => {
   });
 });
 
+describe('parse', () => {
+  it('parse should correctly parse yyyy/MM/dd format', function () {
+    const persianDateTime = Mds.PersianDateTime.parse('1400/07/21');
+    expect(persianDateTime.year).toBe(1400);
+    expect(persianDateTime.month).toBe(7);
+    expect(persianDateTime.day).toBe(21);
+  });
+
+  it('parse should correctly parse date with time', function () {
+    const persianDateTime = Mds.PersianDateTime.parse('1400/07/21 14:30:45');
+    expect(persianDateTime.hour).toBe(14);
+    expect(persianDateTime.minute).toBe(30);
+    expect(persianDateTime.second).toBe(45);
+  });
+
+  it('parse should correctly parse date with Persian month name', function () {
+    const persianDateTime = Mds.PersianDateTime.parse('21 مهر 1400');
+    expect(persianDateTime.year).toBe(1400);
+    expect(persianDateTime.month).toBe(7);
+    expect(persianDateTime.day).toBe(21);
+  });
+
+  it('parse should throw on invalid month', function () {
+    expect(() => Mds.PersianDateTime.parse('1400/13/01')).toThrow();
+  });
+
+  it('parse should throw on day 30 of Esfand in a non-leap year', function () {
+    expect(() => Mds.PersianDateTime.parse('1400/12/30')).toThrow();
+  });
+});
+
+describe('toString', () => {
+  it('toString should format according to custom pattern', function () {
+    const persianDateTime = Mds.PersianDateTime.fromPersianDateTime(1400, 7, 21, 14, 5, 9, 0);
+    expect(persianDateTime.toString('yyyy/MM/dd HH:mm:ss')).toBe('1400/07/21 14:05:09');
+  });
+
+  it('toString should use the default format when no pattern is given', function () {
+    const persianDateTime = Mds.PersianDateTime.fromPersianDateTime(1400, 7, 21, 14, 5, 9, 0);
+    expect(persianDateTime.toString()).toBe('1400/07/21   14:05:09');
+  });
+});
+
+describe('addMonths', () => {
+  it('addMonths should roll over to the next year', function () {
+    const persianDateTime = Mds.PersianDateTime.fromPersianDate(1400, 11, 1).addMonths(3);
+    expect(persianDateTime.year).toBe(1401);
+    expect(persianDateTime.month).toBe(2);
+    expect(persianDateTime.day).toBe(1);
+  });
+
+  it('addMonths should clamp day to 30 when moving into a 30-day month', function () {
+    const persianDateTime = Mds.PersianDateTime.fromPersianDate(1400, 1, 31).addMonths(6);
+    expect(persianDateTime.month).toBe(7);
+    expect(persianDateTime.day).toBe(30);
+  });
+
+  it('addMonths should clamp day to 29 when moving into Esfand of a non-leap year', function () {
+    const persianDateTime = Mds.PersianDateTime.fromPersianDate(1400, 1, 31).addMonths(11);
+    expect(persianDateTime.month).toBe(12);
+    expect(persianDateTime.day).toBe(29);
+  });
+});
+
+describe('clone', () => {
+  it('clone should create an independent copy', function () {
+    const original = Mds.PersianDateTime.fromPersianDate(1400, 1, 1);
+    const cloned = original.clone();
+    expect(cloned.getTime()).toBe(original.getTime());
+    const clonedNextDay = cloned.addDays(1);
+    expect(original.day).toBe(1);
+    expect(clonedNextDay.day).toBe(2);
+  });
+});
+
+describe('getMonthDays and isLeapYear', () => {
+  it('getMonthDays should return 29 for Esfand of non-leap year 1400', function () {
+    const persianDateTime = Mds.PersianDateTime.fromPersianDate(1400, 12, 1);
+    expect(persianDateTime.getMonthDays).toBe(29);
+  });
+
+  it('getMonthDays should return 30 for Esfand of leap year 1399', function () {
+    const persianDateTime = Mds.PersianDateTime.fromPersianDate(1399, 12, 1);
+    expect(persianDateTime.getMonthDays).toBe(30);
+    expect(persianDateTime.isLeapYear).toBe(true);
+  });
+});
+
 
 

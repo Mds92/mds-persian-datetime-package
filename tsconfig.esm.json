@@ -6,5 +6,10 @@
     "declaration": true,
     "declarationDir": "./dist/esm",
     "emitDeclarationOnly": false
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "dist",
+    "src/basicTests.test.ts"
+  ]
 }

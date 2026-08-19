@@ -85,7 +85,6 @@ export declare namespace Mds {
         private isDST;
         private zeroPad;
         private toPersianNumber;
-        private toEnglishNumber;
         private static toEnglishNumber;
     }
     enum PersianDayOfWeek {
